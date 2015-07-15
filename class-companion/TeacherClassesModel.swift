@@ -18,10 +18,23 @@ struct TeacherClass: Printable {
 }
 
 func addNewTeacherClass(newClass: TeacherClass) {
-  allTeacherClasses.append(newClass)
-  println(allTeacherClasses)
+  
+  if !classAlreadyExists(allTeacherClasses, newClass) {
+    allTeacherClasses.append(newClass)
+    println(allTeacherClasses)
+  }
+
 }
 
 func emptyAllTeacherClasses() {
   allTeacherClasses.removeAll()
+}
+
+func classAlreadyExists (classArray: [TeacherClass], newClass: TeacherClass) -> Bool {
+  for singleClass in classArray {
+    if singleClass.className == newClass.className {
+      return true
+    }
+  }
+  return false
 }
