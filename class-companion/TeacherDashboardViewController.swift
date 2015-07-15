@@ -114,12 +114,35 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if (editingStyle == UITableViewCellEditingStyle.Delete) {
-      let row = indexPath.row
+      let row = Int(indexPath.row)
       let classToDelete = allTeacherClasses[row]
       
-      allTeacherClasses.removeAtIndex(row)
-      self.classTableView.reloadData()
+      showDeleteConfirmationAlert(classToDelete.className, row: row)
+      
     }
+  }
+  
+  func removeClass(classNameToRemove: String, row: Int) {
+    allTeacherClasses.removeAtIndex(row)
+    self.classTableView.reloadData()
+  }
+  
+  func showDeleteConfirmationAlert(className: String, row: Int){
+    
+    
+    var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(className)\" class? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
+    
+    deleteConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+
+    
+    deleteConfirmationAlert.addAction(UIAlertAction(title: "Delete \(className) class", style: .Default, handler: { (action: UIAlertAction!) in
+      self.removeClass(className, row: row)
+    }))
+    
+    
+    
+    presentViewController(deleteConfirmationAlert, animated: true, completion: nil)
+    
   }
   
     /*
