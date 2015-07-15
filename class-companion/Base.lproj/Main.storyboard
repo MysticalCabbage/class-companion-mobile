@@ -29,7 +29,7 @@
                         <viewControllerLayoutGuide type="top" id="81Q-u2-yBH"/>
                         <viewControllerLayoutGuide type="bottom" id="JFR-Za-v0e"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HWy-Kl-I0t" customClass="LoginView">
+                    <view key="view" contentMode="scaleToFill" id="HWy-Kl-I0t">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

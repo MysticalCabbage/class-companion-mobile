@@ -108,6 +108,20 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let row = indexPath.row
   }
 
+  func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    return true
+  }
+  
+  func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if (editingStyle == UITableViewCellEditingStyle.Delete) {
+      let row = indexPath.row
+      let classToDelete = allTeacherClasses[row]
+      
+      allTeacherClasses.removeAtIndex(row)
+      self.classTableView.reloadData()
+    }
+  }
+  
     /*
     // MARK: - Navigation
 
