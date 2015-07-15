@@ -151,6 +151,9 @@
                             <constraint firstAttribute="bottom" secondItem="2pA-lZ-IMd" secondAttribute="bottom" constant="20" symbolic="YES" id="wY9-3k-L6m"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="classTableView" destination="2pA-lZ-IMd" id="0h9-Mb-FUS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFn-ta-sG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
