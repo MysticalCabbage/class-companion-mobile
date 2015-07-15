@@ -8,6 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="IFs-3y-lHO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKZ-fw-lKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cbW-za-e7D" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zot-PR-wYV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -17,13 +18,13 @@
                         <segue destination="21D-YK-RAv" kind="relationship" relationship="rootViewController" id="kkD-OH-kuG"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xKZ-fw-lKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-284" y="298"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="z8j-6h-03a">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wzx-Aq-VSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Login View Controller" id="21D-YK-RAv" customClass="LoginViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="81Q-u2-yBH"/>
@@ -102,13 +103,13 @@
                         <segue destination="Zyh-gR-6fb" kind="show" identifier="showTeacherDashboard" id="Xcq-4k-Utb"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wzx-Aq-VSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="428" y="298"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="RrQ-lT-sx0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qFn-ta-sG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Zyh-gR-6fb" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pLh-ji-Doc"/>
@@ -127,26 +128,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FFO-r3-Bww">
-                                <rect key="frame" x="16" y="101" width="568" height="479"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FFO-r3-Bww" firstAttribute="top" secondItem="2FU-Sx-V6B" secondAttribute="bottom" constant="8" symbolic="YES" id="0NL-5O-mmk"/>
                             <constraint firstItem="2FU-Sx-V6B" firstAttribute="centerX" secondItem="ScX-Rh-wdn" secondAttribute="centerX" id="Bnl-EY-L1U"/>
-                            <constraint firstItem="FFO-r3-Bww" firstAttribute="centerX" secondItem="2FU-Sx-V6B" secondAttribute="centerX" id="M1d-eJ-0uT"/>
-                            <constraint firstAttribute="bottom" secondItem="FFO-r3-Bww" secondAttribute="bottom" constant="20" symbolic="YES" id="OvQ-6z-Nuu"/>
                             <constraint firstItem="2FU-Sx-V6B" firstAttribute="top" secondItem="pLh-ji-Doc" secondAttribute="bottom" constant="8" symbolic="YES" id="fCV-j1-1HY"/>
-                            <constraint firstItem="FFO-r3-Bww" firstAttribute="leading" secondItem="ScX-Rh-wdn" secondAttribute="leadingMargin" id="mF7-LF-zjm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2FU-Sx-V6B" secondAttribute="trailing" constant="149" id="wuT-Hw-Y05"/>
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qFn-ta-sG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="298"/>
+            <point key="canvasLocation" x="1154" y="298"/>
         </scene>
     </scenes>
 </document>
