@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="21D-YK-RAv" kind="show" identifier="Show Login" id="wWg-f3-nW4"/>
+                        <segue destination="21D-YK-RAv" kind="relationship" relationship="rootViewController" id="kkD-OH-kuG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xKZ-fw-lKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,6 +86,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="BcB-Zx-F8S"/>
                     <connections>
                         <outlet property="passwordField" destination="Obj-gf-ZdK" id="QqK-gn-0Ct"/>
                         <outlet property="usernameField" destination="ZIr-uA-Mm4" id="Hv9-Ao-79u"/>
