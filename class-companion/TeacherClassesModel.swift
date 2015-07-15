@@ -21,7 +21,6 @@ func addNewTeacherClass(newClass: TeacherClass) {
   
   if !classAlreadyExists(allTeacherClasses, newClass) {
     allTeacherClasses.append(newClass)
-    println(allTeacherClasses)
   }
 
 }

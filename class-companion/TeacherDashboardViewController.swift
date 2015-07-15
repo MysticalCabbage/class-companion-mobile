@@ -35,6 +35,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
         // Dispose of any resources that can be recreated.
     }
   
+  // ADD CLASS ALERT
   @IBAction func addNewTeacherClassAlert(sender: AnyObject) {
     var alertController:UIAlertController?
 
@@ -44,17 +45,17 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     
     alertController!.addTextFieldWithConfigurationHandler(
       {(textField: UITextField!) in
-        textField.placeholder = "class name"
+        textField.placeholder = "Class Name"
     })
 
-    let action = UIAlertAction(title: "Submit",
+    let submitAction = UIAlertAction(
+      title: "Submit",
       style: UIAlertActionStyle.Default,
       handler: {[weak self]
         (paramAction:UIAlertAction!) in
         if let textFields = alertController?.textFields{
           let theTextFields = textFields as! [UITextField]
           let enteredText = theTextFields[0].text
-//          self.displayLabel.text = enteredText
           let newClass = TeacherClass(className: enteredText)
           addNewTeacherClass(newClass)
           self!.classTableView.reloadData()
@@ -62,7 +63,14 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
         }
       })
     
-    alertController?.addAction(action)
+    let cancelAction = UIAlertAction(
+      title: "Cancel",
+      style: UIAlertActionStyle.Cancel,
+      handler: nil
+    )
+    
+    alertController?.addAction(cancelAction)
+    alertController?.addAction(submitAction)
     
     self.presentViewController(alertController!,
       animated: true,
@@ -89,7 +97,6 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     
     let row = indexPath.row
     
-    println(allTeacherClasses[row])
     cell.textLabel?.text = allTeacherClasses[row].className
 
     return cell
@@ -99,7 +106,6 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
-    println(testClasses[row])
   }
 
     /*
