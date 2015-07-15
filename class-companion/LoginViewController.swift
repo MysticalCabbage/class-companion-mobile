@@ -10,11 +10,21 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+  
+  let userDefaults = NSUserDefaults.standardUserDefaults()
+  let usernameKeyConstant = "usernameKey"
+  let userIsAuthenticatedConstant = "userLoggedIn"
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    handleUserAlreadyLoggedIn()
+      
 
-    }
+  }
+  
+
+  
   
   @IBOutlet weak var usernameField: UITextField!
   
@@ -30,11 +40,21 @@ class LoginViewController: UIViewController {
 //        println("username is \(username) password is \(password)")
         let loginResult = checkLoginCredentials(username, password: password)
         if loginResult {
+          userDefaults.setObject(true, forKey: userIsAuthenticatedConstant)
           goToTeacherDashboardView()
         } else {
           statusLabel.text = "Invalid login credentials"
         }
       }
+    }
+  }
+  
+  func handleUserAlreadyLoggedIn (){
+    if let userLoggedIn = userDefaults.stringForKey(userIsAuthenticatedConstant) {
+      println("Is the user already logged in? \(userLoggedIn)")
+      goToTeacherDashboardView()
+    } else {
+      println("User is not logged in")
     }
   }
   
