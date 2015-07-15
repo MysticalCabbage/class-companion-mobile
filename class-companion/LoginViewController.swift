@@ -19,8 +19,7 @@ class LoginViewController: UIViewController {
     super.viewDidLoad()
     
     handleUserAlreadyLoggedIn()
-      
-
+    
   }
   
 
@@ -33,6 +32,10 @@ class LoginViewController: UIViewController {
   
   
   @IBOutlet weak var statusLabel: UILabel!
+  
+  @IBAction func logoutButton(sender: UIBarButtonItem) {
+    userDefaults.setObject(false, forKey: userIsAuthenticatedConstant)
+  }
   
   @IBAction func loginButton() {
     if let username = usernameField.text {
@@ -51,8 +54,12 @@ class LoginViewController: UIViewController {
   
   func handleUserAlreadyLoggedIn (){
     if let userLoggedIn = userDefaults.stringForKey(userIsAuthenticatedConstant) {
-      println("Is the user already logged in? \(userLoggedIn)")
-      goToTeacherDashboardView()
+      if userLoggedIn == "1" {
+        println("Is the user already logged in? \(userLoggedIn)")
+        goToTeacherDashboardView()
+      } else {
+        println("User is not logged in, but they have credentials")
+      }
     } else {
       println("User is not logged in")
     }

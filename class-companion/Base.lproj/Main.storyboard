@@ -94,7 +94,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="BcB-Zx-F8S"/>
+                    <navigationItem key="navigationItem" title="Login" id="BcB-Zx-F8S">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xlk-KS-cPw">
+                            <connections>
+                                <action selector="logoutButton:" destination="21D-YK-RAv" id="tJF-aW-BKb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="passwordField" destination="Obj-gf-ZdK" id="QqK-gn-0Ct"/>
                         <outlet property="statusLabel" destination="Tsn-uI-4Io" id="tpR-iT-iee"/>
