@@ -31,6 +31,8 @@ class LoginViewController: UIViewController {
         let loginResult = checkLoginCredentials(username, password: password)
         if loginResult {
           goToTeacherDashboardView()
+        } else {
+          statusLabel.text = "Invalid login credentials"
         }
       }
     }
