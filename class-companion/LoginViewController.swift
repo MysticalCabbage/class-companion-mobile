@@ -1,3 +1,4 @@
+
 //
 //  LoginViewController.swift
 //  class-companion
@@ -21,12 +22,33 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var passwordField: UITextField!
   
   
+  @IBOutlet weak var statusLabel: UILabel!
+  
   @IBAction func loginButton() {
     if let username = usernameField.text {
       if let password = passwordField.text {
         println("username is \(username) password is \(password)")
+        let loginResult = checkLoginCredentials(username, password: password)
+        if loginResult {
+          goToTeacherDashboardView()
+        }
       }
     }
   }
+  
+  func goToTeacherDashboardView () {
+    self.performSegueWithIdentifier("showTeacherDashboard", sender: self)
+  }
+  
+  func checkLoginCredentials(username: String, password: String) -> Bool {
+    
+    if username == "Username" && password == "Password" {
+      return true
+    } else {
+      return false
+    }
+    
+  }
+  
 
 }

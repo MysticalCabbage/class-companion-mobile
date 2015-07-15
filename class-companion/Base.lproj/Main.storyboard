@@ -52,6 +52,12 @@
                                     <action selector="loginButton" destination="21D-YK-RAv" eventType="touchUpInside" id="56m-Sd-sNf"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username and password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-uI-4Io">
+                                <rect key="frame" x="16" y="323" width="235" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -64,6 +70,8 @@
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="DHr-PK-Cb8"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="centerY" secondItem="HWy-Kl-I0t" secondAttribute="centerY" id="HMm-sf-ha6"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="Jo5-40-JcC"/>
+                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="top" secondItem="Obj-gf-ZdK" secondAttribute="bottom" constant="8" id="L4j-Qe-8Q7"/>
+                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="MUT-fi-EVk"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="top" secondItem="ZIr-uA-Mm4" secondAttribute="bottom" constant="8" id="V18-Jc-0Ya"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" constant="265" id="bFB-dw-bDz"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="centerX" secondItem="ZIr-uA-Mm4" secondAttribute="centerX" id="ffj-45-eKY"/>
@@ -89,12 +97,56 @@
                     <navigationItem key="navigationItem" id="BcB-Zx-F8S"/>
                     <connections>
                         <outlet property="passwordField" destination="Obj-gf-ZdK" id="QqK-gn-0Ct"/>
+                        <outlet property="statusLabel" destination="Tsn-uI-4Io" id="tpR-iT-iee"/>
                         <outlet property="usernameField" destination="ZIr-uA-Mm4" id="Hv9-Ao-79u"/>
+                        <segue destination="Zyh-gR-6fb" kind="show" identifier="showTeacherDashboard" id="Xcq-4k-Utb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wzx-Aq-VSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="408" y="298"/>
+            <point key="canvasLocation" x="428" y="298"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="RrQ-lT-sx0">
+            <objects>
+                <viewController id="Zyh-gR-6fb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pLh-ji-Doc"/>
+                        <viewControllerLayoutGuide type="bottom" id="FpD-JO-gth"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ScX-Rh-wdn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the teacher dashboard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FU-Sx-V6B">
+                                <rect key="frame" x="166" y="72" width="269" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="E64-ID-nvS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FFO-r3-Bww">
+                                <rect key="frame" x="16" y="101" width="568" height="479"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FFO-r3-Bww" firstAttribute="top" secondItem="2FU-Sx-V6B" secondAttribute="bottom" constant="8" symbolic="YES" id="0NL-5O-mmk"/>
+                            <constraint firstItem="2FU-Sx-V6B" firstAttribute="centerX" secondItem="ScX-Rh-wdn" secondAttribute="centerX" id="Bnl-EY-L1U"/>
+                            <constraint firstItem="FFO-r3-Bww" firstAttribute="centerX" secondItem="2FU-Sx-V6B" secondAttribute="centerX" id="M1d-eJ-0uT"/>
+                            <constraint firstAttribute="bottom" secondItem="FFO-r3-Bww" secondAttribute="bottom" constant="20" symbolic="YES" id="OvQ-6z-Nuu"/>
+                            <constraint firstItem="2FU-Sx-V6B" firstAttribute="top" secondItem="pLh-ji-Doc" secondAttribute="bottom" constant="8" symbolic="YES" id="fCV-j1-1HY"/>
+                            <constraint firstItem="FFO-r3-Bww" firstAttribute="leading" secondItem="ScX-Rh-wdn" secondAttribute="leadingMargin" id="mF7-LF-zjm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2FU-Sx-V6B" secondAttribute="trailing" constant="149" id="wuT-Hw-Y05"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qFn-ta-sG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1074" y="298"/>
         </scene>
     </scenes>
 </document>
