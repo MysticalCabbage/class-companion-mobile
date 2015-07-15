@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
   @IBAction func loginButton() {
     if let username = usernameField.text {
       if let password = passwordField.text {
-        println("username is \(username) password is \(password)")
+//        println("username is \(username) password is \(password)")
         let loginResult = checkLoginCredentials(username, password: password)
         if loginResult {
           goToTeacherDashboardView()

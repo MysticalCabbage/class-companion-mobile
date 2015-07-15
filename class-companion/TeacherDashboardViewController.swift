@@ -46,6 +46,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     alertController!.addTextFieldWithConfigurationHandler(
       {(textField: UITextField!) in
         textField.placeholder = "Class Name"
+        textField.autocapitalizationType = UITextAutocapitalizationType.Words
     })
 
     let submitAction = UIAlertAction(
@@ -80,7 +81,6 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   }
   @IBOutlet var classTableView: TeacherClassesUITableView!
   
-  let testClasses = ["English", "Geography", "Writing"]
   let classCellIdentifier = "ClassCell"
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
