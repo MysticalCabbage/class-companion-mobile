@@ -1,5 +1,5 @@
 //
-//  ClassesModel.swift
+//  TeacherClassesModel.swift
 //  class-companion
 //
 //  Created by Jonathan Davis on 7/14/15.
@@ -8,16 +8,16 @@
 
 import Foundation
 
-var allClasses = [Class]()
+var allTeacherClasses = [TeacherClass]()
 
-struct Class: Printable {
+struct TeacherClass: Printable {
   var className: String
   var description: String {
     return "The class name is \(className)"
   }
 }
 
-func addNewClass(newClass: Class) {
-  allClasses.append(newClass)
-  println(allClasses)
+func addNewTeacherClass(newClass: TeacherClass) {
+  allTeacherClasses.append(newClass)
+  println(allTeacherClasses)
 }
