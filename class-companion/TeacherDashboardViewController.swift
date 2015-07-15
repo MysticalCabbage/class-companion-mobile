@@ -35,6 +35,41 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
         // Dispose of any resources that can be recreated.
     }
   
+  @IBAction func addNewTeacherClassAlert(sender: AnyObject) {
+    var alertController:UIAlertController?
+
+    alertController = UIAlertController(title: "Add Class",
+      message: "Enter the class name below",
+      preferredStyle: .Alert)
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(textField: UITextField!) in
+        textField.placeholder = "class name"
+    })
+
+    let action = UIAlertAction(title: "Submit",
+      style: UIAlertActionStyle.Default,
+      handler: {[weak self]
+        (paramAction:UIAlertAction!) in
+        if let textFields = alertController?.textFields{
+          let theTextFields = textFields as! [UITextField]
+          let enteredText = theTextFields[0].text
+//          self.displayLabel.text = enteredText
+          let newClass = TeacherClass(className: enteredText)
+          addNewTeacherClass(newClass)
+          self!.classTableView.reloadData()
+          
+        }
+      })
+    
+    alertController?.addAction(action)
+    
+    self.presentViewController(alertController!,
+      animated: true,
+      completion: nil)
+    
+
+  }
   @IBOutlet var classTableView: TeacherClassesUITableView!
   
   let testClasses = ["English", "Geography", "Writing"]

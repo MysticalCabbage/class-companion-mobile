@@ -99,7 +99,7 @@
                         <outlet property="passwordField" destination="Obj-gf-ZdK" id="QqK-gn-0Ct"/>
                         <outlet property="statusLabel" destination="Tsn-uI-4Io" id="tpR-iT-iee"/>
                         <outlet property="usernameField" destination="ZIr-uA-Mm4" id="Hv9-Ao-79u"/>
-                        <segue destination="RfN-NW-2Wh" kind="show" identifier="showTeacherDashboard" id="Xcq-4k-Utb"/>
+                        <segue destination="Zyh-gR-6fb" kind="show" identifier="showTeacherDashboard" id="x8a-xY-tUS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wzx-Aq-VSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,32 +151,20 @@
                             <constraint firstAttribute="bottom" secondItem="2pA-lZ-IMd" secondAttribute="bottom" constant="20" symbolic="YES" id="wY9-3k-L6m"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Classes" id="18u-Pb-txc"/>
+                    <navigationItem key="navigationItem" title="Classes" id="18u-Pb-txc">
+                        <barButtonItem key="rightBarButtonItem" title="Add Class" id="KZd-Tb-Rvc">
+                            <connections>
+                                <action selector="addNewTeacherClassAlert:" destination="Zyh-gR-6fb" id="p6m-yz-tbX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="classTableView" destination="2pA-lZ-IMd" id="0h9-Mb-FUS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFn-ta-sG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1966" y="298"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="l4p-ub-vNA">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RfN-NW-2Wh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uQN-NO-Ash">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Zyh-gR-6fb" kind="relationship" relationship="rootViewController" id="DZQ-6o-N8j"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qCx-Bl-9Gn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1154" y="298"/>
+            <point key="canvasLocation" x="1102" y="298"/>
         </scene>
     </scenes>
 </document>
