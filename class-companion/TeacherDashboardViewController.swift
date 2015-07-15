@@ -18,6 +18,9 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       classTableView.delegate = self
       classTableView.dataSource = self
       
+      // Deletes all classes currently in the array
+      emptyAllTeacherClasses()
+      
       // TEST DATA FOR TEACHER CLASSES
       let class1 = TeacherClass(className: "English")
       addNewTeacherClass(class1)

@@ -21,3 +21,7 @@ func addNewTeacherClass(newClass: TeacherClass) {
   allTeacherClasses.append(newClass)
   println(allTeacherClasses)
 }
+
+func emptyAllTeacherClasses() {
+  allTeacherClasses.removeAll()
+}
