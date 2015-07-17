@@ -13,7 +13,7 @@ var allTeacherStudents = [TeacherStudent]()
 class TeacherStudent: Printable {
   var studentTitle: String
   var studentId: String
-  var behavior: Int
+  var behavior: String
   var description: String {
     return "The student name is \(studentTitle)"
   }
@@ -21,7 +21,7 @@ class TeacherStudent: Printable {
   init(key: String, json: Dictionary<String, AnyObject>) {
     self.studentTitle = json["studentTitle"] as? String ?? "studentTitleMissing"
     self.studentId = key
-    self.behavior = json["behavior"] as! Int
+    self.behavior = json["behavior"] as? String ?? "studentTitleMissing"
   }
   
   // when initializing with the snapshot data
@@ -55,7 +55,7 @@ func studentAlreadyExists (studentsArray: [TeacherStudent], newStudent: TeacherS
   return false
 }
 
-//func emptyAllTeacherClassesLocally() {
-//  allTeacherStudents.removeAll()
-//  
-//}
+func emptyAllTeacherStudentsLocally() {
+  allTeacherStudents.removeAll()
+  
+}
