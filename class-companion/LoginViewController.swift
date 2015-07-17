@@ -111,7 +111,11 @@ class LoginViewController: UIViewController {
   
   func setLoggedInUserId(userId: String) {
     
-    userDefaults.setObject(userId, forKey: currentUserIdKey)
+    currentUserId = userId
+    
+//    userDefaults.setObject(userId, forKey: currentUserIdKey)
+    
+    println("current user is \(currentUserId)")
     
     // FOR TESTING: automatically set the user to a teacher
     userDefaults.setObject("Teacher", forKey: "AccountType")

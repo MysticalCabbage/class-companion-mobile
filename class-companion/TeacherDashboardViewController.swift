@@ -24,6 +24,9 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       // Gets all current class data from the server
       getAllClasses()
       
+      // FOR TESTING
+      deleteAllClassesFromServer()
+      
       // TEST DATA FOR TEACHER CLASSES
 //      let class1 = TeacherClass(className: "English")
       sendClassToServer("English")
@@ -178,7 +181,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       /////
       // Send data to teacher section of database
       let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId]
-      let firebaseTeacherClassRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAutoId()
+      let firebaseTeacherClassRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/").childByAutoId()
       firebaseTeacherClassRef.setValue(classInfoForTeacher)
       /////
       
@@ -205,8 +208,10 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   }
   
   func deleteAllClassesFromServer() {
+    let firebaseTeacherClassRootRef = firebaseTeacherRootRef.childByAppendingPath("classes/")
+    
     firebaseClassRootRef.removeValue()
-    let firebaseTeacherUserRoot = firebase
+//    let firebaseTeacherUserRoot = firebase
   }
   
   
