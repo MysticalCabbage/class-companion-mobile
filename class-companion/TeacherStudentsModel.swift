@@ -20,7 +20,7 @@ class TeacherStudent: Printable {
   // initialize the instance with the json data from the snapshot
   init(key: String, json: Dictionary<String, AnyObject>) {
     self.studentTitle = json["studentTitle"] as? String ?? "studentTitleMissing"
-    self.studentId = json["studentId"] as? String ?? "studentIdMissing"
+    self.studentId = key
     self.behavior = json["behavior"] as! Int
   }
   

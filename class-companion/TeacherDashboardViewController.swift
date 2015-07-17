@@ -48,6 +48,9 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  // MARK: - Show Class View
+  
+  
   
   // MARK: - Add / Delete Class Alerts
   // ADD CLASS ALERT
@@ -117,10 +120,18 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     return cell
   }
 
+  // handles segueing to show the view for an individual classroom
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
+    let selectedCell = allTeacherClasses[row]
+    let selectedCellClassId = selectedCell.classId
+    
+    currentClassId = selectedCellClassId
+    
+    performSegueWithIdentifier("showTeacherStudentsView", sender: nil)
+    
   }
 
   func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
