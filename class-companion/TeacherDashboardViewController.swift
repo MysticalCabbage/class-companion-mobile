@@ -21,6 +21,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       // Deletes all classes currently in the array
       emptyAllTeacherClassesLocally()
       
+      setupDeleteListener()
+      
 
       
       // FOR TESTING
@@ -247,7 +249,15 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
 // MARK: - Firebase Listeners
   
   func setupDeleteListener() {
+    let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
+    let firebaseClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes/")
     
+    println(firebaseClassTeacherRef)
+    
+    firebaseClassTeacherRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+      emptyAllTeacherClassesLocally()
+      self.getAllClassesFromServer()
+    })
   }
   
     /*
