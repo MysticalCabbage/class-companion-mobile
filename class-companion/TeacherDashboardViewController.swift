@@ -164,12 +164,11 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let firebaseTeacherClassesRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/")
     firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
       for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-        println("THE INDIVIDUAL SNAPSHOT VALUE IS\(classFromServer.value))")
-        
         let newTeacherClass = TeacherClass(snap: classFromServer)
         addNewTeacherClass(newTeacherClass)
-        println(allTeacherClasses)
       }
+      // after adding the new classes to the classes array, reload the table
+      self.classTableView.reloadData()
       }, withCancelBlock: { error in
         println(error.description)
     })

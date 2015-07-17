@@ -58,8 +58,3 @@ func emptyAllTeacherClassesLocally() {
   allTeacherClasses.removeAll()
 
 }
-
-//func createNewTeacherClass(className: String, classId: String, teacherId: String) -> TeacherClass {
-//  let newTeacherClass = TeacherClass(className: className, classId: classId, teacherId: currentUserId!)
-//  return newTeacherClass
-//}
