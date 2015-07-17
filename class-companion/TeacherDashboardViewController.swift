@@ -19,7 +19,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       classTableView.dataSource = self
       
       // Deletes all classes currently in the array
-      emptyAllTeacherClasses()
+      emptyAllTeacherClassesLocally()
       
       // Gets all current class data from the server
       getAllClasses()
@@ -159,7 +159,9 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       let firebaseTeacherClassesRef = firebaseRef.childByAppendingPath("teachers/")
       firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
-          println(snapshot.value)
+        for rest in snapshot.children.allObjects as! [FDataSnapshot] {
+          println(rest.value)
+        }
         }, withCancelBlock: { error in
           println(error.description)
       })
@@ -200,8 +202,11 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   func deleteClassFromServer(classToDeleteFromServer: TeacherClass) {
     let classId = classToDeleteFromServer.classId
     
-    
-    
+  }
+  
+  func deleteAllClassesFromServer() {
+    firebaseClassRootRef.removeValue()
+    let firebaseTeacherUserRoot = firebase
   }
   
   

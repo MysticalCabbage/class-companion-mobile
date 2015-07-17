@@ -37,7 +37,7 @@ func classAlreadyExists (classArray: [TeacherClass], newClass: TeacherClass) -> 
   return false
 }
 
-func emptyAllTeacherClasses() {
+func emptyAllTeacherClassesLocally() {
   allTeacherClasses.removeAll()
 
 }
