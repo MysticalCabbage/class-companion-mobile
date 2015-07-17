@@ -18,7 +18,8 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    handleUserAlreadyLoggedIn()
+//    handleUserAlreadyLoggedIn()
+    createFirebaseTestUser()
     
   }
   
@@ -40,14 +41,16 @@ class LoginViewController: UIViewController {
   @IBAction func loginButton() {
     if let username = usernameField.text {
       if let password = passwordField.text {
-//        println("username is \(username) password is \(password)")
-        let loginResult = checkLoginCredentials(username, password: password)
-        if loginResult {
-          userDefaults.setObject(true, forKey: userIsAuthenticatedConstant)
-          goToTeacherDashboardView()
-        } else {
-          statusLabel.text = "Invalid login credentials"
-        }
+        
+        checkLoginCredentials(username, password: password)
+        
+//        let loginResult = checkLoginCredentials(username, password: password)
+//        if loginResult {
+//          userDefaults.setObject(true, forKey: userIsAuthenticatedConstant)
+//          goToTeacherDashboardView()
+//        } else {
+//          statusLabel.text = "Invalid login credentials"
+//        }
       }
     }
   }
@@ -69,15 +72,58 @@ class LoginViewController: UIViewController {
     self.performSegueWithIdentifier("showTeacherDashboard", sender: self)
   }
   
-  func checkLoginCredentials(username: String, password: String) -> Bool {
+
+  
+  // MARK: -Firebase Auth
+  
+  
+  let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
+  
+  
+  func createFirebaseTestUser () {
     
-    if username == "Username" && password == "Password" {
-      return true
-    } else {
-      return false
-    }
+    
+    firebaseRef.createUser("mysticalcabbage@mc.com", password: "password",
+      withValueCompletionBlock: { error, result in
+        if error != nil {
+          // There was an error creating the account
+          println("There was an error creating account\(error)")
+        } else {
+          let uid = result["uid"] as? String
+          println("Successfully created user account with uid: \(uid)")
+        }
+    })
+  }
+  
+  func checkLoginCredentials(username: String, password: String){
+
+
+    
+    firebaseRef.authUser(username, password: password,
+      withCompletionBlock: { error, authData in
+        if authData == nil {
+          self.statusLabel.text = "Invalid login credentials"
+        } else {
+          println("authdata is \(authData.uid)")
+          
+          self.goToTeacherDashboardView()
+        }
+    })
     
   }
   
+  func setLoggedInUserId(userId: String) {
+    
+    userDefaults.setObject(userId, forKey: userId)
+    // FOR TESTING: automatically set the user to a teacher
+    userDefaults.setObject("Teacher", forKey: "AccountType")
+  }
+  
+  func userSuccessfullyLoggedIn() {
+    goToTeacherDashboardView()
+  }
+
+  
 
 }
+
