@@ -16,6 +16,7 @@
 		69480CE61B55E98100F80FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE51B55E98100F80FAF /* Images.xcassets */; };
 		69480CE91B55E98100F80FAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE71B55E98100F80FAF /* LaunchScreen.xib */; };
 		69480CF51B55E98100F80FAF /* class_companionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69480CF41B55E98100F80FAF /* class_companionTests.swift */; };
+		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		69480CF31B55E98100F80FAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69480CF41B55E98100F80FAF /* class_companionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = class_companionTests.swift; sourceTree = "<group>"; };
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
+		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8E4731F839F0B2D02C6B9E66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64C41057FE1EA57EE3582E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */,
 				690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */,
 				69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */,
+				69C8EF8E1B58A25B00715BF9 /* Constants.swift */,
 				69480CE51B55E98100F80FAF /* Images.xcassets */,
 				69480CE71B55E98100F80FAF /* LaunchScreen.xib */,
 				69480CDC1B55E98100F80FAF /* Supporting Files */,
@@ -284,6 +287,7 @@
 			files = (
 				69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */,
 				69480CDF1B55E98100F80FAF /* AppDelegate.swift in Sources */,
+				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
 				690BA6F61B5600AE009E63A5 /* TeacherClassesModel.swift in Sources */,
 				690BA6FA1B560196009E63A5 /* TeacherClassesUITableView.swift in Sources */,

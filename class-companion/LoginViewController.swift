@@ -11,9 +11,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
-  let userDefaults = NSUserDefaults.standardUserDefaults()
-  let usernameKeyConstant = "usernameKey"
-  let userIsAuthenticatedConstant = "userLoggedIn"
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,6 +52,7 @@ class LoginViewController: UIViewController {
     }
   }
   
+  // DISABLED FOR NOW
   func handleUserAlreadyLoggedIn (){
     if let userLoggedIn = userDefaults.stringForKey(userIsAuthenticatedConstant) {
       if userLoggedIn == "1" {
@@ -77,7 +75,7 @@ class LoginViewController: UIViewController {
   // MARK: -Firebase Auth
   
   
-  let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
+//  let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
   
   
   func createFirebaseTestUser () {
@@ -86,7 +84,6 @@ class LoginViewController: UIViewController {
     firebaseRef.createUser("mysticalcabbage@mc.com", password: "password",
       withValueCompletionBlock: { error, result in
         if error != nil {
-          // There was an error creating the account
           println("There was an error creating account\(error)")
         } else {
           let uid = result["uid"] as? String
@@ -104,8 +101,8 @@ class LoginViewController: UIViewController {
         if authData == nil {
           self.statusLabel.text = "Invalid login credentials"
         } else {
-          println("authdata is \(authData.uid)")
-          
+          let userId = authData.uid
+          self.setLoggedInUserId(userId)
           self.goToTeacherDashboardView()
         }
     })
@@ -114,7 +111,8 @@ class LoginViewController: UIViewController {
   
   func setLoggedInUserId(userId: String) {
     
-    userDefaults.setObject(userId, forKey: userId)
+    userDefaults.setObject(userId, forKey: currentUserIdKey)
+    
     // FOR TESTING: automatically set the user to a teacher
     userDefaults.setObject("Teacher", forKey: "AccountType")
   }

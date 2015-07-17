@@ -21,13 +21,19 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       // Deletes all classes currently in the array
       emptyAllTeacherClasses()
       
+      // Gets all current class data from the server
+      getAllClasses()
+      
       // TEST DATA FOR TEACHER CLASSES
       let class1 = TeacherClass(className: "English")
-      addNewTeacherClass(class1)
+//      addNewTeacherClass(class1)
+      sendClassToServer(class1)
       let class2 = TeacherClass(className: "Geography")
-      addNewTeacherClass(class2)
+//      addNewTeacherClass(class2)
+      sendClassToServer(class2)
       let class3 = TeacherClass(className: "Writing")
-      addNewTeacherClass(class3)
+//      addNewTeacherClass(class3)
+      sendClassToServer(class3)
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,7 +151,48 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     presentViewController(deleteConfirmationAlert, animated: true, completion: nil)
     
   }
+  
+  // MARK: - Firebase Class Retrival
+  
+  func getAllClasses() {
+    if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
+      let firebaseTeacherClassesRef = firebaseRef.childByAppendingPath("teachers/")
+      firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
+          println(snapshot.value)
+        }, withCancelBlock: { error in
+          println(error.description)
+      })
+    }
     
+  }
+  
+  func sendClassToServer(classToSendToServer: TeacherClass) {
+    let className = classToSendToServer.className
+    
+    if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
+      let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId]
+      
+      let firebaseTeacherClassesRef = firebaseRef.childByAppendingPath("teachers/")
+      let firebaseUserTeacherClassesRef = firebaseTeacherClassesRef.childByAppendingPath(currentUserId)
+      let firebaseUserTeacherClassWithKeyRef = firebaseUserTeacherClassesRef.childByAutoId()
+      
+      firebaseUserTeacherClassWithKeyRef.setValue(classInfoForTeacher)
+      
+      let firebaseClassRootRef = firebaseRef.childByAppendingPath("classes/")
+      let classIdKey = firebaseUserTeacherClassWithKeyRef.key
+      
+      
+      
+      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
+      
+      let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
+      
+      firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
+      
+      
+      
+    }
+  }
   
   
     /*
