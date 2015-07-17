@@ -170,29 +170,32 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let className = classToSendToServer.className
     
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
+      /////
+      // Send data to teacher section of database
       let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId]
+      let firebaseTeacherClassRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAutoId()
+      firebaseTeacherClassRef.setValue(classInfoForTeacher)
+      /////
       
-      let firebaseTeacherClassesRef = firebaseRef.childByAppendingPath("teachers/")
-      let firebaseUserTeacherClassesRef = firebaseTeacherClassesRef.childByAppendingPath(currentUserId)
-      let firebaseUserTeacherClassWithKeyRef = firebaseUserTeacherClassesRef.childByAutoId()
-      
-      firebaseUserTeacherClassWithKeyRef.setValue(classInfoForTeacher)
-      
-      let firebaseClassRootRef = firebaseRef.childByAppendingPath("classes/")
-      let classIdKey = firebaseUserTeacherClassWithKeyRef.key
-      
-      
-      
-      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
-      
+      /////
+      // send data to class section of database
+      let classIdKey = firebaseTeacherClassRef.key
       let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
-      
+      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
       firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
+      /////
+      
+      
       
       
       
     }
   }
+  
+  func deleteClassFromServer(classToDeleteFromServer: TeacherClass) {
+    
+  }
+  
   
   
     /*

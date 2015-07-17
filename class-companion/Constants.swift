@@ -10,6 +10,10 @@ import Foundation
 
 let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
 
+let firebaseTeacherRootRef = firebaseRef.childByAppendingPath("teachers/")
+let firebaseClassRootRef = firebaseRef.childByAppendingPath("classes/")
+
+
 let userDefaults = NSUserDefaults.standardUserDefaults()
 let usernameKeyConstant = "usernameKey"
 let userIsAuthenticatedConstant = "userLoggedIn"
