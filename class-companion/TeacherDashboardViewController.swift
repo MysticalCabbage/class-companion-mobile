@@ -109,7 +109,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     
     let row = indexPath.row
     
-    cell.textLabel?.text = allTeacherClasses[row].className
+    cell.textLabel?.text = allTeacherClasses[row].classTitle
 
     return cell
   }
@@ -129,7 +129,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       let row = Int(indexPath.row)
       let classToDelete = allTeacherClasses[row]
       
-      showDeleteConfirmationAlert(classToDelete.className, row: row)
+      showDeleteConfirmationAlert(classToDelete.classTitle, row: row)
       
     }
   }
@@ -165,7 +165,10 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
       for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
         println("THE INDIVIDUAL SNAPSHOT VALUE IS\(classFromServer.value))")
-        addNewTeacherClass(classFromServer)
+        
+        let newTeacherClass = TeacherClass(snap: classFromServer)
+        addNewTeacherClass(newTeacherClass)
+        println(allTeacherClasses)
       }
       }, withCancelBlock: { error in
         println(error.description)
