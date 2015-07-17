@@ -15,19 +15,21 @@ class TeacherClass: Printable {
   var classId: String
   var teacherId: String
   var description: String {
-    return "The class name is \(classTitle)"
+    return "The class name is \(classTitle) and classID is \(classId)"
   }
-  
-  init(json: Dictionary<String, AnyObject>) {
+  // initialize the instance with the json data from the snapshot
+  init(key: String, json: Dictionary<String, AnyObject>) {
     self.classTitle = json["classTitle"] as? String ?? "classNameMissing"
-    self.classId = json["classId"] as? String ?? "classIdMissing"
+//    self.classId = json["classId"] as? String ?? "classIdMissing"
+    self.classId = key
     self.teacherId = json["teacherId"] as? String ?? "TeacherIdMissing"
   }
   
+  // when initializing with the snapshot data
   convenience init(snap: FDataSnapshot) {
-    println("IN INIT THE SNAP VALUE IS \(snap.value)")
+//    println("IN INIT THE SNAP VALUE IS \(snap.value)")
     if let json = snap.value as? Dictionary<String, AnyObject> {
-      self.init(json: json)
+      self.init(key: snap.key, json: json)
     }
     else {
       fatalError("errored when initializing with snapshot data")

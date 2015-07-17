@@ -150,18 +150,15 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     
     deleteConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
 
-//    func deleteHandler(className: String, classId: String, row: Int) {
-//      self.deleteClassFromServer(className, classId: classId, row: row)
-//    }
+
     let deleteAction = UIAlertAction(
       title: "Delete \(className) class",
       style: UIAlertActionStyle.Default,
-//      handler: deleteHandler(className, classId, row)
       handler: { (action: UIAlertAction!) -> Void in
-        //      self.removeClass(className, row: row)
         self.deleteClassFromServer(className, classId: classId, row: row)
       }
     )
+    
     deleteConfirmationAlert.addAction(deleteAction)
     
     
@@ -176,11 +173,14 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let firebaseTeacherClassesRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/")
     firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
       for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
+        println("CLASS FROM SERVER IS \(classFromServer)")
         let newTeacherClass = TeacherClass(snap: classFromServer)
         addNewTeacherClass(newTeacherClass)
+        println(allTeacherClasses)
       }
       // after adding the new classes to the classes array, reload the table
       self.classTableView.reloadData()
+      
       }, withCancelBlock: { error in
         println(error.description)
     })
@@ -224,25 +224,24 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   
   
   func deleteClassFromServer(className: String, classId: String, row: Int) {
-    let firebaseDeleteClassRef = firebaseClassRootRef.childByAppendingPath(classId)
+    let firebaseDeleteClassRef = firebaseClassRootRef.childByAppendingPath(classId).childByAppendingPath("info/")
     
     firebaseDeleteClassRef.removeValue()
     
     let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-    let firebaseDeleteClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes").childByAppendingPath(classId)
+    let firebaseDeleteClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes/").childByAppendingPath(classId)
     
     firebaseDeleteClassTeacherRef.removeValue()
     
   }
   
-  func deleteAllClassesFromServer() {
-    let firebaseUserTeacherRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-    
-
-    
-    firebaseClassRootRef.removeValue()
-//    let firebaseTeacherUserRoot = firebase
-  }
+//  func deleteAllClassesFromServer() {
+//    let firebaseUserTeacherRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
+//    
+//
+//    
+//    firebaseClassRootRef.removeValue()
+//  }
   
   
 // MARK: - Firebase Listeners
@@ -254,6 +253,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     println(firebaseClassTeacherRef)
     
     firebaseClassTeacherRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+      println("DELETED \(snapshot.value)")
       emptyAllTeacherClassesLocally()
       self.getAllClassesFromServer()
     })

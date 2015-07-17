@@ -11,6 +11,7 @@
 		690BA6F61B5600AE009E63A5 /* TeacherClassesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */; };
 		690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */; };
 		690BA6FA1B560196009E63A5 /* TeacherClassesUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */; };
+		691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691AEEFA1B59A81200FD3051 /* TeacherStudentsModel.swift */; };
 		69480CDF1B55E98100F80FAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69480CDE1B55E98100F80FAF /* AppDelegate.swift */; };
 		69480CE41B55E98100F80FAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE21B55E98100F80FAF /* Main.storyboard */; };
 		69480CE61B55E98100F80FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE51B55E98100F80FAF /* Images.xcassets */; };
@@ -35,6 +36,7 @@
 		690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherClassesModel.swift; sourceTree = "<group>"; };
 		690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherDashboardViewController.swift; sourceTree = "<group>"; };
 		690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherClassesUITableView.swift; sourceTree = "<group>"; };
+		691AEEFA1B59A81200FD3051 /* TeacherStudentsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentsModel.swift; sourceTree = "<group>"; };
 		69480CD91B55E98100F80FAF /* class-companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "class-companion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69480CDD1B55E98100F80FAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69480CDE1B55E98100F80FAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				69480CE21B55E98100F80FAF /* Main.storyboard */,
 				690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */,
 				690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */,
+				691AEEFA1B59A81200FD3051 /* TeacherStudentsModel.swift */,
 				690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */,
 				69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */,
 				69C8EF8E1B58A25B00715BF9 /* Constants.swift */,
@@ -288,6 +291,7 @@
 				69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */,
 				69480CDF1B55E98100F80FAF /* AppDelegate.swift in Sources */,
 				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,
+				691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
 				690BA6F61B5600AE009E63A5 /* TeacherClassesModel.swift in Sources */,
 				690BA6FA1B560196009E63A5 /* TeacherClassesUITableView.swift in Sources */,
