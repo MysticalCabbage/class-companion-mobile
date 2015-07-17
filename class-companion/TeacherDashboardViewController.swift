@@ -47,6 +47,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
         // Dispose of any resources that can be recreated.
     }
   
+  // MARK: - Add / Delete Class Alerts
   // ADD CLASS ALERT
   @IBAction func addNewTeacherClassAlert(sender: AnyObject) {
     var alertController:UIAlertController?
@@ -129,7 +130,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       let row = Int(indexPath.row)
       let classToDelete = allTeacherClasses[row]
       
-      showDeleteConfirmationAlert(classToDelete.classTitle, row: row)
+      showDeleteConfirmationAlert(classToDelete.classTitle, classId: classToDelete.classId, row: row)
       
     }
   }
@@ -140,17 +141,26 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   }
   
   
-  func showDeleteConfirmationAlert(className: String, row: Int){
+  func showDeleteConfirmationAlert(className: String, classId: String, row: Int){
     
     
     var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(className)\" class? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
     
     deleteConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
 
-    
-    deleteConfirmationAlert.addAction(UIAlertAction(title: "Delete \(className) class", style: .Default, handler: { (action: UIAlertAction!) in
-      self.removeClass(className, row: row)
-    }))
+//    func deleteHandler(className: String, classId: String, row: Int) {
+//      self.deleteClassFromServer(className, classId: classId, row: row)
+//    }
+    let deleteAction = UIAlertAction(
+      title: "Delete \(className) class",
+      style: UIAlertActionStyle.Default,
+//      handler: deleteHandler(className, classId, row)
+      handler: { (action: UIAlertAction!) -> Void in
+        //      self.removeClass(className, row: row)
+        self.deleteClassFromServer(className, classId: classId, row: row)
+      }
+    )
+    deleteConfirmationAlert.addAction(deleteAction)
     
     
     
@@ -212,8 +222,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   // MARK: - Firebase Class Deleting
   
   
-  func deleteClassFromServer(classToDeleteFromServer: TeacherClass) {
-    let classId = classToDeleteFromServer.classId
+  func deleteClassFromServer(className: String, classId: String, row: Int) {
+//    let classId = classToDeleteFromServer.classId
     
   }
   
