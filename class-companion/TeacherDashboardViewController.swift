@@ -21,22 +21,24 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       // Deletes all classes currently in the array
       emptyAllTeacherClassesLocally()
       
-      // Gets all current class data from the server
-      getAllClasses()
+
       
       // FOR TESTING
-      deleteAllClassesFromServer()
+//      deleteAllClassesFromServer()
       
       // TEST DATA FOR TEACHER CLASSES
 //      let class1 = TeacherClass(className: "English")
-      sendClassToServer("English")
+//      sendClassToServer("English")
 //      sendClassToServer(class1)
 //      let class2 = TeacherClass(className: "Geography")
-      sendClassToServer("Geography")
+//      sendClassToServer("Geography")
 //      sendClassToServer(class2)
 //      let class3 = TeacherClass(className: "Writing")
 //      addNewTeacherClass(class3)
-      sendClassToServer("Writing")
+//      sendClassToServer("Writing")
+      
+      // Gets all current class data from the server
+      getAllClassesFromServer()
       
     }
 
@@ -158,17 +160,16 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
 
   // MARK: - Firebase Class Retrieval
   
-  func getAllClasses() {
-    if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
-      let firebaseTeacherClassesRef = firebaseRef.childByAppendingPath("teachers/")
-      firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
-        for rest in snapshot.children.allObjects as! [FDataSnapshot] {
-          println(rest.value)
-        }
-        }, withCancelBlock: { error in
-          println(error.description)
-      })
-    }
+  func getAllClassesFromServer() {
+    let firebaseTeacherClassesRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/")
+    firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
+      for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
+        println("THE INDIVIDUAL SNAPSHOT VALUE IS\(classFromServer.value))")
+        addNewTeacherClass(classFromServer)
+      }
+      }, withCancelBlock: { error in
+        println(error.description)
+    })
     
   }
   

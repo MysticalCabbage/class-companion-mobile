@@ -13,6 +13,7 @@ var allTeacherClasses = [TeacherClass]()
 struct TeacherClass: Printable {
   var className: String
   var classId: String
+  var teacherId: String
   var description: String {
     return "The class name is \(className)"
   }
@@ -40,4 +41,9 @@ func classAlreadyExists (classArray: [TeacherClass], newClass: TeacherClass) -> 
 func emptyAllTeacherClassesLocally() {
   allTeacherClasses.removeAll()
 
+}
+
+func createNewTeacherClass(className: String, classId: String, teacherId: String) -> TeacherClass {
+  let newTeacherClass = TeacherClass(className: className, classId: classId, teacherId: currentUserId!)
+  return newTeacherClass
 }
