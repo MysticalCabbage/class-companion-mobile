@@ -223,18 +223,32 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   
   
   func deleteClassFromServer(className: String, classId: String, row: Int) {
-//    let classId = classToDeleteFromServer.classId
+    let firebaseDeleteClassRef = firebaseClassRootRef.childByAppendingPath(classId)
+    
+    firebaseDeleteClassRef.removeValue()
+    
+    let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
+    let firebaseDeleteClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes").childByAppendingPath(classId)
+    
+    firebaseDeleteClassTeacherRef.removeValue()
     
   }
   
   func deleteAllClassesFromServer() {
-    let firebaseTeacherClassRootRef = firebaseTeacherRootRef.childByAppendingPath("classes/")
+    let firebaseUserTeacherRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
+    
+
     
     firebaseClassRootRef.removeValue()
 //    let firebaseTeacherUserRoot = firebase
   }
   
   
+// MARK: - Firebase Listeners
+  
+  func setupDeleteListener() {
+    
+  }
   
     /*
     // MARK: - Navigation
@@ -246,4 +260,5 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     }
     */
 
+  
 }
