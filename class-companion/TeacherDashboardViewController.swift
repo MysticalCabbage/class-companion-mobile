@@ -204,15 +204,14 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       
       let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId, "classId": classIdKey]
       let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
-      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
+      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey).childByAppendingPath("info/")
       
-      firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
-      /////
-      
-      /////
-
+      // add the class to the teacher section
       firebaseTeacherClassRef.setValue(classInfoForTeacher)
-      /////
+      
+      // add the class to the classes section
+      firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
+
       
     }
     else {

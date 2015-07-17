@@ -8,7 +8,11 @@
 
 import Foundation
 
-let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
+// SANDBOX URL
+//let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
+
+// LIVE URL
+let firebaseRef = Firebase(url: "https://mysticalcabbage2.firebaseio.com/")
 
 let firebaseTeacherRootRef = firebaseRef.childByAppendingPath("teachers/")
 let firebaseClassRootRef = firebaseRef.childByAppendingPath("classes/")

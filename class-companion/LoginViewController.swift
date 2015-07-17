@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     super.viewDidLoad()
     
 //    handleUserAlreadyLoggedIn()
-    createFirebaseTestUser()
+//    createFirebaseTestUser()
     
   }
   
