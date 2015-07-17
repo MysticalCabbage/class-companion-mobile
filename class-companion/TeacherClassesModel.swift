@@ -12,6 +12,7 @@ var allTeacherClasses = [TeacherClass]()
 
 struct TeacherClass: Printable {
   var className: String
+  var classId: String
   var description: String {
     return "The class name is \(className)"
   }

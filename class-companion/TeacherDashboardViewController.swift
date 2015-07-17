@@ -25,15 +25,16 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       getAllClasses()
       
       // TEST DATA FOR TEACHER CLASSES
-      let class1 = TeacherClass(className: "English")
-//      addNewTeacherClass(class1)
-      sendClassToServer(class1)
-      let class2 = TeacherClass(className: "Geography")
-//      addNewTeacherClass(class2)
-      sendClassToServer(class2)
-      let class3 = TeacherClass(className: "Writing")
+//      let class1 = TeacherClass(className: "English")
+      sendClassToServer("English")
+//      sendClassToServer(class1)
+//      let class2 = TeacherClass(className: "Geography")
+      sendClassToServer("Geography")
+//      sendClassToServer(class2)
+//      let class3 = TeacherClass(className: "Writing")
 //      addNewTeacherClass(class3)
-      sendClassToServer(class3)
+      sendClassToServer("Writing")
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,8 +64,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
         if let textFields = alertController?.textFields{
           let theTextFields = textFields as! [UITextField]
           let enteredText = theTextFields[0].text
-          let newClass = TeacherClass(className: enteredText)
-          addNewTeacherClass(newClass)
+          let newClassName = enteredText
+          self!.sendClassToServer(newClassName)
           self!.classTableView.reloadData()
           
         }
@@ -151,8 +152,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     presentViewController(deleteConfirmationAlert, animated: true, completion: nil)
     
   }
-  
-  // MARK: - Firebase Class Retrival
+
+  // MARK: - Firebase Class Retrieval
   
   func getAllClasses() {
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
@@ -166,9 +167,11 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     
   }
   
-  func sendClassToServer(classToSendToServer: TeacherClass) {
-    let className = classToSendToServer.className
-    
+  
+  // MARK: - Firebase Class Sending
+  
+  func sendClassToServer(className: String) {
+
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       /////
       // Send data to teacher section of database
@@ -184,15 +187,20 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
       firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
       /////
-      
-      
-      
-      
-      
     }
+    else {
+      println("ERROR: trying to send class to server without userID in user defaults")
+    }
+    
   }
   
+  // MARK: - Firebase Class Deleting
+  
+  
   func deleteClassFromServer(classToDeleteFromServer: TeacherClass) {
+    let classId = classToDeleteFromServer.classId
+    
+    
     
   }
   
