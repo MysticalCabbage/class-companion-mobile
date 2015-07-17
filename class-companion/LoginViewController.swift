@@ -119,6 +119,20 @@ class LoginViewController: UIViewController {
     
     // FOR TESTING: automatically set the user to a teacher
     userDefaults.setObject("Teacher", forKey: "AccountType")
+    
+    // FOR TESTING: automatically add extra field values to firebase
+    let firebaseInfoPath = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("info")
+    
+    let teacherInfo = [
+                      "email": usernameField.text,
+                      "firstName": "Cabbage",
+                      "lastName": "Mystical",
+                      "prefix": "Sorcerer",
+                      "uid": currentUserId
+                      ]
+    
+    firebaseInfoPath.setValue(teacherInfo)
+    
   }
   
   func userSuccessfullyLoggedIn() {

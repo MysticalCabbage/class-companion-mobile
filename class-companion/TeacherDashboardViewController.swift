@@ -178,20 +178,27 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   func sendClassToServer(className: String) {
 
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
-      /////
-      // Send data to teacher section of database
-      let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId]
+
+
+      
+      // prepare data to send to teacher section of database
+
       let firebaseTeacherClassRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/").childByAutoId()
-      firebaseTeacherClassRef.setValue(classInfoForTeacher)
+
+      let classIdKey = firebaseTeacherClassRef.key
+      
+      let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId, "classId": classIdKey]
+      let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
+      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
+      
+      firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
       /////
       
       /////
-      // send data to class section of database
-      let classIdKey = firebaseTeacherClassRef.key
-      let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
-      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey)
-      firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
+
+      firebaseTeacherClassRef.setValue(classInfoForTeacher)
       /////
+      
     }
     else {
       println("ERROR: trying to send class to server without userID in user defaults")
