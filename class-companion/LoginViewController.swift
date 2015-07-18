@@ -115,7 +115,7 @@ class LoginViewController: UIViewController {
     
 //    userDefaults.setObject(userId, forKey: currentUserIdKey)
     
-    println("current user is \(currentUserId)")
+//    println("current user is \(currentUserId)")
     
     // FOR TESTING: automatically set the user to a teacher
     userDefaults.setObject("Teacher", forKey: "AccountType")

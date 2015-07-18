@@ -20,15 +20,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-
-        // Do any additional setup after loading the view./
-      // TEST DATA
-//      let behavior1 = Behaviors("Raising Hand", behaviorId: "a1", behaviorValue: "1")
-//      let behavior2 = Behaviors("Did Homework", behaviorId: "b2", behaviorValue: "2")
-//      let behavior3 = Behaviors("Disrupting Class", behaviorId: "c3", behaviorValue: "-1")
       
-//      addNewBehavior(behavior1)
+      getAllBehaviorsFromServer()
       
     }
 
@@ -61,13 +54,83 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 //        return allBehaviors.count
       return 10
     }
-
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> BehaviorCollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BehaviorCollectionViewCell
-        cell.behaviorNameLabel.text = "Raising Hand"
-      cell.behaviorValueLabel.text = "+1"
-        return cell
+  
+  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    // 3
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BehaviorCollectionViewCell
+    
+    // Configure the cell
+    
+    cell.behaviorNameLabel.text = "Raising Hand"
+    cell.behaviorValueLabel.text = "1"
+    
+    return cell
+  }
+  
+  
+  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
+    
+//    var cell : UICollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)!
+//    cell.backgroundColor = UIColor.magentaColor()
+    let behaviorValue = "1"
+    
+    updateBehaviorPoints(behaviorValue)
+  }
+  
+  // MARK: - Firebase Update Behavior Points
+  
+  func updateBehaviorPoints(behaviorValueToAdd: String) {
+    
+    
+    let firebaseStudentBehaviorRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+      .childByAppendingPath(currentStudentId)
+      .childByAppendingPath("behavior/")
+    
+    let behaviorValueToAddInt = behaviorValueToAdd.toInt()
+    
+    
+    firebaseStudentBehaviorRef.runTransactionBlock({
+      (currentData:FMutableData!) in
+      
+      if let behaviorValue = currentData.value as? Int {
+        currentData.value = behaviorValue + behaviorValueToAddInt!
+      } else {
+        currentData.value = 1
+      }
+      
+      return FTransactionResult.successWithValue(currentData)
+    })
+    
+  }
+  
+  // MARK: - Firebase Get All Behaviors
+  
+  func getAllBehaviorsFromServer() {
+    let firebaseClassBehaviorRef =
+      firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+    
+    firebaseClassBehaviorRef.observeEventType(.Value, withBlock: { snapshot in
+      for behaviorFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
+      //        println("STUDENT FROM SERVER IS \(studentFromServer)")
+      let newBehavior = Behavior(snap: behaviorFromServer)
+      addNewBehavior(newBehavior)
+      //        println(allTeacherStudents)
     }
+    // after adding the new classes to the classes array, reload the table
+    self.collectionView!.reloadData()
+    
+    }, withCancelBlock: { error in
+    println(error.description)
+    })
+  }
+  
+  
+  
 
 
     // MARK: UICollectionViewDelegate
@@ -100,5 +163,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
     }
     */
+
 
 }

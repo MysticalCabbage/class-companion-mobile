@@ -152,6 +152,7 @@ class TeacherStudentsTableViewController: UITableViewController {
 //    addBehaviorPoints(selectedStudent)
     
     currentStudentName = selectedStudent.studentTitle
+    currentStudentId = selectedStudent.studentId
     
     performSegueWithIdentifier("showStudentBehaviorList", sender: nil)
     
@@ -233,9 +234,9 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   func getAllStudentsFromServer() {
     let firebaseClassStudentRef =
-    firebaseClassRootRef
-      .childByAppendingPath(currentClassId)
-      .childByAppendingPath("students/")
+      firebaseClassRootRef
+        .childByAppendingPath(currentClassId)
+        .childByAppendingPath("students/")
     
     firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {

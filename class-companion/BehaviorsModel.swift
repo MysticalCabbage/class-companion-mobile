@@ -8,9 +8,9 @@
 
 import Foundation
 
-var allBehaviors = [Behaviors]()
+var allBehaviors = [Behavior]()
 
-class Behaviors: Printable {
+class Behavior: Printable {
   var behaviorTitle: String
   var behaviorId: String
   var behaviorValue: String
@@ -40,7 +40,7 @@ class Behaviors: Printable {
 
 
 
-func addNewBehavior(newBehavior: Behaviors) {
+func addNewBehavior(newBehavior: Behavior) {
   
   if !behaviorAlreadyExists(allBehaviors, newBehavior) {
     allBehaviors.append(newBehavior)
@@ -48,7 +48,7 @@ func addNewBehavior(newBehavior: Behaviors) {
   
 }
 
-func behaviorAlreadyExists (behaviorArray: [Behaviors], newBehavior: Behaviors) -> Bool {
+func behaviorAlreadyExists (behaviorArray: [Behavior], newBehavior: Behavior) -> Bool {
   for singleBehavior in behaviorArray {
     if singleBehavior.behaviorId == newBehavior.behaviorId {
       return true

@@ -25,6 +25,7 @@ let userIsAuthenticatedConstant = "userLoggedIn"
 let currentUserIdKey = "currentUserIdKey"
 let currentClassIdKey = "currentClassIdKey"
 let currentStudentNameKey = "currentStudentNameKey"
+let currentStudentIdKey = "currentStudentIdKey"
 
 var currentUserId: String? {
   get { return userDefaults.stringForKey(currentUserIdKey) }
@@ -38,6 +39,11 @@ var currentClassId: String? {
 }
 
 var currentStudentName: String? {
-get { return userDefaults.stringForKey(currentStudentNameKey) }
-set { userDefaults.setObject(newValue, forKey: currentStudentNameKey)}
+  get { return userDefaults.stringForKey(currentStudentNameKey) }
+  set { userDefaults.setObject(newValue, forKey: currentStudentNameKey)}
+}
+
+var currentStudentId: String? {
+  get { return userDefaults.stringForKey(currentStudentIdKey) }
+  set { userDefaults.setObject(newValue, forKey: currentStudentIdKey)}
 }
