@@ -18,6 +18,8 @@
 		69480CE91B55E98100F80FAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE71B55E98100F80FAF /* LaunchScreen.xib */; };
 		69480CF51B55E98100F80FAF /* class_companionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69480CF41B55E98100F80FAF /* class_companionTests.swift */; };
 		6978C5991B59CCB0006A70FB /* TeacherStudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */; };
+		698681501B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */; };
+		698681521B5ADE7E0073AE96 /* BehaviorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */; };
 		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,8 @@
 		69480CF31B55E98100F80FAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69480CF41B55E98100F80FAF /* class_companionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = class_companionTests.swift; sourceTree = "<group>"; };
 		6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentsTableViewController.swift; sourceTree = "<group>"; };
+		6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentBehaviorsCollectionViewController.swift; sourceTree = "<group>"; };
+		698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorsModel.swift; sourceTree = "<group>"; };
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */,
 				6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */,
 				690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */,
+				6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */,
+				698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */,
 				691AEEFA1B59A81200FD3051 /* TeacherStudentsModel.swift */,
 				690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */,
 				69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */,
@@ -292,6 +298,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6978C5991B59CCB0006A70FB /* TeacherStudentsTableViewController.swift in Sources */,
+				698681501B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift in Sources */,
+				698681521B5ADE7E0073AE96 /* BehaviorsModel.swift in Sources */,
 				69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */,
 				69480CDF1B55E98100F80FAF /* AppDelegate.swift in Sources */,
 				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,

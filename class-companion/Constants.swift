@@ -24,6 +24,7 @@ let userIsAuthenticatedConstant = "userLoggedIn"
 // used for accessing and retrieving the current user's ID
 let currentUserIdKey = "currentUserIdKey"
 let currentClassIdKey = "currentClassIdKey"
+let currentStudentNameKey = "currentStudentNameKey"
 
 var currentUserId: String? {
   get { return userDefaults.stringForKey(currentUserIdKey) }
@@ -34,4 +35,9 @@ var currentUserId: String? {
 var currentClassId: String? {
   get { return userDefaults.stringForKey(currentClassIdKey) }
   set { userDefaults.setObject(newValue, forKey: currentClassIdKey)}
+}
+
+var currentStudentName: String? {
+get { return userDefaults.stringForKey(currentStudentNameKey) }
+set { userDefaults.setObject(newValue, forKey: currentStudentNameKey)}
 }

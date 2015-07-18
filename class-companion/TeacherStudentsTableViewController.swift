@@ -141,7 +141,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     return cell
   }
   
-  // FOR TESTING  adds a point to a student's behavior
+  // ON CLICKING adds a point to a student's behavior
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
@@ -149,9 +149,11 @@ class TeacherStudentsTableViewController: UITableViewController {
     let selectedStudent = allTeacherStudents[row]
 //    let selectedCellStudentId = selectedCell.studentId
     
-    addBehaviorPoints(selectedStudent)
+//    addBehaviorPoints(selectedStudent)
     
-//    performSegueWithIdentifier("showTeacherStudentsView", sender: nil)
+    currentStudentName = selectedStudent.studentTitle
+    
+    performSegueWithIdentifier("showStudentBehaviorList", sender: nil)
     
   }
   
