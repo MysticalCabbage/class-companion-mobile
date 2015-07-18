@@ -38,7 +38,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     //      sendClassToServer("Writing")
     
     // Gets all current class data from the server
-    getAllClassesFromServer()
+    getAllStudentsFromServer()
     
   }
   
@@ -52,7 +52,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   // MARK: - Add / Delete Class Alerts
   // ADD CLASS ALERT
-  @IBAction func addNewTeacherClassAlert(sender: AnyObject) {
+  @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
     var alertController:UIAlertController?
     
     alertController = UIAlertController(title: "Add Class",
@@ -73,8 +73,8 @@ class TeacherStudentsTableViewController: UITableViewController {
         if let textFields = alertController?.textFields{
           let theTextFields = textFields as! [UITextField]
           let enteredText = theTextFields[0].text
-          let newClassName = enteredText
-          self!.sendClassToServer(newClassName)
+          let newstudentName = enteredText
+          self!.sendStudentToServer(newstudentName)
           self!.tableView.reloadData()
           
         }
@@ -96,7 +96,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
   }
   
-  let classCellIdentifier = "ClassCell"
+  let classCellIdentifier = "TeacherStudentCell"
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
@@ -112,58 +112,60 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     let row = indexPath.row
     
-    cell.textLabel?.text = allTeacherStudents[row].classTitle
+    cell.textLabel?.text = allTeacherStudents[row].studentTitle
     
     return cell
   }
   
   // handles segueing to show the view for an individual classroom
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    
-    let row = indexPath.row
-    let selectedCell = allTeacherStudents[row]
-    let selectedCellClassId = selectedCell.classId
-    
-    currentClassId = selectedCellClassId
-    
-    performSegueWithIdentifier("showTeacherStudentsView", sender: nil)
-    
-  }
+//  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//    
+//    let row = indexPath.row
+//    let selectedCell = allTeacherStudents[row]
+//    let selectedCellClassId = selectedCell.classId
+//    
+//    currentClassId = selectedCellClassId
+//    
+//    performSegueWithIdentifier("showTeacherStudentsView", sender: nil)
+//    
+//  }
   
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
     return true
   }
   
-  overridefunc tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if (editingStyle == UITableViewCellEditingStyle.Delete) {
       let row = Int(indexPath.row)
-      let classToDelete = allTeacherStudents[row]
+      let studentToDelete = allTeacherStudents[row]
       
-      showDeleteConfirmationAlert(classToDelete.classTitle, classId: classToDelete.classId, row: row)
+      showDeleteConfirmationAlert(studentToDelete)
       
     }
   }
   
-  func removeClass(classNameToRemove: String, row: Int) {
+  func removeStudent(studentNameToRemove: String, row: Int) {
     allTeacherStudents.removeAtIndex(row)
     self.tableView.reloadData()
   }
   
   
-  func showDeleteConfirmationAlert(className: String, classId: String, row: Int){
+  func showDeleteConfirmationAlert(studentToDelete: TeacherStudent){
+    
+    let studentName = studentToDelete.studentTitle
     
     
-    var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(className)\" class? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
+    var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(studentName)\" class? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
     
     deleteConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
     
     
     let deleteAction = UIAlertAction(
-      title: "Delete \(className) class",
+      title: "Delete \(studentName) class",
       style: UIAlertActionStyle.Default,
       handler: { (action: UIAlertAction!) -> Void in
-        self.deleteClassFromServer(className, classId: classId, row: row)
+        self.deleteStudentFromServer(studentToDelete)
       }
     )
     
@@ -177,13 +179,17 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   // MARK: - Firebase Class Retrieval
   
-  func getAllClassesFromServer() {
-    let firebaseTeacherStudentsRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/")
-    firebaseTeacherStudentsRef.observeEventType(.Value, withBlock: { snapshot in
-      for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-        println("CLASS FROM SERVER IS \(classFromServer)")
-        let newTeacherClass = TeacherClass(snap: classFromServer)
-        addNewTeacherClass(newTeacherClass)
+  func getAllStudentsFromServer() {
+    let firebaseClassStudentRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+    
+    firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
+      for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
+        println("CLASS FROM SERVER IS \(studentFromServer)")
+        let newTeacherStudent = TeacherStudent(snap: studentFromServer)
+        addNewTeacherStudent(newTeacherStudent)
         println(allTeacherStudents)
       }
       // after adding the new classes to the classes array, reload the table
@@ -198,28 +204,27 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   // MARK: - Firebase Class Sending
   
-  func sendClassToServer(className: String) {
+  func sendStudentToServer(studentName: String) {
     
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       
-      
-      
+
       // prepare data to send to teacher section of database
       
-      let firebaseTeacherClassRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/").childByAutoId()
+      let firebaseClassStudentRef = 
+        firebaseClassRootRef
+        .childByAppendingPath(currentClassId)
+        .childByAppendingPath("students/")
+        .childByAutoId()
       
-      let classIdKey = firebaseTeacherClassRef.key
-      
-      let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId, "classId": classIdKey]
-      let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
-      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey).childByAppendingPath("info/")
+      let studentInfoForClassRoot =
+      [
+        "studentTitle": studentName,
+        "behavior": "0"
+      ]
       
       // add the class to the teacher section
-      firebaseTeacherClassRef.setValue(classInfoForTeacher)
-      
-      // add the class to the classes section
-      firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
-      
+      firebaseClassStudentRef.setValue(studentInfoForClassRoot)
       
     }
     else {
@@ -231,15 +236,23 @@ class TeacherStudentsTableViewController: UITableViewController {
   // MARK: - Firebase Class Deleting
   
   
-  func deleteClassFromServer(className: String, classId: String, row: Int) {
-    let firebaseDeleteClassRef = firebaseClassRootRef.childByAppendingPath(classId).childByAppendingPath("info/")
+  func deleteStudentFromServer(studentToDelete: TeacherStudent) {
+    let studentId = studentToDelete.studentId
+    let firebaseDeleteStudentRef =
+      firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+      .childByAppendingPath(studentId)
     
-    firebaseDeleteClassRef.removeValue()
+    firebaseDeleteStudentRef.removeValue()
     
-    let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-    let firebaseDeleteClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes/").childByAppendingPath(classId)
-    
-    firebaseDeleteClassTeacherRef.removeValue()
+//    let firebaseTeacherUserRootRef =
+//      firebaseTeacherRootRef
+//      .childByAppendingPath(currentUserId)
+//      .childByAppendingPath("classes/")
+//      .childByAppendingPath(classId)
+//    
+//    firebaseDeleteClassTeacherRef.removeValue()
     
   }
   
@@ -255,15 +268,16 @@ class TeacherStudentsTableViewController: UITableViewController {
   // MARK: - Firebase Listeners
   
   func setupDeleteListener() {
-    let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-    let firebaseClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes/")
+
+    let firebaseClassStudentRef =
+      firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
     
-    println(firebaseClassTeacherRef)
-    
-    firebaseClassTeacherRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+    firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
       println("DELETED \(snapshot.value)")
       emptyAllTeacherStudentsLocally()
-      self.getAllClassesFromServer()
+      self.getAllStudentsFromServer()
     })
   }
   
