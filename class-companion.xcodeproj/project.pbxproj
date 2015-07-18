@@ -20,6 +20,7 @@
 		6978C5991B59CCB0006A70FB /* TeacherStudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */; };
 		698681501B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */; };
 		698681521B5ADE7E0073AE96 /* BehaviorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */; };
+		698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */; };
 		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentsTableViewController.swift; sourceTree = "<group>"; };
 		6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentBehaviorsCollectionViewController.swift; sourceTree = "<group>"; };
 		698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorsModel.swift; sourceTree = "<group>"; };
+		698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorCollectionViewCell.swift; sourceTree = "<group>"; };
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */,
 				690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */,
 				6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */,
+				698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */,
 				698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */,
 				691AEEFA1B59A81200FD3051 /* TeacherStudentsModel.swift */,
 				690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */,
@@ -305,6 +308,7 @@
 				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,
 				691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
+				698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */,
 				690BA6F61B5600AE009E63A5 /* TeacherClassesModel.swift in Sources */,
 				690BA6FA1B560196009E63A5 /* TeacherClassesUITableView.swift in Sources */,
 			);

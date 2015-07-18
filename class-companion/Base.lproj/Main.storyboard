@@ -209,30 +209,59 @@
             </objects>
             <point key="canvasLocation" x="1777" y="298"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Student Behaviors Collection View Controller-->
         <scene sceneID="d7Q-eK-mqN">
             <objects>
-                <collectionViewController id="YcX-yM-aiM" sceneMemberID="viewController">
+                <collectionViewController id="YcX-yM-aiM" customClass="StudentBehaviorsCollectionViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="mdc-YX-IR7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OrY-n1-zOQ">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="behaviorAction" id="0Pm-ET-qph">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="behaviorActionCell" id="0Pm-ET-qph" customClass="BehaviorCollectionViewCell" customModule="class_companion" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
+                                            <rect key="frame" x="5" y="53" width="118" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
+                                            <rect key="frame" x="43" y="99" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="fPM-3B-L4a" secondAttribute="centerX" id="2Go-3q-qrV"/>
+                                    <constraint firstAttribute="centerY" secondItem="nOH-Xv-35A" secondAttribute="centerY" id="IJh-WZ-d8y"/>
+                                    <constraint firstAttribute="centerX" secondItem="nOH-Xv-35A" secondAttribute="centerX" id="QHi-qN-P3A"/>
+                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="bottom" secondItem="0Pm-ET-qph" secondAttribute="bottomMargin" id="mc7-eN-oCW"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="behaviorNameLabel" destination="nOH-Xv-35A" id="RLN-fR-Cq2"/>
+                                    <outlet property="behaviorValueLabel" destination="fPM-3B-L4a" id="RBx-FW-vom"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BehaviorListHeader" id="gf5-0l-wxU">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="YcX-yM-aiM" id="epm-jm-7An"/>
                             <outlet property="delegate" destination="YcX-yM-aiM" id="gy6-Wz-96G"/>

@@ -16,7 +16,7 @@ class Behaviors: Printable {
   var behaviorValue: String
   
   var description: String {
-    return "The behavior name is \(behaviorTitle)"
+    return "The behavior name is \(behaviorTitle) and value is \(behaviorValue)"
   }
   // initialize the instance with the json data from the snapshot
   init(key: String, json: Dictionary<String, AnyObject>) {
@@ -39,7 +39,8 @@ class Behaviors: Printable {
 
 
 
-func addNewBehaviors(newBehavior: Behaviors) {
+
+func addNewBehavior(newBehavior: Behaviors) {
   
   if !behaviorAlreadyExists(allBehaviors, newBehavior) {
     allBehaviors.append(newBehavior)

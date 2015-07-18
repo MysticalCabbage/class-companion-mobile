@@ -11,6 +11,9 @@ import UIKit
 let reuseIdentifier = "behaviorActionCell"
 
 class StudentBehaviorsCollectionViewController: UICollectionViewController {
+  
+  let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +21,15 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view./
+      // TEST DATA
+//      let behavior1 = Behaviors("Raising Hand", behaviorId: "a1", behaviorValue: "1")
+//      let behavior2 = Behaviors("Did Homework", behaviorId: "b2", behaviorValue: "2")
+//      let behavior3 = Behaviors("Disrupting Class", behaviorId: "c3", behaviorValue: "-1")
+      
+//      addNewBehavior(behavior1)
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,23 +50,23 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        //#warning Incomplete method implementation -- Return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //#warning Incomplete method implementation -- Return the number of items in the section
-        return 0
+//        return allBehaviors.count
+      return 10
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
-    
-        // Configure the cell
-    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> BehaviorCollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BehaviorCollectionViewCell
+      println(cell.behaviorNameLabel)
+        cell.behaviorNameLabel.text = "Test"
+      cell.behaviorValueLabel.text = "+1"
         return cell
     }
+
 
     // MARK: UICollectionViewDelegate
 
