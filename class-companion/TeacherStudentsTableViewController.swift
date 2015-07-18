@@ -21,23 +21,6 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     setupDeleteListener()
     
-    
-    
-    // FOR TESTING
-    //      deleteAllClassesFromServer()
-    
-    // TEST DATA FOR TEACHER CLASSES
-    //      let class1 = TeacherClass(className: "English")
-    //      sendClassToServer("English")
-    //      sendClassToServer(class1)
-    //      let class2 = TeacherClass(className: "Geography")
-    //      sendClassToServer("Geography")
-    //      sendClassToServer(class2)
-    //      let class3 = TeacherClass(className: "Writing")
-    //      addNewTeacherClass(class3)
-    //      sendClassToServer("Writing")
-    
-    // Gets all current class data from the server
     getAllStudentsFromServer()
     
   }
@@ -46,13 +29,54 @@ class TeacherStudentsTableViewController: UITableViewController {
 //    super.didReceiveMemoryWarning()
 //    // Dispose of any resources that can be recreated.
 //  }
-  // MARK: - Show Class View
+
   
+  @IBAction func addNewTeacherStudentAlert(sender: UIBarButtonItem) {
+    var alertController:UIAlertController?
+    
+    alertController = UIAlertController(title: "Add Class",
+      message: "Enter the class name below",
+      preferredStyle: .Alert)
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(textField: UITextField!) in
+        textField.placeholder = "Class Name"
+        textField.autocapitalizationType = UITextAutocapitalizationType.Words
+    })
+    
+    let submitAction = UIAlertAction(
+      title: "Submit",
+      style: UIAlertActionStyle.Default,
+      handler: {[weak self]
+        (paramAction:UIAlertAction!) in
+        if let textFields = alertController?.textFields{
+          let theTextFields = textFields as! [UITextField]
+          let enteredText = theTextFields[0].text
+          let newstudentName = enteredText
+          self!.sendStudentToServer(newstudentName)
+          self!.tableView.reloadData()
+          
+        }
+      })
+    
+    let cancelAction = UIAlertAction(
+      title: "Cancel",
+      style: UIAlertActionStyle.Cancel,
+      handler: nil
+    )
+    
+    alertController?.addAction(cancelAction)
+    alertController?.addAction(submitAction)
+    
+    self.presentViewController(alertController!,
+      animated: true,
+      completion: nil)
+  }
   
   
   // MARK: - Add / Delete Class Alerts
   // ADD CLASS ALERT
-  @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
+  @IBAction func addNewTeacherStudentAlert2(sender: AnyObject) {
     var alertController:UIAlertController?
     
     alertController = UIAlertController(title: "Add Class",
@@ -108,7 +132,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCellWithIdentifier("ClassCell") as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
     
     let row = indexPath.row
     

@@ -176,7 +176,7 @@
         <!--Class-->
         <scene sceneID="nnS-eD-1zg">
             <objects>
-                <tableViewController id="mK4-FS-4UG" sceneMemberID="viewController">
+                <tableViewController id="mK4-FS-4UG" customClass="TeacherStudentsTableViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Bug-4w-sdw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,13 @@
                             <outlet property="delegate" destination="mK4-FS-4UG" id="eBn-n6-TKg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Class" id="Fgc-Np-946"/>
+                    <navigationItem key="navigationItem" title="Class" id="Fgc-Np-946">
+                        <barButtonItem key="rightBarButtonItem" title="Add Student" id="Zr9-f1-QOd">
+                            <connections>
+                                <action selector="addNewTeacherStudentAlert:" destination="mK4-FS-4UG" id="RhN-Dv-sEx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfn-wh-M2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
