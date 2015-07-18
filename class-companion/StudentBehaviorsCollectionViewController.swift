@@ -53,6 +53,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
         return 1
     }
 
+  @IBAction func cancelAssignBehavior(sender: UIBarButtonItem) {
+    presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+  }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return allBehaviors.count
@@ -61,8 +64,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> BehaviorCollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BehaviorCollectionViewCell
-      println(cell.behaviorNameLabel)
-        cell.behaviorNameLabel.text = "Test"
+        cell.behaviorNameLabel.text = "Raising Hand"
       cell.behaviorValueLabel.text = "+1"
         return cell
     }
