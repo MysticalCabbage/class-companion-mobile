@@ -34,13 +34,13 @@ class TeacherStudentsTableViewController: UITableViewController {
   @IBAction func addNewTeacherStudentAlert(sender: UIBarButtonItem) {
     var alertController:UIAlertController?
     
-    alertController = UIAlertController(title: "Add Class",
-      message: "Enter the class name below",
+    alertController = UIAlertController(title: "Add Student",
+      message: "Enter the student name below",
       preferredStyle: .Alert)
     
     alertController!.addTextFieldWithConfigurationHandler(
       {(textField: UITextField!) in
-        textField.placeholder = "Class Name"
+        textField.placeholder = "Student Name"
         textField.autocapitalizationType = UITextAutocapitalizationType.Words
     })
     
@@ -227,7 +227,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
   }
   
-  // MARK: - Firebase Class Retrieval
+  // MARK: - Firebase Student Retrieval
   
   func getAllStudentsFromServer() {
     let firebaseClassStudentRef =
@@ -252,7 +252,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   }
   
   
-  // MARK: - Firebase Class Sending
+  // MARK: - Firebase Student Sending
   
   func sendStudentToServer(studentName: String) {
     
@@ -283,7 +283,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
   }
   
-  // MARK: - Firebase Class Deleting
+  // MARK: - Firebase Student Deleting
   
   
   func deleteStudentFromServer(studentToDelete: TeacherStudent) {
