@@ -16,7 +16,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
+      self.title = "\(currentStudentName!)'s Behavior"
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -75,6 +76,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     let behaviorValue = "1"
     
     updateBehaviorPoints(behaviorValue)
+    // TODO: dismiss the modal
+    
   }
   
   // MARK: - Firebase Update Behavior Points
