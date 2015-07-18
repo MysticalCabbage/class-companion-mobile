@@ -79,13 +79,13 @@ class TeacherStudentsTableViewController: UITableViewController {
   @IBAction func addNewTeacherStudentAlert2(sender: AnyObject) {
     var alertController:UIAlertController?
     
-    alertController = UIAlertController(title: "Add Class",
-      message: "Enter the class name below",
+    alertController = UIAlertController(title: "Add Student",
+      message: "Enter the student name below",
       preferredStyle: .Alert)
     
     alertController!.addTextFieldWithConfigurationHandler(
       {(textField: UITextField!) in
-        textField.placeholder = "Class Name"
+        textField.placeholder = "Student Name"
         textField.autocapitalizationType = UITextAutocapitalizationType.Words
     })
     
@@ -141,19 +141,19 @@ class TeacherStudentsTableViewController: UITableViewController {
     return cell
   }
   
-  // handles segueing to show the view for an individual classroom
-//  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//    tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//    
-//    let row = indexPath.row
-//    let selectedCell = allTeacherStudents[row]
-//    let selectedCellClassId = selectedCell.classId
-//    
-//    currentClassId = selectedCellClassId
-//    
+  // FOR TESTING  adds a point to a student's behavior
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
+    let row = indexPath.row
+    let selectedStudent = allTeacherStudents[row]
+//    let selectedCellStudentId = selectedCell.studentId
+    
+    addBehaviorPoints(selectedStudent)
+    
 //    performSegueWithIdentifier("showTeacherStudentsView", sender: nil)
-//    
-//  }
+    
+  }
   
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
     return true
@@ -180,7 +180,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     let studentName = studentToDelete.studentTitle
     
     
-    var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(studentName)\" student? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
+    var deleteConfirmationAlert = UIAlertController(title: "Delete Student", message: "Are you sure you want to delete the \"\(studentName)\" student? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
     
     deleteConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
     
@@ -198,6 +198,32 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     
     presentViewController(deleteConfirmationAlert, animated: true, completion: nil)
+    
+  }
+  
+  // MARK: - Firebase Add Points
+  func addBehaviorPoints(selectedStudent: TeacherStudent) {
+    
+    let studentId = selectedStudent.studentId
+    
+    let firebaseStudentBehaviorRef =
+      firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+      .childByAppendingPath(studentId)
+      .childByAppendingPath("behavior/")
+    
+    firebaseStudentBehaviorRef.runTransactionBlock({
+      (currentData:FMutableData!) in
+      
+      if let behaviorValue = currentData.value as? Int {
+        currentData.value = behaviorValue + 1
+      } else {
+        currentData.value = 1
+      }
+
+      return FTransactionResult.successWithValue(currentData)
+    })
     
   }
   
@@ -269,25 +295,10 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath(studentId)
     
     firebaseDeleteStudentRef.removeValue()
-    
-//    let firebaseTeacherUserRootRef =
-//      firebaseTeacherRootRef
-//      .childByAppendingPath(currentUserId)
-//      .childByAppendingPath("classes/")
-//      .childByAppendingPath(classId)
-//    
-//    firebaseDeleteClassTeacherRef.removeValue()
+
     
   }
-  
-  //  func deleteAllClassesFromServer() {
-  //    let firebaseUserTeacherRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-  //
-  //
-  //
-  //    firebaseClassRootRef.removeValue()
-  //  }
-  
+
   
   // MARK: - Firebase Listeners
   
