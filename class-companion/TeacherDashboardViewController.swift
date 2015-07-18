@@ -184,10 +184,10 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let firebaseTeacherClassesRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/")
     firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
       for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-        println("CLASS FROM SERVER IS \(classFromServer)")
+//        println("CLASS FROM SERVER IS \(classFromServer)")
         let newTeacherClass = TeacherClass(snap: classFromServer)
         addNewTeacherClass(newTeacherClass)
-        println(allTeacherClasses)
+//        println(allTeacherClasses)
       }
       // after adding the new classes to the classes array, reload the table
       self.classTableView.reloadData()
@@ -261,7 +261,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
     let firebaseClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes/")
     
-    println(firebaseClassTeacherRef)
+//    println(firebaseClassTeacherRef)
     
     firebaseClassTeacherRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
       println("DELETED \(snapshot.value)")

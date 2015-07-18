@@ -180,13 +180,13 @@ class TeacherStudentsTableViewController: UITableViewController {
     let studentName = studentToDelete.studentTitle
     
     
-    var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(studentName)\" class? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
+    var deleteConfirmationAlert = UIAlertController(title: "Delete Class", message: "Are you sure you want to delete the \"\(studentName)\" student? All data will be lost!!", preferredStyle: UIAlertControllerStyle.Alert)
     
     deleteConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
     
     
     let deleteAction = UIAlertAction(
-      title: "Delete \(studentName) class",
+      title: "Delete \(studentName) student",
       style: UIAlertActionStyle.Default,
       handler: { (action: UIAlertAction!) -> Void in
         self.deleteStudentFromServer(studentToDelete)
@@ -211,10 +211,10 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-        println("CLASS FROM SERVER IS \(studentFromServer)")
+//        println("STUDENT FROM SERVER IS \(studentFromServer)")
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
         addNewTeacherStudent(newTeacherStudent)
-        println(allTeacherStudents)
+//        println(allTeacherStudents)
       }
       // after adding the new classes to the classes array, reload the table
       self.tableView.reloadData()
@@ -299,7 +299,6 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath("students/")
     
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
-      println("DELETED \(snapshot.value)")
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
