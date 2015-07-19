@@ -13,7 +13,7 @@ var allTeacherStudents = [TeacherStudent]()
 class TeacherStudent: Printable {
   var studentTitle: String
   var studentId: String
-  var behavior: String
+  var behaviorTotal: Int
   var description: String {
     return "The student name is \(studentTitle)"
   }
@@ -21,7 +21,7 @@ class TeacherStudent: Printable {
   init(key: String, json: Dictionary<String, AnyObject>) {
     self.studentTitle = json["studentTitle"] as? String ?? "studentTitleMissing"
     self.studentId = key
-    self.behavior = json["behavior"] as? String ?? "studentTitleMissing"
+    self.behaviorTotal = json["behaviorTotal"] as? Int ?? 0
   }
   
   // when initializing with the snapshot data

@@ -21,6 +21,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     setupDeleteListener()
     
+    setUpBehaviorListener()
+    
     getAllStudentsFromServer()
     
   }
@@ -137,6 +139,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     let row = indexPath.row
     
     cell.textLabel?.text = allTeacherStudents[row].studentTitle
+    cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal)
+    
     
     return cell
   }
@@ -214,7 +218,7 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
       .childByAppendingPath(studentId)
-      .childByAppendingPath("behavior/")
+      .childByAppendingPath("behaviorTotal/")
     
     firebaseStudentBehaviorRef.runTransactionBlock({
       (currentData:FMutableData!) in
@@ -273,7 +277,7 @@ class TeacherStudentsTableViewController: UITableViewController {
       let studentInfoForClassRoot =
       [
         "studentTitle": studentName,
-        "behavior": "0"
+        "behaviorTotal": 0
       ]
       
       // add the class to the teacher section
@@ -313,6 +317,20 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath("students/")
     
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+      emptyAllTeacherStudentsLocally()
+      self.getAllStudentsFromServer()
+    })
+  }
+  
+  func setUpBehaviorListener() {
+    // TODO set firebase ref to student behavior
+    let firebaseStudentBehaviorRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+    
+    firebaseStudentBehaviorRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+      println("student child changed fired")
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })

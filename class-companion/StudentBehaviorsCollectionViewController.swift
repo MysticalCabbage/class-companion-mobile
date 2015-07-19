@@ -24,6 +24,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       
       getAllBehaviorsFromServer()
       
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,7 +91,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
       .childByAppendingPath(currentStudentId)
-      .childByAppendingPath("behavior/")
+      .childByAppendingPath("behaviorTotal/")
     
     let behaviorValueToAddInt = behaviorValueToAdd.toInt()
     
@@ -115,7 +116,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     let firebaseClassBehaviorRef =
       firebaseClassRootRef
       .childByAppendingPath(currentClassId)
-      .childByAppendingPath("students/")
+      .childByAppendingPath("behavior/")
     
     firebaseClassBehaviorRef.observeEventType(.Value, withBlock: { snapshot in
       for behaviorFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
@@ -131,6 +132,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     println(error.description)
     })
   }
+  
+  
   
   
   
