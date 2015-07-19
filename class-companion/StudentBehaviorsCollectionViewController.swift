@@ -85,11 +85,12 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
     
-//    var cell : UICollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)!
+    var cell = collectionView.cellForItemAtIndexPath(indexPath)!
 //    cell.backgroundColor = UIColor.magentaColor()
-    let behaviorValue = "1"
+//    let behaviorValue = cell.behaviorValueLabel.text
     
-    updateBehaviorPoints(behaviorValue)
+    updateBehaviorPoints("1")
+    
     // TODO: dismiss the modal
     
   }
@@ -146,6 +147,11 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     })
   }
   
+  // Mark: - Firebase Send New Behavior
+  
+  func sendNewBehaviorToServer(behaviorName: String, behaviorValue: Int) {
+    
+  }
   
   
   
