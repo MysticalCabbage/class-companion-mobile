@@ -63,8 +63,21 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
     // Configure the cell
     
-    cell.behaviorNameLabel.text = "Raising Hand"
-    cell.behaviorValueLabel.text = "1"
+    let diceRoll = Int(arc4random_uniform(2))
+    
+    var debugBehaviorName: String
+    var debugBehaviorValue: String
+    
+    if (diceRoll == 0) {
+      debugBehaviorName = "Raising Hand"
+      debugBehaviorValue = "1"
+    } else {
+      debugBehaviorName = "Forgot homework"
+      debugBehaviorValue = "-1"
+    }
+    
+    cell.behaviorNameLabel.text = debugBehaviorName
+    cell.behaviorValueLabel.text = debugBehaviorValue
     
     return cell
   }
