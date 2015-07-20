@@ -13,24 +13,20 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
-
     
-    // Do any additional setup after loading the view.
-        
     // sets the navigation bar title
     // even though the tab bar is used in the assignment variable
     self.tabBarController!.navigationItem.title = "\(currentClassName!)"
-
-
-    println("Setting up student view!")
-    // Deletes all classes currently in the array
-    emptyAllTeacherStudentsLocally()
     
+    setUpAddStudentBarButton()
+
+    // set up listeners
+    setupReloadDataListener()
     setupDeleteListener()
-    
     setUpBehaviorListener()
     
+    // refresh the table
+    emptyAllTeacherStudentsLocally()  
     getAllStudentsFromServer()
     
     
@@ -40,9 +36,15 @@ class TeacherStudentsTableViewController: UITableViewController {
 //    super.didReceiveMemoryWarning()
 //    // Dispose of any resources that can be recreated.
 //  }
+  
+  func setUpAddStudentBarButton() {
+    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
+    
+    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
+  }
 
   
-  @IBAction func addNewTeacherStudentAlert(sender: UIBarButtonItem) {
+  func addNewTeacherStudentAlert() {
     var alertController:UIAlertController?
     
     alertController = UIAlertController(title: "Add Student",
@@ -261,8 +263,6 @@ class TeacherStudentsTableViewController: UITableViewController {
       }
       // after adding the new classes to the classes array, reload the table
       NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-      println("in get all students \(allTeacherStudents)")
-
       
       }, withCancelBlock: { error in
         println(error.description)
@@ -360,7 +360,16 @@ class TeacherStudentsTableViewController: UITableViewController {
     })
   }
   
-  // MARK: - Reload Listener
+  // MARK: - Reload Table Data Listener
+  func setupReloadDataListener() {
+    // add Listener for reloading the table
+    // this allows sub-classes of this class to reload their table data
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
+
+  }
+
+  
+  // MARK: - Reload Table Data
   func reloadTableData(notification: NSNotification) {
     tableView.reloadData()
   }

@@ -20,15 +20,8 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
       
         super.viewDidLoad()
       
-//      emptyAllTeacherStudentsLocally()
-//      
-//      setupDeleteListener()
-//      
-//      setUpBehaviorListener()
+      self.extendedLayoutIncludesOpaqueBars = true;
       
-//      getAllStudentsFromServer()
-      
-      println("in viewDidLoad \(allTeacherStudents)")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,14 +30,6 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-  
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return allTeacherStudents.count
-  }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
