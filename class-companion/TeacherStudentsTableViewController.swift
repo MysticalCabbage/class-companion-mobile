@@ -344,7 +344,6 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath("students/")
     
     firebaseStudentBehaviorRef.observeEventType(.ChildChanged, withBlock: { snapshot in
-      println("student child changed fired")
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })

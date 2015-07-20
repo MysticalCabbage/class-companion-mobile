@@ -57,15 +57,24 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     }
   
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    // 3
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BehaviorCollectionViewCell
     
-    // Configure the cell
-    
     let row = indexPath.row
+    let behaviorName = allBehaviors[row].behaviorTitle
+    let behaviorValue = allBehaviors[row].behaviorValue
+    var behaviorValueString = String(behaviorValue)
     
-    cell.behaviorNameLabel.text = allBehaviors[row].behaviorTitle
-    cell.behaviorValueLabel.text = String(allBehaviors[row].behaviorValue)
+    cell.behaviorNameLabel.text = behaviorName
+    
+    cell.behaviorValueLabel.text = behaviorValueString
+    
+    if (behaviorValue > 0) {
+      cell.behaviorValueLabel.text = "+" + behaviorValueString
+      cell.behaviorValueLabel.textColor = UIColor.greenColor()
+    } else {
+      cell.behaviorValueLabel.textColor = UIColor.redColor()
+
+    }
     
     return cell
   }
@@ -74,8 +83,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
     
     var cell = collectionView.cellForItemAtIndexPath(indexPath)!
-//    cell.backgroundColor = UIColor.magentaColor()
-//    let behaviorValue = cell.behaviorValueLabel.text
+
     let row = indexPath.row
     
     let behaviorPoints = allBehaviors[row].behaviorValue
@@ -148,10 +156,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
     firebaseClassBehaviorRef.observeEventType(.Value, withBlock: { snapshot in
       for behaviorFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-      //        println("STUDENT FROM SERVER IS \(studentFromServer)")
         let newBehavior = Behavior(snap: behaviorFromServer)
         addNewBehavior(newBehavior)
-        println(allBehaviors)
       }
     // after adding the new behaviors to the behaviors array, reload the collection
     self.collectionView!.reloadData()

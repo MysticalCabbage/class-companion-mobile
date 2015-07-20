@@ -19,14 +19,12 @@ class Behavior: Printable {
   }
   // initialize the instance with the json data from the snapshot
   init(key: String, behaviorValue: Int) {
-    println("KEY IS \(key) VALUE IS \(behaviorValue)")
     self.behaviorTitle = key
     self.behaviorValue = behaviorValue
   }
   
   // when initializing with the snapshot data
   convenience init(snap: FDataSnapshot) {
-        println("IN INIT THE SNAP VALUE IS \(snap.value)")
     if let behaviorValue = snap.value as? Int {
       self.init(key: snap.key, behaviorValue: behaviorValue)
     }
