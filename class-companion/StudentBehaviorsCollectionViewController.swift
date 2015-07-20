@@ -54,7 +54,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return allBehaviors.count
-//      return 10
     }
   
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -67,23 +66,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
     cell.behaviorNameLabel.text = allBehaviors[row].behaviorTitle
     cell.behaviorValueLabel.text = String(allBehaviors[row].behaviorValue)
-
-    
-//    let diceRoll = Int(arc4random_uniform(2))
-//    
-//    var debugBehaviorName: String
-//    var debugBehaviorValue: String
-//    
-//    if (diceRoll == 0) {
-//      debugBehaviorName = "Raising Hand"
-//      debugBehaviorValue = "1"
-//    } else {
-//      debugBehaviorName = "Forgot homework"
-//      debugBehaviorValue = "-1"
-//    }
-//    
-//    cell.behaviorNameLabel.text = debugBehaviorName
-//    cell.behaviorValueLabel.text = debugBehaviorValue
     
     return cell
   }
@@ -94,16 +76,21 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     var cell = collectionView.cellForItemAtIndexPath(indexPath)!
 //    cell.backgroundColor = UIColor.magentaColor()
 //    let behaviorValue = cell.behaviorValueLabel.text
+    let row = indexPath.row
     
-    updateBehaviorPoints("1")
+    let behaviorPoints = allBehaviors[row].behaviorValue
+    let behaviorName = allBehaviors[row].behaviorTitle
     
+    updateBehaviorPoints(behaviorPoints)
+    
+    updateBehaviorList(behaviorName)
     // TODO: dismiss the modal
     
   }
   
   // MARK: - Firebase Update Behavior Points
   
-  func updateBehaviorPoints(behaviorValueToAdd: String) {
+  func updateBehaviorPoints(behaviorValueToAddOrSubtract: Int) {
     
     
     let firebaseStudentBehaviorRef =
@@ -113,14 +100,12 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       .childByAppendingPath(currentStudentId)
       .childByAppendingPath("behaviorTotal/")
     
-    let behaviorValueToAddInt = behaviorValueToAdd.toInt()
-    
     
     firebaseStudentBehaviorRef.runTransactionBlock({
       (currentData:FMutableData!) in
       
       if let behaviorValue = currentData.value as? Int {
-        currentData.value = behaviorValue + behaviorValueToAddInt!
+        currentData.value = behaviorValue + behaviorValueToAddOrSubtract
       } else {
         currentData.value = 1
       }
@@ -128,6 +113,28 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       return FTransactionResult.successWithValue(currentData)
     })
     
+  }
+  
+  func updateBehaviorList(behaviorNameToAppend: String) {
+    let firebaseStudentBehaviorListRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+      .childByAppendingPath(currentStudentId)
+      .childByAppendingPath("behavior/")
+      .childByAppendingPath(behaviorNameToAppend)
+    
+    firebaseStudentBehaviorListRef.runTransactionBlock({
+      (currentData:FMutableData!) in
+      
+      if let currentBehaviorCount = currentData.value as? Int {
+        currentData.value = currentBehaviorCount + 1
+      } else {
+        currentData.value = 1
+      }
+      
+      return FTransactionResult.successWithValue(currentData)
+    })
   }
   
   // MARK: - Firebase Get All Behaviors
