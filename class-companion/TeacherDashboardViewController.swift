@@ -225,8 +225,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       let firebaseClassBehaviorRef =
         firebaseClassRootRef
           .childByAppendingPath(newClassIdKey)
-          .childByAppendingPath("info")
-          .childByAppendingPath("behavior")
+          .childByAppendingPath("info/")
+          .childByAppendingPath("behavior/")
       
       let firebaseClassRootWithClassKey =
         firebaseClassRootRef

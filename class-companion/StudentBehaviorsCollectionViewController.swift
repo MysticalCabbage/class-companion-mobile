@@ -130,16 +130,17 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     let firebaseClassBehaviorRef =
       firebaseClassRootRef
       .childByAppendingPath(currentClassId)
+      .childByAppendingPath("info/")
       .childByAppendingPath("behavior/")
     
     firebaseClassBehaviorRef.observeEventType(.Value, withBlock: { snapshot in
       for behaviorFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
       //        println("STUDENT FROM SERVER IS \(studentFromServer)")
-      let newBehavior = Behavior(snap: behaviorFromServer)
-      addNewBehavior(newBehavior)
-      //        println(allTeacherStudents)
-    }
-    // after adding the new classes to the classes array, reload the table
+        let newBehavior = Behavior(snap: behaviorFromServer)
+        addNewBehavior(newBehavior)
+        println(allBehaviors)
+      }
+    // after adding the new behaviors to the behaviors array, reload the collection
     self.collectionView!.reloadData()
     
     }, withCancelBlock: { error in
