@@ -26,6 +26,7 @@ let currentUserIdKey = "currentUserIdKey"
 let currentClassIdKey = "currentClassIdKey"
 let currentStudentNameKey = "currentStudentNameKey"
 let currentStudentIdKey = "currentStudentIdKey"
+let currentClassNameKey = "currentClassNameKey"
 
 var currentUserId: String? {
   get { return userDefaults.stringForKey(currentUserIdKey) }
@@ -36,6 +37,11 @@ var currentUserId: String? {
 var currentClassId: String? {
   get { return userDefaults.stringForKey(currentClassIdKey) }
   set { userDefaults.setObject(newValue, forKey: currentClassIdKey)}
+}
+
+var currentClassName: String? {
+get { return userDefaults.stringForKey(currentClassNameKey) }
+set { userDefaults.setObject(newValue, forKey: currentClassNameKey)}
 }
 
 var currentStudentName: String? {

@@ -133,6 +133,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     let selectedCellClassId = selectedCell.classId
     
     currentClassId = selectedCellClassId
+    currentClassName = selectedCell.classTitle
     
     performSegueWithIdentifier("showTeacherStudentsView", sender: nil)
     

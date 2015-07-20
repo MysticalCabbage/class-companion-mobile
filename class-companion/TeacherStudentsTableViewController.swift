@@ -14,6 +14,9 @@ class TeacherStudentsTableViewController: UITableViewController {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
+    
+    self.title = "\(currentClassName!)"
+
 
     
     // Deletes all classes currently in the array
