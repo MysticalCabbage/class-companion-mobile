@@ -25,6 +25,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     getAllStudentsFromServer()
     
+    
   }
   
 //   func didReceiveMemoryWarning() {
@@ -259,7 +260,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   }
   
   
-  // MARK: - Firebase Student Sending
+  // MARK: - Firebase Send Student
   
   func sendStudentToServer(studentName: String) {
     

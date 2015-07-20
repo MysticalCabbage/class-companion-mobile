@@ -220,20 +220,30 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
           .childByAutoId()
       
 
-      let classIdKey = firebaseTeacherClassRef.key
+      let newClassIdKey = firebaseTeacherClassRef.key
       
       let firebaseClassBehaviorRef =
         firebaseClassRootRef
-          .childByAppendingPath(classIdKey)
+          .childByAppendingPath(newClassIdKey)
           .childByAppendingPath("info")
           .childByAppendingPath("behavior")
       
+      let firebaseClassRootWithClassKey =
+        firebaseClassRootRef
+          .childByAppendingPath(newClassIdKey)
+          .childByAppendingPath("info/")
       
+      let firebaseTeacherBehaviorRef =
+        firebaseTeacherRootRef
+          .childByAppendingPath(currentUserId)
+          .childByAppendingPath("classes/")
+          .childByAppendingPath(newClassIdKey)
+          .childByAppendingPath("behavior")
 
       
-      let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId, "classId": classIdKey]
-      let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
-      let firebaseClassRootWithClassKey = firebaseClassRootRef.childByAppendingPath(classIdKey).childByAppendingPath("info/")
+      let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId, "classId": newClassIdKey]
+      let classInfoForClassRoot = ["classId": newClassIdKey, "classTitle": className, "teacherId": currentUserId]
+      
       
       // add the class to the teacher section
       firebaseTeacherClassRef.setValue(classInfoForTeacher)
@@ -241,8 +251,11 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       // add the class to the classes section
       firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
       
-      // set default behaviors for the class
+      // add the default behaviors in the class root
       firebaseClassBehaviorRef.setValue(defaultBehaviors)
+      
+      // add the default behaviors to the teacher section
+      firebaseTeacherBehaviorRef.setValue(defaultBehaviors)
 
       
     }
