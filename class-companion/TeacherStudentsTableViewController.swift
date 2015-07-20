@@ -14,8 +14,10 @@ class TeacherStudentsTableViewController: UITableViewController {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    
-    self.title = "\(currentClassName!)"
+        
+    // sets the navigation bar title
+    // even though the tab bar is used in the assignment variable
+    self.tabBarController!.navigationItem.title = "\(currentClassName!)"
 
 
     

@@ -166,14 +166,33 @@
                     </navigationItem>
                     <connections>
                         <outlet property="classTableView" destination="2pA-lZ-IMd" id="0h9-Mb-FUS"/>
-                        <segue destination="mK4-FS-4UG" kind="show" identifier="showTeacherStudentsView" id="Q5G-Df-xTT"/>
+                        <segue destination="Z0x-Hg-2k8" kind="show" identifier="showTeacherStudentsView" id="8G7-RV-l5K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFn-ta-sG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1114" y="298"/>
         </scene>
-        <!--Class-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="1my-I1-wUV">
+            <objects>
+                <tabBarController id="Z0x-Hg-2k8" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="O5H-7Q-1wh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="mK4-FS-4UG" kind="relationship" relationship="viewControllers" id="dnJ-Sy-7w6"/>
+                        <segue destination="lpC-x0-jyX" kind="relationship" relationship="viewControllers" id="qaI-rs-m8r"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jPA-Kn-qfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1771" y="298"/>
+        </scene>
+        <!--Teacher Students Table View Controller-->
         <scene sceneID="nnS-eD-1zg">
             <objects>
                 <tableViewController id="mK4-FS-4UG" customClass="TeacherStudentsTableViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
@@ -208,7 +227,8 @@
                             <outlet property="delegate" destination="mK4-FS-4UG" id="eBn-n6-TKg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Class" id="Fgc-Np-946">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="bZT-6j-dt0"/>
+                    <navigationItem key="navigationItem" id="Fgc-Np-946">
                         <barButtonItem key="rightBarButtonItem" title="Add Student" id="Zr9-f1-QOd">
                             <connections>
                                 <action selector="addNewTeacherStudentAlert:" destination="mK4-FS-4UG" id="RhN-Dv-sEx"/>
@@ -221,7 +241,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfn-wh-M2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="298"/>
+            <point key="canvasLocation" x="2589" y="298"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Zps-aJ-ubj">
+            <objects>
+                <tableViewController id="lpC-x0-jyX" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Bj8-LT-iwn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H3w-dQ-x73">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H3w-dQ-x73" id="OdU-cg-Jh8">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lpC-x0-jyX" id="sQ0-Bc-q3W"/>
+                            <outlet property="delegate" destination="lpC-x0-jyX" id="yUQ-sG-RAO"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="myA-KY-ZHu"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4R0-Xj-dNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2488" y="1104"/>
         </scene>
         <!--Assign a student behavior-->
         <scene sceneID="d7Q-eK-mqN">
