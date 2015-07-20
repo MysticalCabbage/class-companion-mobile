@@ -13,6 +13,9 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
+
+    
     // Do any additional setup after loading the view.
         
     // sets the navigation bar title
@@ -20,7 +23,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     self.tabBarController!.navigationItem.title = "\(currentClassName!)"
 
 
-    
+    println("Setting up student view!")
     // Deletes all classes currently in the array
     emptyAllTeacherStudentsLocally()
     
@@ -62,7 +65,8 @@ class TeacherStudentsTableViewController: UITableViewController {
           let enteredText = theTextFields[0].text
           let newstudentName = enteredText
           self!.sendStudentToServer(newstudentName)
-          self!.tableView.reloadData()
+          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+
           
         }
       })
@@ -107,8 +111,8 @@ class TeacherStudentsTableViewController: UITableViewController {
           let enteredText = theTextFields[0].text
           let newstudentName = enteredText
           self!.sendStudentToServer(newstudentName)
-          self!.tableView.reloadData()
-          
+          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+
         }
       })
     
@@ -140,7 +144,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
+    let cell = self.tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
     
     let row = indexPath.row
     
@@ -153,7 +157,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   // ON CLICKING adds a point to a student's behavior
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
     let selectedStudent = allTeacherStudents[row]
@@ -184,7 +188,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   func removeStudent(studentNameToRemove: String, row: Int) {
     allTeacherStudents.removeAtIndex(row)
-    self.tableView.reloadData()
+    NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
   }
   
   
@@ -248,15 +252,17 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath(currentClassId)
         .childByAppendingPath("students/")
     
+    
     firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
 //        println("STUDENT FROM SERVER IS \(studentFromServer)")
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
         addNewTeacherStudent(newTeacherStudent)
-//        println(allTeacherStudents)
       }
       // after adding the new classes to the classes array, reload the table
-      self.tableView.reloadData()
+      NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+      println("in get all students \(allTeacherStudents)")
+
       
       }, withCancelBlock: { error in
         println(error.description)
@@ -354,6 +360,10 @@ class TeacherStudentsTableViewController: UITableViewController {
     })
   }
   
+  // MARK: - Reload Listener
+  func reloadTableData(notification: NSNotification) {
+    tableView.reloadData()
+  }
   /*
   // MARK: - Navigation
   
