@@ -154,8 +154,10 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       .childByAppendingPath("info/")
       .childByAppendingPath("behavior/")
     
-    firebaseClassBehaviorRef.observeEventType(.Value, withBlock: { snapshot in
-      for behaviorFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
+    // retrieve all behaviors in ascending order with respect to behavior value
+    firebaseClassBehaviorRef.queryOrderedByValue().observeEventType(.Value, withBlock: { snapshot in
+      // we reverse here to make the values in descending order by behavior value
+      for behaviorFromServer in reverse(snapshot.children.allObjects as! [FDataSnapshot]) {
         let newBehavior = Behavior(snap: behaviorFromServer)
         addNewBehavior(newBehavior)
       }
