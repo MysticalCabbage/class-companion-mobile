@@ -53,8 +53,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return allBehaviors.count
-      return 10
+        return allBehaviors.count
+//      return 10
     }
   
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -63,21 +63,27 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
     // Configure the cell
     
-    let diceRoll = Int(arc4random_uniform(2))
+    let row = indexPath.row
     
-    var debugBehaviorName: String
-    var debugBehaviorValue: String
+    cell.behaviorNameLabel.text = allBehaviors[row].behaviorTitle
+    cell.behaviorValueLabel.text = String(allBehaviors[row].behaviorValue)
+
     
-    if (diceRoll == 0) {
-      debugBehaviorName = "Raising Hand"
-      debugBehaviorValue = "1"
-    } else {
-      debugBehaviorName = "Forgot homework"
-      debugBehaviorValue = "-1"
-    }
-    
-    cell.behaviorNameLabel.text = debugBehaviorName
-    cell.behaviorValueLabel.text = debugBehaviorValue
+//    let diceRoll = Int(arc4random_uniform(2))
+//    
+//    var debugBehaviorName: String
+//    var debugBehaviorValue: String
+//    
+//    if (diceRoll == 0) {
+//      debugBehaviorName = "Raising Hand"
+//      debugBehaviorValue = "1"
+//    } else {
+//      debugBehaviorName = "Forgot homework"
+//      debugBehaviorValue = "-1"
+//    }
+//    
+//    cell.behaviorNameLabel.text = debugBehaviorName
+//    cell.behaviorValueLabel.text = debugBehaviorValue
     
     return cell
   }
