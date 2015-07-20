@@ -275,14 +275,27 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath("students/")
         .childByAutoId()
       
+      let firebaseClassStudentBehaviorRef =
+        firebaseClassStudentRef
+        .childByAppendingPath("behavior/")
+      
       let studentInfoForClassRoot =
       [
         "studentTitle": studentName,
         "behaviorTotal": 0
       ]
       
-      // add the class to the teacher section
+      var defaultBehaviorAmounts = [String: Int]()
+      
+      for behaviorName in defaultBehaviors.keys {
+        defaultBehaviorAmounts["\(behaviorName)"] = 0
+      }
+      
+      // add the student to the teacher section
       firebaseClassStudentRef.setValue(studentInfoForClassRoot)
+      
+      // add the behaviors to the student section with the current amounts set to 0
+      firebaseClassStudentBehaviorRef.setValue(defaultBehaviorAmounts)
       
     }
     else {
