@@ -17,6 +17,7 @@
 		69480CE61B55E98100F80FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE51B55E98100F80FAF /* Images.xcassets */; };
 		69480CE91B55E98100F80FAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69480CE71B55E98100F80FAF /* LaunchScreen.xib */; };
 		69480CF51B55E98100F80FAF /* class_companionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69480CF41B55E98100F80FAF /* class_companionTests.swift */; };
+		696812F61B5D636A00FD16C7 /* DefaultBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696812F51B5D636A00FD16C7 /* DefaultBehaviors.swift */; };
 		6978C5991B59CCB0006A70FB /* TeacherStudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */; };
 		698681501B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */; };
 		698681521B5ADE7E0073AE96 /* BehaviorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */; };
@@ -50,6 +51,7 @@
 		69480CEE1B55E98100F80FAF /* class-companionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "class-companionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69480CF31B55E98100F80FAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69480CF41B55E98100F80FAF /* class_companionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = class_companionTests.swift; sourceTree = "<group>"; };
+		696812F51B5D636A00FD16C7 /* DefaultBehaviors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultBehaviors.swift; sourceTree = "<group>"; };
 		6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentsTableViewController.swift; sourceTree = "<group>"; };
 		6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentBehaviorsCollectionViewController.swift; sourceTree = "<group>"; };
 		698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorsModel.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */,
 				6978C5981B59CCB0006A70FB /* TeacherStudentsTableViewController.swift */,
 				690BA6F51B5600AE009E63A5 /* TeacherClassesModel.swift */,
+				696812F51B5D636A00FD16C7 /* DefaultBehaviors.swift */,
 				6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */,
 				698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */,
 				698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */,
@@ -309,6 +312,7 @@
 				691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
 				698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */,
+				696812F61B5D636A00FD16C7 /* DefaultBehaviors.swift in Sources */,
 				690BA6F61B5600AE009E63A5 /* TeacherClassesModel.swift in Sources */,
 				690BA6FA1B560196009E63A5 /* TeacherClassesUITableView.swift in Sources */,
 			);

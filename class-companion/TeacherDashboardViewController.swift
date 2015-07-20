@@ -23,6 +23,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       
       setupDeleteListener()
       
+      // Set default behaviors
+      setDefaultBehaviors()
       
       
 
@@ -211,9 +213,23 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       
       // prepare data to send to teacher section of database
 
-      let firebaseTeacherClassRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/").childByAutoId()
+      let firebaseTeacherClassRef =
+        firebaseTeacherRootRef
+          .childByAppendingPath(currentUserId)
+          .childByAppendingPath("classes/")
+          .childByAutoId()
+      
 
       let classIdKey = firebaseTeacherClassRef.key
+      
+      let firebaseClassBehaviorRef =
+        firebaseClassRootRef
+          .childByAppendingPath(classIdKey)
+          .childByAppendingPath("info")
+          .childByAppendingPath("behavior")
+      
+      
+
       
       let classInfoForTeacher = ["classTitle": className, "teacherId": currentUserId, "classId": classIdKey]
       let classInfoForClassRoot = ["classId": classIdKey, "classTitle": className, "teacherId": currentUserId]
@@ -224,6 +240,9 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       
       // add the class to the classes section
       firebaseClassRootWithClassKey.setValue(classInfoForClassRoot)
+      
+      // set default behaviors for the class
+      firebaseClassBehaviorRef.setValue(defaultBehaviors)
 
       
     }
