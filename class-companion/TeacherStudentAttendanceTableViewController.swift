@@ -10,7 +10,7 @@ import UIKit
 
 class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewController {
 
-  var allPresent = false
+  var toggleAttendanceStatus = true
   
   @IBOutlet weak var attendanceTableView: UITableView!
   
@@ -46,13 +46,13 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   }
   
 
-
-  
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
     let selectedStudent = allTeacherStudents[row]
+    
+    assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false)
     
   }
   
@@ -60,13 +60,17 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
 
     for student in allTeacherStudents {
       
-      assignAttendanceToOneStudent(student)
+      assignAttendanceToOneStudent(student, togglingAllStudents: true)
       
     }
     
+    toggleAttendanceStatus = !toggleAttendanceStatus
+
   }
   
-  func assignAttendanceToOneStudent(student: TeacherStudent) {
+  func assignAttendanceToOneStudent(student: TeacherStudent, togglingAllStudents: Bool) {
+    
+    let newAttendanceStatus = getNewAttendanceStatus(student, togglingAllStudents: togglingAllStudents)
 
     let currentDate = getCurrentDateInString()
 
@@ -78,8 +82,26 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
       .childByAppendingPath("attendance/")
       .childByAppendingPath(currentDate)
     
-    firebaseClassStudentAttendanceRef.setValue("Absent")
-
+    firebaseClassStudentAttendanceRef.setValue(newAttendanceStatus)
+    
+  }
+  
+  func getNewAttendanceStatus(student: TeacherStudent, togglingAllStudents: Bool) -> String {
+    if togglingAllStudents {
+      if toggleAttendanceStatus {
+        return "Present"
+      } else {
+        return "Absent"
+      }
+    } else {
+      if student.attendanceStatus == "Present" {
+        return "Absent"
+      } else if student.attendanceStatus == "Absent" {
+        return "Tardy"
+      } else {
+        return "Present"
+      }
+    }
   }
   
  
