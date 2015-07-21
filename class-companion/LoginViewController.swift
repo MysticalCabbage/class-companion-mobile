@@ -94,8 +94,6 @@ class LoginViewController: UIViewController {
   
   func checkLoginCredentials(username: String, password: String){
 
-
-    
     firebaseRef.authUser(username, password: password,
       withCompletionBlock: { error, authData in
         if authData == nil {

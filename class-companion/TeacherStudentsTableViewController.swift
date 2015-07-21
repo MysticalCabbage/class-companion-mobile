@@ -16,7 +16,9 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     // sets the navigation bar title
     // even though the tab bar is used in the assignment variable
-    self.tabBarController!.navigationItem.title = "\(currentClassName!)"
+//    self.navigationItem.title = "\(currentClassName!)"
+    var nav = self.navigationController?.navigationBar
+    self.title = "\(currentClassName!)"
     
     setUpAddStudentBarButton()
 
