@@ -46,7 +46,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     if attendanceStatus == "Present" {
       cell.detailTextLabel?.textColor = UIColor.greenColor()
-    } else if attendanceStatus == "Tardy" {
+    } else if attendanceStatus == "Late" {
       cell.detailTextLabel?.textColor = UIColor.orangeColor()
     } else if attendanceStatus == "Absent" {
       cell.detailTextLabel?.textColor = UIColor.redColor()
@@ -108,7 +108,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
       if student.attendanceStatus == "Present" {
         return "Absent"
       } else if student.attendanceStatus == "Absent" {
-        return "Tardy"
+        return "Late"
       } else {
         return "Present"
       }
