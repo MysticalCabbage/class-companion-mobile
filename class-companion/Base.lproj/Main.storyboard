@@ -438,6 +438,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Student Selection" id="Pya-IM-c7O">
+                        <barButtonItem key="leftBarButtonItem" title="Group Students" id="dJs-C9-kHK">
+                            <connections>
+                                <action selector="groupSelectionButton:" destination="EBP-ye-20S" id="nVP-M8-eyx"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Random" id="ZTG-do-Pky">
                             <connections>
                                 <action selector="randomSelectionButton:" destination="EBP-ye-20S" id="4Ev-XX-YbC"/>

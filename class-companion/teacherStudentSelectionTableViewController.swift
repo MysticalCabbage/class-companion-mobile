@@ -32,11 +32,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
 
     // MARK: - Table view data source
 
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        // #warning Potentially incomplete method implementation.
-//        // Return the number of sections.
-//        return 0
-//    }
 //
 //    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        // #warning Incomplete method implementation.
@@ -78,21 +73,59 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
    
   }
   
+  var numberOfTableSections = 1
+  
+  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    // #warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return numberOfTableSections
+  }
+
+  
   // MARK: - Buttons
   
   @IBAction func randomSelectionButton(sender: UIBarButtonItem){
-      let randomIndex = getRandomRowIndex()
+      let randomIndex = getRandomIndex(allTeacherStudents)
     
       setStudentAsSelected(randomIndex)
   }
   
-  // MARK: - Random Selection
-  func getRandomRowIndex() -> Int {
-    let randomRowIndex = Int(arc4random_uniform(UInt32(allTeacherStudents.count)))
+  @IBAction func groupSelectionButton(sender: UIBarButtonItem) {
+    divideStudentsIntoGroups(2)
+  }
+
+  // Mark: - Divide Into Groups
+  
+  func divideStudentsIntoGroups(numberOfGroups: Int) {
     
-    return randomRowIndex
+    var numStudentsGrouped = 0
+    
+    var allStudentGroups = Dictionary<Int, Array<TeacherStudent>>()
+    var currentGroupIndex = 0
+    
+    var shuffledStudents = allTeacherStudents
+    
+    shuffledStudents.shuffle()
+    
+    for student in shuffledStudents {
+      if allStudentGroups[currentGroupIndex] == nil {
+        allStudentGroups[currentGroupIndex] = [TeacherStudent]()
+      }
+      allStudentGroups[currentGroupIndex]!.append(student)
+      if currentGroupIndex < numberOfGroups - 1 {
+        currentGroupIndex++
+      } else {
+        currentGroupIndex = 0
+      }
+    }
+    
+    println(allStudentGroups)
+    
   }
   
+  
+  // MARK: - Select Student
+ 
   // stores the previously selected student index
   // used for removing the "Selected!" message from the detail
   var previousSelectionRow: Int?
@@ -156,7 +189,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       .childByAppendingPath("selection/")
     
     firebaseSelectionRef.observeEventType(.ChildChanged, withBlock: { snapshot in
-      println("NEW SELECTION ID IS \(snapshot.value)")
       
       let serverStudentId = snapshot.value as! String
       

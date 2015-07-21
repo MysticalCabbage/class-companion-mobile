@@ -17,11 +17,10 @@ let firebaseRef = Firebase(url: "https://mysticalcabbage2.firebaseio.com/")
 let firebaseTeacherRootRef = firebaseRef.childByAppendingPath("teachers/")
 let firebaseClassRootRef = firebaseRef.childByAppendingPath("classes/")
 
-
+// User Default Variables
 let userDefaults = NSUserDefaults.standardUserDefaults()
 let usernameKeyConstant = "usernameKey"
 let userIsAuthenticatedConstant = "userLoggedIn"
-// used for accessing and retrieving the current user's ID
 let currentUserIdKey = "currentUserIdKey"
 let currentClassIdKey = "currentClassIdKey"
 let currentStudentNameKey = "currentStudentNameKey"
