@@ -29,6 +29,18 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+  
+  override func setUpNavBarTitle() {
+    self.title = "\(currentClassName!) Attendance"
+  }
+  
+  override func setUpRightBarButton() {
+    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Toggle", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleAttendanceAll")
+    
+    self.navigationItem.rightBarButtonItem = addStudentButton
+    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
+    
+  }
 
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -43,6 +55,8 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     return cell
   }
+  
+
 
     /*
     // Override to support conditional editing of the table view.

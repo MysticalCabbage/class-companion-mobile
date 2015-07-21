@@ -13,13 +13,8 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
-    // sets the navigation bar title
-    // even though the tab bar is used in the assignment variable
-//    self.navigationItem.title = "\(currentClassName!)"
-    var nav = self.navigationController?.navigationBar
-    self.title = "\(currentClassName!)"
-    
+    // set up the navigation bar
+    setUpNavBarTitle()
     setUpRightBarButton()
 
     // set up listeners
@@ -31,13 +26,16 @@ class TeacherStudentsTableViewController: UITableViewController {
     emptyAllTeacherStudentsLocally()  
     getAllStudentsFromServer()
     
-    
   }
   
 //   func didReceiveMemoryWarning() {
 //    super.didReceiveMemoryWarning()
 //    // Dispose of any resources that can be recreated.
 //  }
+  
+  func setUpNavBarTitle() {
+    self.title = "\(currentClassName!) Behavior"
+  }
   
   func setUpRightBarButton() {
     var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
