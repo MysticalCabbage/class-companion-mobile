@@ -14,14 +14,18 @@ class TeacherStudent: Printable {
   var studentTitle: String
   var studentId: String
   var behaviorTotal: Int
+  var attendanceStatus: String
   var description: String {
     return "The student name is \(studentTitle)"
   }
   // initialize the instance with the json data from the snapshot
   init(key: String, json: Dictionary<String, AnyObject>) {
+    let currentDate = getCurrentDateInString()
+    
     self.studentTitle = json["studentTitle"] as? String ?? "studentTitleMissing"
     self.studentId = key
     self.behaviorTotal = json["behaviorTotal"] as? Int ?? 0
+    self.attendanceStatus = json["attendance"]![currentDate] as? String ?? "studentAttendanceMissing"
   }
   
   // when initializing with the snapshot data

@@ -10,6 +10,8 @@ import UIKit
 
 class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewController {
 
+  var allPresent = false
+  
   @IBOutlet weak var attendanceTableView: UITableView!
   
     override func viewDidLoad() {
@@ -20,7 +22,6 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
         super.viewDidLoad()
       
       self.extendedLayoutIncludesOpaqueBars = true;
-      
 
     }
   
@@ -38,7 +39,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     let row = indexPath.row
     
     cell.textLabel?.text = allTeacherStudents[row].studentTitle
-    cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal)
+    cell.detailTextLabel?.text = String(allTeacherStudents[row].attendanceStatus)
     
     
     return cell
@@ -52,14 +53,6 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     let row = indexPath.row
     let selectedStudent = allTeacherStudents[row]
-    //    let selectedCellStudentId = selectedCell.studentId
-    
-    //    addBehaviorPoints(selectedStudent)
-    
-//    currentStudentName = selectedStudent.studentTitle
-//    currentStudentId = selectedStudent.studentId
-//    
-//    performSegueWithIdentifier("showStudentBehaviorList", sender: nil)
     
   }
   
@@ -74,6 +67,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   }
   
   func assignAttendanceToOneStudent(student: TeacherStudent) {
+
     let currentDate = getCurrentDateInString()
 
     let firebaseClassStudentAttendanceRef =
@@ -88,14 +82,6 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
 
   }
   
-  func getCurrentDateInString() -> String {
-    let date = NSDate()
-    let dateFormatter:NSDateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "M-dd-yyyy"
-    let currentDate:String = dateFormatter.stringFromDate(date)
-    
-    return currentDate
-    
-  }
+ 
   
 }
