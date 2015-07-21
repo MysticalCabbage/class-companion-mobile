@@ -38,8 +38,19 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     let row = indexPath.row
     
+    let studentTitle = allTeacherStudents[row].studentTitle
+    let attendanceStatus = allTeacherStudents[row].attendanceStatus
+    
     cell.textLabel?.text = allTeacherStudents[row].studentTitle
-    cell.detailTextLabel?.text = String(allTeacherStudents[row].attendanceStatus)
+    cell.detailTextLabel?.text = attendanceStatus
+    
+    if attendanceStatus == "Present" {
+      cell.detailTextLabel?.textColor = UIColor.greenColor()
+    } else if attendanceStatus == "Tardy" {
+      cell.detailTextLabel?.textColor = UIColor.orangeColor()
+    } else if attendanceStatus == "Absent" {
+      cell.detailTextLabel?.textColor = UIColor.redColor()
+    }
     
     
     return cell
