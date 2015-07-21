@@ -99,9 +99,9 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       // set the previous student model's selection status to false
       allTeacherStudents[previousSelectionIndex].currentlySelected = false
       // get the index path for the previous random selection
-      let previousRandomCellIndexPath = NSIndexPath(forRow: previousSelectionIndex, inSection: 0)
+      let previousCellIndexPath = NSIndexPath(forRow: previousSelectionIndex, inSection: 0)
       // reload the random path selection
-      self.tableView.reloadRowsAtIndexPaths([previousRandomCellIndexPath], withRowAnimation: UITableViewRowAnimation.None)
+      self.tableView.reloadRowsAtIndexPaths([previousCellIndexPath], withRowAnimation: UITableViewRowAnimation.None)
     }
     
     allTeacherStudents[selectedStudentIndex].currentlySelected = true
@@ -113,6 +113,8 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     self.tableView.selectRowAtIndexPath(cellToEditIndexPath, animated: true, scrollPosition: .Middle);
     
     previousSelectionRow = selectedStudentIndex
+    
+    sendSelectedStudent(allTeacherStudents[selectedStudentIndex])
   }
   
   func setRandomStudentAsSelected() {
@@ -126,11 +128,15 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   func sendSelectedStudent(selectedStudent: TeacherStudent) {
     let studentId = selectedStudent.studentId
     
-    let firebaseRandomStudentRef =
+    let firebaseStudentRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
-      .childByAppendingPath("randomSelection/")
-      .childByAppendingPath(studentId)
+      .childByAppendingPath("selection/")
+    
+    let selectionInfo = ["currentSelection": studentId]
+    
+    firebaseStudentRef.setValue(selectionInfo)
+    
     
   }
   
