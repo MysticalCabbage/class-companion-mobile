@@ -13,7 +13,11 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+      // Setup Listeners
+      listenForStudentSelection()
+      
+      
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -117,10 +121,13 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     sendSelectedStudent(allTeacherStudents[selectedStudentIndex])
   }
   
-  func setRandomStudentAsSelected() {
-    
-
- 
+  func getIndexByStudentId(targetStudentId: String) -> Int? {
+    for (index, student) in enumerate(allTeacherStudents) {
+      if targetStudentId == student.studentId {
+        return index
+      }
+    }
+    return nil
   }
   
   // MARK: - Firebase Send Student Selection Info
@@ -128,15 +135,36 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   func sendSelectedStudent(selectedStudent: TeacherStudent) {
     let studentId = selectedStudent.studentId
     
-    let firebaseStudentRef =
+    let firebaseSelectionRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("selection/")
+      .childByAppendingPath("currentSelection")
+    
+    
+    firebaseSelectionRef.setValue(studentId)
+    
+  
+  }
+  
+  // MARK: - Firebase Student Selection Listener
+  
+  func listenForStudentSelection() {
+    let firebaseSelectionRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("selection/")
     
-    let selectionInfo = ["currentSelection": studentId]
-    
-    firebaseStudentRef.setValue(selectionInfo)
-    
+    firebaseSelectionRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+      println("NEW SELECTION ID IS \(snapshot.value)")
+      
+      let serverStudentId = snapshot.value as! String
+      
+      if let selectedStudentIndex = self.getIndexByStudentId(serverStudentId) {
+        self.setStudentAsSelected(selectedStudentIndex)
+      }
+      
+    })
     
   }
   
