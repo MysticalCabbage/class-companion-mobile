@@ -25,6 +25,15 @@ func getRandomIndex(fromArray: [AnyObject]) -> Int {
   return randomIndex
 }
 
+func getIndexByStudentId(targetStudentId: String) -> Int? {
+  for (index, student) in enumerate(allTeacherStudents) {
+    if targetStudentId == student.studentId {
+      return index
+    }
+  }
+  return nil
+}
+
 extension Array {
   mutating func shuffle() {
     if count < 2 { return }
@@ -34,3 +43,4 @@ extension Array {
     }
   }
 }
+

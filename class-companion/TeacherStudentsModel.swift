@@ -16,6 +16,7 @@ class TeacherStudent: Printable {
   var behaviorTotal: Int
   var attendanceStatus: String
   var currentlySelected: Bool
+  var groupNumber: Int?
   var description: String {
     return "The student name is \(studentTitle)"
   }
@@ -36,6 +37,7 @@ class TeacherStudent: Printable {
       self.attendanceStatus = "Present"
     }
     self.currentlySelected = false
+    self.groupNumber = nil
   }
   
   // when initializing with the snapshot data
@@ -73,3 +75,14 @@ func emptyAllTeacherStudentsLocally() {
   allTeacherStudents.removeAll()
   
 }
+
+func assignStudentToGroup(studentId: String, groupNumber: Int) {
+  if let studentToGroupIndex = getIndexByStudentId(studentId) {
+    allTeacherStudents[studentToGroupIndex].groupNumber = groupNumber
+  } else {
+    println("ERROR: Trying to group a student that doesn't exist")
+  }
+  
+  
+}
+

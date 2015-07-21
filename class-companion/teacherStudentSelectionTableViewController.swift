@@ -123,6 +123,10 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     
   }
   
+  func assignGroupToStudentModels(groupedStudentsArray: Dictionary<Int, Array<TeacherStudent>>) {
+    
+  }
+  
   
   // MARK: - Select Student
  
@@ -154,14 +158,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     sendSelectedStudent(allTeacherStudents[selectedStudentIndex])
   }
   
-  func getIndexByStudentId(targetStudentId: String) -> Int? {
-    for (index, student) in enumerate(allTeacherStudents) {
-      if targetStudentId == student.studentId {
-        return index
-      }
-    }
-    return nil
-  }
+
   
   // MARK: - Firebase Send Student Selection Info
   
@@ -192,7 +189,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       
       let serverStudentId = snapshot.value as! String
       
-      if let selectedStudentIndex = self.getIndexByStudentId(serverStudentId) {
+      if let selectedStudentIndex = getIndexByStudentId(serverStudentId) {
         self.setStudentAsSelected(selectedStudentIndex)
       }
       
