@@ -15,7 +15,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     // set up the navigation bar
     setUpNavBarTitle()
-    setUpRightBarButton()
+//    setUpRightBarButton()
+//    setUpLeftBarButton()
 
     // set up listeners
     setupReloadDataListener()
@@ -37,12 +38,32 @@ class TeacherStudentsTableViewController: UITableViewController {
     self.title = "\(currentClassName!) Behavior"
   }
   
+  /*
   func setUpRightBarButton() {
     var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
     
-    self.navigationItem.rightBarButtonItem = addStudentButton
-    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
+//    self.navigationItem.rightBarButtonItem = addStudentButton
+//    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
 
+  }
+  */
+  
+  /*
+  func setUpLeftBarButton() {
+    
+    
+    var backButton : UIBarButtonItem = UIBarButtonItem(title: "Classes", style: UIBarButtonItemStyle.Plain, target: self, action: "returnToDashboardView")
+    self.navigationItem.leftBarButtonItem = backButton
+
+  }
+  */
+  
+  @IBAction func returnToTeacherDashboard(sender: UIBarButtonItem) {
+    var next = self.storyboard?.instantiateViewControllerWithIdentifier("TeacherDashboard") as! TeacherDashboardViewController
+    
+    self.presentViewController(next, animated: true, completion: nil)
+    
+    
   }
 
   
@@ -135,6 +156,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     
   }
+  
+  // MARK: -Table Logic
   
   let classCellIdentifier = "TeacherStudentCell"
   

@@ -99,7 +99,7 @@
         <!--Classes-->
         <scene sceneID="RrQ-lT-sx0">
             <objects>
-                <viewController id="Zyh-gR-6fb" customClass="TeacherDashboardViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TeacherDashboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zyh-gR-6fb" customClass="TeacherDashboardViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pLh-ji-Doc"/>
                         <viewControllerLayoutGuide type="bottom" id="FpD-JO-gth"/>
@@ -108,8 +108,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome to the teacher dashboard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FU-Sx-V6B">
-                                <rect key="frame" x="166" y="72" width="269" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the teacher dashboard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FU-Sx-V6B">
+                                <rect key="frame" x="166" y="28" width="269" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="5oO-7w-rcV"/>
                                 </constraints>
@@ -117,8 +117,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2pA-lZ-IMd" customClass="TeacherClassesUITableView" customModule="class_companion" customModuleProvider="target">
-                                <rect key="frame" x="16" y="101" width="568" height="479"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2pA-lZ-IMd" customClass="TeacherClassesUITableView" customModule="class_companion" customModuleProvider="target">
+                                <rect key="frame" x="16" y="57" width="568" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ClassCell" id="bci-f4-CjT">
@@ -157,7 +157,7 @@
             </objects>
             <point key="canvasLocation" x="2874" y="298"/>
         </scene>
-        <!--Teacher Students Table View Controller-->
+        <!--Students List-->
         <scene sceneID="nnS-eD-1zg">
             <objects>
                 <tableViewController id="mK4-FS-4UG" customClass="TeacherStudentsTableViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,7 +194,18 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Fgc-Np-946"/>
+                    <navigationItem key="navigationItem" title="Students List" id="onx-YP-ssl">
+                        <barButtonItem key="leftBarButtonItem" title="Classes" id="h3o-52-Jqi">
+                            <connections>
+                                <action selector="returnToTeacherDashboard:" destination="mK4-FS-4UG" id="Kma-Rf-utG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add Student" id="7Nq-Ps-Oe8">
+                            <connections>
+                                <action selector="addNewTeacherStudentAlert2:" destination="mK4-FS-4UG" id="vkV-jn-z67"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="cgf-6f-3Ei" kind="presentation" identifier="showStudentBehaviorList" id="fAf-RP-GeX"/>
@@ -202,9 +213,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfn-wh-M2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5568" y="-487"/>
+            <point key="canvasLocation" x="5229" y="-463"/>
         </scene>
-        <!--Teacher Student Attendance Table View Controller-->
+        <!--Student Attendance-->
         <scene sceneID="Zps-aJ-ubj">
             <objects>
                 <tableViewController id="lpC-x0-jyX" customClass="teacherStudentAttendanceTableViewController" customModule="class_companion" customModuleProvider="target" sceneMemberID="viewController">
@@ -239,14 +250,21 @@
                             <outlet property="delegate" destination="lpC-x0-jyX" id="yUQ-sG-RAO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zmv-Ph-iP7"/>
+                    <navigationItem key="navigationItem" title="Student Attendance" id="UtY-Bx-GVy">
+                        <barButtonItem key="leftBarButtonItem" title="Classes" id="5sr-61-caX">
+                            <connections>
+                                <action selector="returnToTeacherDashboard:" destination="lpC-x0-jyX" id="3hd-KS-z4A"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Toggle" id="YZ3-tv-9vg"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="attendanceTableView" destination="Bj8-LT-iwn" id="glC-rC-84B"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4R0-Xj-dNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5229" y="298"/>
+            <point key="canvasLocation" x="5081" y="304"/>
         </scene>
         <!--Assign a student behavior-->
         <scene sceneID="d7Q-eK-mqN">
@@ -271,13 +289,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
-                                            <rect key="frame" x="21" y="66" width="114" height="20"/>
+                                            <rect key="frame" x="21" y="65" width="114" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
-                                            <rect key="frame" x="61" y="106" width="35" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
+                                            <rect key="frame" x="61" y="105" width="35" height="17"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -304,7 +322,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Assign a student behavior" id="Gdr-iw-k5s">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="wv3-mt-Bb3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="wv3-mt-Bb3">
                             <connections>
                                 <action selector="cancelAssignBehavior:" destination="YcX-yM-aiM" id="TX2-Dv-L7I"/>
                             </connections>
@@ -313,7 +331,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbO-32-Z3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7385" y="-496"/>
+            <point key="canvasLocation" x="6577" y="-463"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DaH-Tc-jeC">
@@ -331,7 +349,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIX-bx-lxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6717" y="-496"/>
+            <point key="canvasLocation" x="5909" y="-463"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5xY-Is-bUb">
@@ -388,7 +406,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCe-wd-qUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4756" y="-487"/>
+            <point key="canvasLocation" x="4417" y="-463"/>
         </scene>
     </scenes>
 </document>

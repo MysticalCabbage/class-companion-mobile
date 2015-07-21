@@ -33,14 +33,15 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   override func setUpNavBarTitle() {
     self.title = "\(currentClassName!) Attendance"
   }
-  
+  /*
   override func setUpRightBarButton() {
-    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Toggle", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleAttendanceAll")
+//    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Toggle", style: UIBarButtonItemStyle.Plain, target: self, action: "assignAttendanceToAllStudents")
     
-    self.navigationItem.rightBarButtonItem = addStudentButton
-    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
+//    self.navigationItem.rightBarButtonItem = addStudentButton
+//    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
     
   }
+*/
 
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -58,49 +59,43 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   
 
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
+    let row = indexPath.row
+    let selectedStudent = allTeacherStudents[row]
+    //    let selectedCellStudentId = selectedCell.studentId
+    
+    //    addBehaviorPoints(selectedStudent)
+    
+    currentStudentName = selectedStudent.studentTitle
+    currentStudentId = selectedStudent.studentId
+    
+    performSegueWithIdentifier("showStudentBehaviorList", sender: nil)
+    
+  }
+  
+  func assignAttendanceToAllStudents() {
+
+    let currentDate = getCurrentDateInString()
+    
+    for student in allTeacherStudents {
+      
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
+    println(currentDate)
+  }
+  
+  func getCurrentDateInString() -> String {
+    let date = NSDate()
+    let dateFormatter:NSDateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "M-dd-yyyy"
+    let currentDate:String = dateFormatter.stringFromDate(date)
+    
+    return currentDate
+    
+  }
+  
 }
