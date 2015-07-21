@@ -16,34 +16,21 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
       
         attendanceTableView.delegate = self
         attendanceTableView.dataSource = self
-//      self.tableView = attendanceTableView
       
         super.viewDidLoad()
       
       self.extendedLayoutIncludesOpaqueBars = true;
       
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
   
+  @IBAction func toggleStudentAttendanceButton(sender: UIBarButtonItem) {
+    assignAttendanceToAllStudents()
+  }
   override func setUpNavBarTitle() {
     self.title = "\(currentClassName!) Attendance"
   }
-  /*
-  override func setUpRightBarButton() {
-//    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Toggle", style: UIBarButtonItemStyle.Plain, target: self, action: "assignAttendanceToAllStudents")
-    
-//    self.navigationItem.rightBarButtonItem = addStudentButton
-//    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
-    
-  }
-*/
 
-  
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     let cell = self.tableView.dequeueReusableCellWithIdentifier("teacherStudentAttendanceCell") as! UITableViewCell
@@ -69,23 +56,36 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     //    addBehaviorPoints(selectedStudent)
     
-    currentStudentName = selectedStudent.studentTitle
-    currentStudentId = selectedStudent.studentId
-    
-    performSegueWithIdentifier("showStudentBehaviorList", sender: nil)
+//    currentStudentName = selectedStudent.studentTitle
+//    currentStudentId = selectedStudent.studentId
+//    
+//    performSegueWithIdentifier("showStudentBehaviorList", sender: nil)
     
   }
   
   func assignAttendanceToAllStudents() {
 
-    let currentDate = getCurrentDateInString()
-    
     for student in allTeacherStudents {
+      
+      assignAttendanceToOneStudent(student)
       
     }
     
+  }
+  
+  func assignAttendanceToOneStudent(student: TeacherStudent) {
+    let currentDate = getCurrentDateInString()
+
+    let firebaseClassStudentAttendanceRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("students/")
+      .childByAppendingPath(student.studentId)
+      .childByAppendingPath("attendance/")
+      .childByAppendingPath(currentDate)
     
-    println(currentDate)
+    firebaseClassStudentAttendanceRef.setValue("Absent")
+
   }
   
   func getCurrentDateInString() -> String {

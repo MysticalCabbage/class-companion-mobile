@@ -67,53 +67,10 @@ class TeacherStudentsTableViewController: UITableViewController {
   }
 
   
-  func addNewTeacherStudentAlert() {
-    var alertController:UIAlertController?
-    
-    alertController = UIAlertController(title: "Add Student",
-      message: "Enter the student name below",
-      preferredStyle: .Alert)
-    
-    alertController!.addTextFieldWithConfigurationHandler(
-      {(textField: UITextField!) in
-        textField.placeholder = "Student Name"
-        textField.autocapitalizationType = UITextAutocapitalizationType.Words
-    })
-    
-    let submitAction = UIAlertAction(
-      title: "Submit",
-      style: UIAlertActionStyle.Default,
-      handler: {[weak self]
-        (paramAction:UIAlertAction!) in
-        if let textFields = alertController?.textFields{
-          let theTextFields = textFields as! [UITextField]
-          let enteredText = theTextFields[0].text
-          let newstudentName = enteredText
-          self!.sendStudentToServer(newstudentName)
-          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-
-          
-        }
-      })
-    
-    let cancelAction = UIAlertAction(
-      title: "Cancel",
-      style: UIAlertActionStyle.Cancel,
-      handler: nil
-    )
-    
-    alertController?.addAction(cancelAction)
-    alertController?.addAction(submitAction)
-    
-    self.presentViewController(alertController!,
-      animated: true,
-      completion: nil)
-  }
-  
   
   // MARK: - Add / Delete Class Alerts
   // ADD CLASS ALERT
-  @IBAction func addNewTeacherStudentAlert2(sender: AnyObject) {
+  @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
     var alertController:UIAlertController?
     
     alertController = UIAlertController(title: "Add Student",
@@ -182,7 +139,6 @@ class TeacherStudentsTableViewController: UITableViewController {
     return cell
   }
   
-  // ON CLICKING adds a point to a student's behavior
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
