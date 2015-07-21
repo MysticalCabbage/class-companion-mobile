@@ -210,7 +210,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add Student" id="7Nq-Ps-Oe8">
                             <connections>
-                                <action selector="addNewTeacherStudentAlert2:" destination="mK4-FS-4UG" id="vkV-jn-z67"/>
+                                <action selector="addNewTeacherStudentAlert:" destination="mK4-FS-4UG" id="gQG-AE-hy0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -25,7 +25,15 @@ class TeacherStudent: Printable {
     self.studentTitle = json["studentTitle"] as? String ?? "studentTitleMissing"
     self.studentId = key
     self.behaviorTotal = json["behaviorTotal"] as? Int ?? 0
-    self.attendanceStatus = json["attendance"]![currentDate] as? String ?? "studentAttendanceMissing"
+    
+    // if there is an attendance section for that student in the database
+    if let tempAttendance: AnyObject = json["attendance"] as AnyObject? {
+      // use the value for the current date, or by default set it to "Present"
+      self.attendanceStatus = tempAttendance[currentDate] as? String ?? "Present"
+    } else {
+      // if there is no attendance section for that student, 
+      self.attendanceStatus = "Present"
+    }
   }
   
   // when initializing with the snapshot data

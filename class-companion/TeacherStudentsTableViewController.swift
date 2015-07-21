@@ -258,6 +258,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       
+      let currentDate = getCurrentDateInString()
 
       // prepare data to send to teacher section of database
       
@@ -271,10 +272,15 @@ class TeacherStudentsTableViewController: UITableViewController {
         firebaseClassStudentRef
         .childByAppendingPath("behavior/")
       
+      let firebaseClassStudentAttendanceRef =
+        firebaseClassStudentRef
+        .childByAppendingPath("attendance/")
+        .childByAppendingPath(currentDate)
+      
       let studentInfoForClassRoot =
       [
         "studentTitle": studentName,
-        "behaviorTotal": 0
+        "behaviorTotal": 0,
       ]
       
       var defaultBehaviorAmounts = [String: Int]()
@@ -288,6 +294,9 @@ class TeacherStudentsTableViewController: UITableViewController {
       
       // add the behaviors to the student section with the current amounts set to 0
       firebaseClassStudentBehaviorRef.setValue(defaultBehaviorAmounts)
+      
+      // by default, set the student attendance to "Present" for today
+      firebaseClassStudentAttendanceRef.setValue("Present")
       
     }
     else {
