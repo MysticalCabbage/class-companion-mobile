@@ -20,7 +20,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     var nav = self.navigationController?.navigationBar
     self.title = "\(currentClassName!)"
     
-    setUpAddStudentBarButton()
+    setUpRightBarButton()
 
     // set up listeners
     setupReloadDataListener()
@@ -39,10 +39,12 @@ class TeacherStudentsTableViewController: UITableViewController {
 //    // Dispose of any resources that can be recreated.
 //  }
   
-  func setUpAddStudentBarButton() {
+  func setUpRightBarButton() {
     var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
     
+    self.navigationItem.rightBarButtonItem = addStudentButton
     self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
+
   }
 
   

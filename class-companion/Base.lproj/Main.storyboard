@@ -193,7 +193,9 @@
                             <outlet property="delegate" destination="mK4-FS-4UG" id="QdL-wJ-Hqf"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Fgc-Np-946"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="cgf-6f-3Ei" kind="presentation" identifier="showStudentBehaviorList" id="fAf-RP-GeX"/>
                     </connections>
