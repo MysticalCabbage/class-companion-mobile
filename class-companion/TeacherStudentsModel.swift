@@ -15,6 +15,7 @@ class TeacherStudent: Printable {
   var studentId: String
   var behaviorTotal: Int
   var attendanceStatus: String
+  var randomlySelected: Bool
   var description: String {
     return "The student name is \(studentTitle)"
   }
@@ -34,6 +35,7 @@ class TeacherStudent: Printable {
       // if there is no attendance section for that student, 
       self.attendanceStatus = "Present"
     }
+    self.randomlySelected = false
   }
   
   // when initializing with the snapshot data

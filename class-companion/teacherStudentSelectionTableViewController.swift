@@ -44,16 +44,26 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     self.title = "\(currentClassName!) Selection"
   }
   
+  
   // MARK: - Table logic
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      
       let cell = tableView.dequeueReusableCellWithIdentifier("teacherStudentSelectionCell", forIndexPath: indexPath) as! UITableViewCell
 
-      let row = indexPath.row
+      let currentRow = indexPath.row
+      
+      let selectedStudent = allTeacherStudents[currentRow
+      ]
+      
+      cell.textLabel?.text = selectedStudent.studentTitle
       
       
-      
-      cell.textLabel?.text = allTeacherStudents[row].studentTitle
-      cell.detailTextLabel?.text = ""
+      if selectedStudent.randomlySelected {
+        cell.detailTextLabel?.text = "Selected!"
+      } else {
+        cell.detailTextLabel?.text = ""
+      }
+    
       
       
       return cell
@@ -85,26 +95,47 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   // stores the previously selected student index
   // used for removing the "Selected!" message from the detail
-  var previousRandomSelectionRowIndex: Int?
+  var previousRandomSelectionRow: Int?
   
   func setRandomStudentAsSelected() {
-    // if we have randomly selected before
-    if let previousRowIndex = previousRandomSelectionRowIndex {
-      // set the old random selection detail to a blank message
-      setRowDetailMessage(previousRowIndex, withMessage: "")
+    
+    if let previousRandomSelectionIndex = previousRandomSelectionRow {
+      allTeacherStudents[previousRandomSelectionIndex].randomlySelected = false
     }
-    let randomRowIndex = getRandomRowIndex()
-    setRowDetailMessage(randomRowIndex, withMessage: "Selected!")
-    previousRandomSelectionRowIndex = randomRowIndex
+    
+    let randomStudentIndex = getRandomRowIndex()
+    
+    allTeacherStudents[randomStudentIndex].randomlySelected = true
+    
+//
+    let cellToEditIndexPath = NSIndexPath(forRow: randomStudentIndex, inSection: 0)
+//
+////    let cellToEdit = tableView.cellForRowAtIndexPath(cellToEditIndexPath) as UITableViewCell!
+//    
+//    self.tableView.reloadRowsAtIndexPaths([cellToEditIndexPath], withRowAnimation: UITableViewRowAnimation.None)
+//    
+    self.tableView.selectRowAtIndexPath(cellToEditIndexPath, animated: true, scrollPosition: .Middle);
+    
+    tableView.reloadData()
+    
+    previousRandomSelectionRow = randomStudentIndex
+
+
+    
   }
   
-  func setRowDetailMessage(atRowIndex: Int, withMessage: String) {
+  func setRowDetailMessage(atRowIndex: Int, withMessage: String, shouldSelectRow: Bool) {
     let cellToEditIndexPath = NSIndexPath(forRow: atRowIndex, inSection: 0)
     
-    let cellToEdit = tableView.cellForRowAtIndexPath(cellToEditIndexPath)
+    let cellToEdit = tableView.cellForRowAtIndexPath(cellToEditIndexPath) as UITableViewCell!
     
-    cellToEdit!.detailTextLabel?.text = withMessage
+    cellToEdit.detailTextLabel?.text = withMessage
     
+//    self.tableView.reloadRowsAtIndexPaths([cellToEditIndexPath], withRowAnimation: UITableViewRowAnimation.None)
+
+    if shouldSelectRow {
+      self.tableView.selectRowAtIndexPath(cellToEditIndexPath, animated: true, scrollPosition: .Middle);
+    }
     
   }
   

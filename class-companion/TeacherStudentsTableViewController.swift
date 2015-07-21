@@ -114,7 +114,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
   }
   
-  // MARK: -Table Logic
+  // MARK: - Table Logic
   
   let classCellIdentifier = "TeacherStudentCell"
   
