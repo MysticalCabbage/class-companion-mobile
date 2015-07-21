@@ -56,7 +56,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       
       cell.textLabel?.text = selectedStudent.studentTitle
       
-      if selectedStudent.randomlySelected {
+      if selectedStudent.currentlySelected {
         cell.detailTextLabel?.text = "Selected!"
       } else {
         cell.detailTextLabel?.text = ""
@@ -69,15 +69,17 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
-    let selectedStudent = allTeacherStudents[row]
+    
+    setStudentAsSelected(row)
    
   }
   
   // MARK: - Buttons
   
   @IBAction func randomSelectionButton(sender: UIBarButtonItem){
-   
-      setRandomStudentAsSelected()
+      let randomIndex = getRandomRowIndex()
+    
+      setStudentAsSelected(randomIndex)
   }
   
   // MARK: - Random Selection
@@ -89,32 +91,47 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   // stores the previously selected student index
   // used for removing the "Selected!" message from the detail
-  var previousRandomSelectionRow: Int?
+  var previousSelectionRow: Int?
   
-  func setRandomStudentAsSelected() {
-    
-    // if we previously set a random student selection
-    if let previousRandomSelectionIndex = previousRandomSelectionRow {
-      // set the previous student model's random selection status to false
-      allTeacherStudents[previousRandomSelectionIndex].randomlySelected = false
+  func setStudentAsSelected(selectedStudentIndex: Int) {
+    // if we previously set a student selection
+    if let previousSelectionIndex = previousSelectionRow {
+      // set the previous student model's selection status to false
+      allTeacherStudents[previousSelectionIndex].currentlySelected = false
       // get the index path for the previous random selection
-      let previousRandomCellIndexPath = NSIndexPath(forRow: previousRandomSelectionIndex, inSection: 0)
+      let previousRandomCellIndexPath = NSIndexPath(forRow: previousSelectionIndex, inSection: 0)
       // reload the random path selection
       self.tableView.reloadRowsAtIndexPaths([previousRandomCellIndexPath], withRowAnimation: UITableViewRowAnimation.None)
     }
     
-    let randomStudentIndex = getRandomRowIndex()
+    allTeacherStudents[selectedStudentIndex].currentlySelected = true
     
-    allTeacherStudents[randomStudentIndex].randomlySelected = true
-    
-    let cellToEditIndexPath = NSIndexPath(forRow: randomStudentIndex, inSection: 0)
+    let cellToEditIndexPath = NSIndexPath(forRow: selectedStudentIndex, inSection: 0)
     
     self.tableView.reloadRowsAtIndexPaths([cellToEditIndexPath], withRowAnimation: UITableViewRowAnimation.None)
     
     self.tableView.selectRowAtIndexPath(cellToEditIndexPath, animated: true, scrollPosition: .Middle);
+    
+    previousSelectionRow = selectedStudentIndex
+  }
+  
+  func setRandomStudentAsSelected() {
+    
 
-    previousRandomSelectionRow = randomStudentIndex
  
+  }
+  
+  // MARK: - Firebase Send Student Selection Info
+  
+  func sendSelectedStudent(selectedStudent: TeacherStudent) {
+    let studentId = selectedStudent.studentId
+    
+    let firebaseRandomStudentRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("randomSelection/")
+      .childByAppendingPath(studentId)
+    
   }
   
 
