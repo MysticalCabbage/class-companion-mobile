@@ -60,6 +60,11 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       } else {
         cell.detailTextLabel?.text = ""
       }
+      
+      if let groupNumber =  selectedStudent.groupNumber {
+        println("group number is \(groupNumber)")
+        cell.detailTextLabel?.text = "\(groupNumber)"
+      }
 
       return cell
     }
@@ -98,8 +103,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   func divideStudentsIntoGroups(numberOfGroups: Int) {
     
-    var numStudentsGrouped = 0
-    
     var allStudentGroups = Dictionary<Int, Array<TeacherStudent>>()
     var currentGroupIndex = 0
     
@@ -119,11 +122,20 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       }
     }
     
-    println(allStudentGroups)
+    assignGroupToStudentModels(allStudentGroups)
+    
     
   }
   
   func assignGroupToStudentModels(groupedStudentsArray: Dictionary<Int, Array<TeacherStudent>>) {
+    
+    for (group, students) in groupedStudentsArray {
+      for student in students {
+        assignStudentModelToGroup(student.studentId, group)
+      }
+    }
+  
+    tableView.reloadData()
     
   }
   

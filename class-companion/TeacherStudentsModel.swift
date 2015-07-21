@@ -76,7 +76,7 @@ func emptyAllTeacherStudentsLocally() {
   
 }
 
-func assignStudentToGroup(studentId: String, groupNumber: Int) {
+func assignStudentModelToGroup(studentId: String, groupNumber: Int) {
   if let studentToGroupIndex = getIndexByStudentId(studentId) {
     allTeacherStudents[studentToGroupIndex].groupNumber = groupNumber
   } else {
