@@ -63,7 +63,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       
       
       if let groupNumber = selectedStudent.groupNumber where numberOfStudentGroups > 1 {
-        println("group number is \(groupNumber)")
         cell.groupNumberLabel.text = "Group \(groupNumber)"
       } else {
         cell.groupNumberLabel.text = ""
@@ -94,16 +93,16 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   @IBAction func randomSelectionButton(sender: UIBarButtonItem){
       let randomIndex = getRandomIndex(allTeacherStudents)
-    
       setStudentAsSelected(randomIndex)
   }
   
   @IBAction func groupSelectionButton(sender: UIBarButtonItem) {
-//    divideStudentsIntoGroups(2)
-    makeGroupsAlert()
+    showMakeGroupsAlert()
   }
   
-  func makeGroupsAlert() {
+  // MARK: - Make Groups Alert
+  
+  func showMakeGroupsAlert() {
     var alertController:UIAlertController?
     
     alertController = UIAlertController(title: "Make Groups",
@@ -160,7 +159,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   func divideStudentsIntoGroups(numberOfGroupsToMake: Int) {
     
-    var allStudentGroups = Dictionary<Int, Array<TeacherStudent>>()
+    var allStudentGroups = Dictionary<String, Array<TeacherStudent>>()
     var currentGroupIndex = 1
     
     var shuffledStudents = allTeacherStudents
@@ -168,10 +167,11 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     shuffledStudents.shuffle()
     
     for student in shuffledStudents {
-      if allStudentGroups[currentGroupIndex] == nil {
-        allStudentGroups[currentGroupIndex] = [TeacherStudent]()
+      let currentGroupIndexString = String(currentGroupIndex)
+      if allStudentGroups[currentGroupIndexString] == nil {
+        allStudentGroups[currentGroupIndexString] = [TeacherStudent]()
       }
-      allStudentGroups[currentGroupIndex]!.append(student)
+      allStudentGroups[currentGroupIndexString]!.append(student)
       if currentGroupIndex < numberOfGroupsToMake {
         currentGroupIndex++
       } else {
@@ -186,7 +186,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     
   }
   
-  func assignGroupToStudentModels(groupedStudentsArray: Dictionary<Int, Array<TeacherStudent>>) {
+  func assignGroupToStudentModels(groupedStudentsArray: Dictionary<String, Array<TeacherStudent>>) {
     
     for (group, students) in groupedStudentsArray {
       for student in students {
@@ -246,6 +246,18 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     firebaseSelectionRef.setValue(studentId)
     
   
+  }
+  
+  // MARK: - Firebase Send Group Info
+  
+  func sendGroupInfo(allStudentGroups: Dictionary<String, Array<TeacherStudent>>) {
+    
+    for (group, studentList) in allStudentGroups {
+      for student in group {
+        
+      }
+    }
+    
   }
   
   // MARK: - Firebase Student Selection Listener

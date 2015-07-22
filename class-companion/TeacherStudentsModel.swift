@@ -16,7 +16,7 @@ class TeacherStudent: Printable {
   var behaviorTotal: Int
   var attendanceStatus: String
   var currentlySelected: Bool
-  var groupNumber: Int?
+  var groupNumber: String?
   var description: String {
     return "The student name is \(studentTitle)"
   }
@@ -76,7 +76,7 @@ func emptyAllTeacherStudentsLocally() {
   
 }
 
-func assignStudentModelToGroup(studentId: String, groupNumber: Int) {
+func assignStudentModelToGroup(studentId: String, groupNumber: String) {
   if let studentToGroupIndex = getIndexByStudentId(studentId) {
     allTeacherStudents[studentToGroupIndex].groupNumber = groupNumber
   } else {
