@@ -14,19 +14,34 @@ class TeacherStudent: Printable {
   var studentTitle: String
   var studentId: String
   var behaviorTotal: Int
+  var attendanceStatus: String
+  var currentlySelected: Bool
+  var groupNumber: String?
   var description: String {
     return "The student name is \(studentTitle)"
   }
   // initialize the instance with the json data from the snapshot
   init(key: String, json: Dictionary<String, AnyObject>) {
+    let currentDate = getCurrentDateInString()
+    
     self.studentTitle = json["studentTitle"] as? String ?? "studentTitleMissing"
     self.studentId = key
     self.behaviorTotal = json["behaviorTotal"] as? Int ?? 0
+    
+    // if there is an attendance section for that student in the database
+    if let tempAttendance: AnyObject = json["attendance"] as AnyObject? {
+      // use the value for the current date, or by default set it to "Present"
+      self.attendanceStatus = tempAttendance[currentDate] as? String ?? "Present"
+    } else {
+      // if there is no attendance section for that student, 
+      self.attendanceStatus = "Present"
+    }
+    self.currentlySelected = false
+    self.groupNumber = nil
   }
   
   // when initializing with the snapshot data
   convenience init(snap: FDataSnapshot) {
-    //    println("IN INIT THE SNAP VALUE IS \(snap.value)")
     if let json = snap.value as? Dictionary<String, AnyObject> {
       self.init(key: snap.key, json: json)
     }
@@ -59,3 +74,14 @@ func emptyAllTeacherStudentsLocally() {
   allTeacherStudents.removeAll()
   
 }
+
+func assignStudentModelToGroup(studentId: String, groupNumber: String) {
+  if let studentToGroupIndex = getIndexByStudentId(studentId) {
+    allTeacherStudents[studentToGroupIndex].groupNumber = groupNumber
+  } else {
+    println("ERROR: Trying to group a student that doesn't exist")
+  }
+  
+  
+}
+

@@ -13,21 +13,19 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
-    
-    self.title = "\(currentClassName!)"
+    // set up the navigation bar
+    setUpNavBarTitle()
+//    setUpRightBarButton()
+//    setUpLeftBarButton()
 
-
-    
-    // Deletes all classes currently in the array
-    emptyAllTeacherStudentsLocally()
-    
+    // set up listeners
+    setupReloadDataListener()
     setupDeleteListener()
-    
     setUpBehaviorListener()
     
+    // refresh the table
+    emptyAllTeacherStudentsLocally()  
     getAllStudentsFromServer()
-    
     
   }
   
@@ -35,54 +33,44 @@ class TeacherStudentsTableViewController: UITableViewController {
 //    super.didReceiveMemoryWarning()
 //    // Dispose of any resources that can be recreated.
 //  }
-
   
-  @IBAction func addNewTeacherStudentAlert(sender: UIBarButtonItem) {
-    var alertController:UIAlertController?
-    
-    alertController = UIAlertController(title: "Add Student",
-      message: "Enter the student name below",
-      preferredStyle: .Alert)
-    
-    alertController!.addTextFieldWithConfigurationHandler(
-      {(textField: UITextField!) in
-        textField.placeholder = "Student Name"
-        textField.autocapitalizationType = UITextAutocapitalizationType.Words
-    })
-    
-    let submitAction = UIAlertAction(
-      title: "Submit",
-      style: UIAlertActionStyle.Default,
-      handler: {[weak self]
-        (paramAction:UIAlertAction!) in
-        if let textFields = alertController?.textFields{
-          let theTextFields = textFields as! [UITextField]
-          let enteredText = theTextFields[0].text
-          let newstudentName = enteredText
-          self!.sendStudentToServer(newstudentName)
-          self!.tableView.reloadData()
-          
-        }
-      })
-    
-    let cancelAction = UIAlertAction(
-      title: "Cancel",
-      style: UIAlertActionStyle.Cancel,
-      handler: nil
-    )
-    
-    alertController?.addAction(cancelAction)
-    alertController?.addAction(submitAction)
-    
-    self.presentViewController(alertController!,
-      animated: true,
-      completion: nil)
+  func setUpNavBarTitle() {
+    self.title = "\(currentClassName!) Behavior"
   }
+  
+  /*
+  func setUpRightBarButton() {
+    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
+    
+//    self.navigationItem.rightBarButtonItem = addStudentButton
+//    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
+
+  }
+  */
+  
+  /*
+  func setUpLeftBarButton() {
+    
+    
+    var backButton : UIBarButtonItem = UIBarButtonItem(title: "Classes", style: UIBarButtonItemStyle.Plain, target: self, action: "returnToDashboardView")
+    self.navigationItem.leftBarButtonItem = backButton
+
+  }
+  */
+  
+  @IBAction func returnToTeacherDashboard(sender: UIBarButtonItem) {
+    var next = self.storyboard?.instantiateViewControllerWithIdentifier("TeacherDashboard") as! TeacherDashboardViewController
+    
+    self.presentViewController(next, animated: true, completion: nil)
+    
+    
+  }
+
   
   
   // MARK: - Add / Delete Class Alerts
   // ADD CLASS ALERT
-  @IBAction func addNewTeacherStudentAlert2(sender: AnyObject) {
+  @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
     var alertController:UIAlertController?
     
     alertController = UIAlertController(title: "Add Student",
@@ -105,8 +93,8 @@ class TeacherStudentsTableViewController: UITableViewController {
           let enteredText = theTextFields[0].text
           let newstudentName = enteredText
           self!.sendStudentToServer(newstudentName)
-          self!.tableView.reloadData()
-          
+          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+
         }
       })
     
@@ -125,6 +113,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     
   }
+  
+  // MARK: - Table Logic
   
   let classCellIdentifier = "TeacherStudentCell"
   
@@ -138,7 +128,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
+    let cell = self.tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
     
     let row = indexPath.row
     
@@ -149,9 +139,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     return cell
   }
   
-  // ON CLICKING adds a point to a student's behavior
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
     let selectedStudent = allTeacherStudents[row]
@@ -182,7 +171,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   func removeStudent(studentNameToRemove: String, row: Int) {
     allTeacherStudents.removeAtIndex(row)
-    self.tableView.reloadData()
+    NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
   }
   
   
@@ -246,15 +235,15 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath(currentClassId)
         .childByAppendingPath("students/")
     
+    
     firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
 //        println("STUDENT FROM SERVER IS \(studentFromServer)")
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
         addNewTeacherStudent(newTeacherStudent)
-//        println(allTeacherStudents)
       }
       // after adding the new classes to the classes array, reload the table
-      self.tableView.reloadData()
+      NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
       
       }, withCancelBlock: { error in
         println(error.description)
@@ -269,6 +258,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       
+      let currentDate = getCurrentDateInString()
 
       // prepare data to send to teacher section of database
       
@@ -282,10 +272,15 @@ class TeacherStudentsTableViewController: UITableViewController {
         firebaseClassStudentRef
         .childByAppendingPath("behavior/")
       
+      let firebaseClassStudentAttendanceRef =
+        firebaseClassStudentRef
+        .childByAppendingPath("attendance/")
+        .childByAppendingPath(currentDate)
+      
       let studentInfoForClassRoot =
       [
         "studentTitle": studentName,
-        "behaviorTotal": 0
+        "behaviorTotal": 0,
       ]
       
       var defaultBehaviorAmounts = [String: Int]()
@@ -299,6 +294,9 @@ class TeacherStudentsTableViewController: UITableViewController {
       
       // add the behaviors to the student section with the current amounts set to 0
       firebaseClassStudentBehaviorRef.setValue(defaultBehaviorAmounts)
+      
+      // by default, set the student attendance to "Present" for today
+      firebaseClassStudentAttendanceRef.setValue("Present")
       
     }
     else {
@@ -352,6 +350,19 @@ class TeacherStudentsTableViewController: UITableViewController {
     })
   }
   
+  // MARK: - Reload Table Data Listener
+  func setupReloadDataListener() {
+    // add Listener for reloading the table
+    // this allows sub-classes of this class to reload their table data
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
+
+  }
+
+  
+  // MARK: - Reload Table Data
+  func reloadTableData(notification: NSNotification) {
+    tableView.reloadData()
+  }
   /*
   // MARK: - Navigation
   

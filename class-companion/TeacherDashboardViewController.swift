@@ -8,8 +8,10 @@
 
 import UIKit
 
-class TeacherDashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class TeacherDashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIBarPositioningDelegate {
 
+  @IBOutlet weak var dashboardNavigationBar: UINavigationBar!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +19,12 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       
       classTableView.delegate = self
       classTableView.dataSource = self
+      
+//      dashboar
+//      dashboardNavigationBar.delegate = self
+//      self.navigationItem.appearance()
+      
+//      let barPosition: UIBarPosition
       
       // Deletes all classes currently in the array
       emptyAllTeacherClassesLocally()
@@ -27,31 +35,14 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
       setDefaultBehaviors()
       
       
-
-      
-      // FOR TESTING
-//      deleteAllClassesFromServer()
-      
-      // TEST DATA FOR TEACHER CLASSES
-//      let class1 = TeacherClass(className: "English")
-//      sendClassToServer("English")
-//      sendClassToServer(class1)
-//      let class2 = TeacherClass(className: "Geography")
-//      sendClassToServer("Geography")
-//      sendClassToServer(class2)
-//      let class3 = TeacherClass(className: "Writing")
-//      addNewTeacherClass(class3)
-//      sendClassToServer("Writing")
-      
       // Gets all current class data from the server
       getAllClassesFromServer()
       
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+    return .TopAttached
+  }
   // MARK: - Show Class View
   
   

@@ -18,6 +18,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
       super.viewDidLoad()
       self.title = "\(currentStudentName!)'s Behavior"
+      
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
