@@ -16,6 +16,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       
       // Setup Listeners
       listenForStudentSelection()
+      listenForStudentGroups()
       
       
         // Uncomment the following line to preserve selection between presentations
@@ -62,7 +63,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       }
       
       
-      if let groupNumber = selectedStudent.groupNumber where numberOfStudentGroups > 1 {
+      if let groupNumber = selectedStudent.groupNumber where currentNumberOfStudentGroups > 1 {
         cell.groupNumberLabel.text = "Group \(groupNumber)"
       } else {
         cell.groupNumberLabel.text = ""
@@ -153,7 +154,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     
   }
   
-  var numberOfStudentGroups = 1
+  var currentNumberOfStudentGroups = 1
 
   // Mark: - Divide Into Groups
   
@@ -181,9 +182,10 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     
     assignGroupToStudentModels(allStudentGroups)
     
-    numberOfStudentGroups = numberOfGroupsToMake
+    currentNumberOfStudentGroups = numberOfGroupsToMake
     
     
+    sendGroupsInfo(allStudentGroups)
   }
   
   func assignGroupToStudentModels(groupedStudentsArray: Dictionary<String, Array<TeacherStudent>>) {
@@ -250,14 +252,22 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   // MARK: - Firebase Send Group Info
   
-  func sendGroupInfo(allStudentGroups: Dictionary<String, Array<TeacherStudent>>) {
+  func sendGroupsInfo(allStudentGroups: Dictionary<String, Array<TeacherStudent>>) {
+    let firebaseGroupRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("groups/")
+
+    var studentIdsAndGroups = [String: String]()
     
     for (group, studentList) in allStudentGroups {
-      for student in group {
-        
+      for student in studentList {
+        studentIdsAndGroups[student.studentId] = student.groupNumber
       }
     }
     
+    firebaseGroupRef.setValue(studentIdsAndGroups)
+
   }
   
   // MARK: - Firebase Student Selection Listener
@@ -276,6 +286,36 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         self.setStudentAsSelected(selectedStudentIndex)
       }
       
+    })
+    
+  }
+  
+  // MARK: - Firebase Student Groups Listener
+  func listenForStudentGroups() {
+    let firebaseGroupsRef =
+    firebaseClassRootRef
+      .childByAppendingPath(currentClassId)
+      .childByAppendingPath("groups/")
+    
+    firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
+      
+      println("snapshot value is \(snapshot.value)")
+      
+      var numberOfGroupsOnServer = 1
+      
+      for studentInfo in snapshot.children.allObjects as! [FDataSnapshot] {
+        let studentIdFromServer = studentInfo.key
+        if let studentGroupFromServer = studentInfo.value as? String {
+          assignStudentModelToGroup(studentIdFromServer, studentGroupFromServer)
+          numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupFromServer.toInt()!)
+        }
+      }
+      self.tableView.reloadData()
+      
+      self.currentNumberOfStudentGroups = numberOfGroupsOnServer
+      
+      
+
     })
     
   }
