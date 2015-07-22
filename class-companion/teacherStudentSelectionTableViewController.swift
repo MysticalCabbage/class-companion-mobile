@@ -47,23 +47,25 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   // MARK: - Table logic
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
       
-      let cell = tableView.dequeueReusableCellWithIdentifier("teacherStudentSelectionCell", forIndexPath: indexPath) as! UITableViewCell
+      let cell = tableView.dequeueReusableCellWithIdentifier("teacherStudentSelectionCell", forIndexPath: indexPath) as! teacherStudentSelectionTableViewCell
 
       let currentRow = indexPath.row
       
       let selectedStudent = allTeacherStudents[currentRow]
       
-      cell.textLabel?.text = selectedStudent.studentTitle
+      cell.studentNameLabel.text = selectedStudent.studentTitle
       
       if selectedStudent.currentlySelected {
-        cell.detailTextLabel?.text = "Selected!"
+        cell.selectionStatusLabel.text = "Selected!"
       } else {
-        cell.detailTextLabel?.text = ""
+        cell.selectionStatusLabel.text = ""
       }
       
       if let groupNumber =  selectedStudent.groupNumber {
         println("group number is \(groupNumber)")
-        cell.detailTextLabel?.text = "\(groupNumber)"
+        cell.groupNumberLabel.text = "\(groupNumber)"
+      } else {
+        cell.groupNumberLabel.text = ""
       }
 
       return cell

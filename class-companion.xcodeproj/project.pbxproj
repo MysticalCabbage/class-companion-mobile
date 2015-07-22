@@ -28,6 +28,7 @@
 		69AF6E931B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */; };
 		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
+		69F717511B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		8E4731F839F0B2D02C6B9E66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64C41057FE1EA57EE3582E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 			children = (
 				69480CDE1B55E98100F80FAF /* AppDelegate.swift */,
 				69480CE21B55E98100F80FAF /* Main.storyboard */,
+				69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */,
 				690E3B371B5EC3600045A68D /* teacherStudentSelectionTableViewController.swift */,
 				69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */,
 				690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */,
@@ -326,6 +329,7 @@
 				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,
 				691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
+				69F717511B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift in Sources */,
 				690E3B381B5EC3600045A68D /* teacherStudentSelectionTableViewController.swift in Sources */,
 				698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */,
 				696812F61B5D636A00FD16C7 /* DefaultBehaviors.swift in Sources */,
