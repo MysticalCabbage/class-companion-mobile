@@ -189,7 +189,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     
     currentNumberOfStudentGroups = numberOfGroupsToMake
     
-    
     sendGroupsInfo(allStudentGroups)
   }
   
@@ -304,7 +303,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     
     firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
       
-      println("snapshot value is \(snapshot.value)")
       
       var numberOfGroupsOnServer = 1
       

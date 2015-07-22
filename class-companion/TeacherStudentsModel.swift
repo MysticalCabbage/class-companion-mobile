@@ -42,7 +42,6 @@ class TeacherStudent: Printable {
   
   // when initializing with the snapshot data
   convenience init(snap: FDataSnapshot) {
-    //    println("IN INIT THE SNAP VALUE IS \(snap.value)")
     if let json = snap.value as? Dictionary<String, AnyObject> {
       self.init(key: snap.key, json: json)
     }
