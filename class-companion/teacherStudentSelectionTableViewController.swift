@@ -61,7 +61,8 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         cell.selectionStatusLabel.text = ""
       }
       
-      if let groupNumber =  selectedStudent.groupNumber {
+      
+      if let groupNumber = selectedStudent.groupNumber where numberOfStudentGroups > 1 {
         println("group number is \(groupNumber)")
         cell.groupNumberLabel.text = "Group \(groupNumber)"
       } else {
@@ -80,13 +81,13 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
    
   }
   
-  var numberOfTableSections = 1
-  
+  /*
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     // #warning Potentially incomplete method implementation.
     // Return the number of sections.
     return numberOfTableSections
   }
+  */
 
   
   // MARK: - Buttons
@@ -98,15 +99,69 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   }
   
   @IBAction func groupSelectionButton(sender: UIBarButtonItem) {
-    divideStudentsIntoGroups(2)
+//    divideStudentsIntoGroups(2)
+    makeGroupsAlert()
   }
+  
+  func makeGroupsAlert() {
+    var alertController:UIAlertController?
+    
+    alertController = UIAlertController(title: "Make Groups",
+      message: "Enter the number of groups below",
+      preferredStyle: .Alert)
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(textField: UITextField!) in
+        textField.placeholder = "Number of Groups"
+        textField.autocapitalizationType = UITextAutocapitalizationType.Words
+    })
+    
+    let submitAction = UIAlertAction(
+      title: "Make Groups",
+      style: UIAlertActionStyle.Default,
+      handler: {[weak self]
+        (paramAction:UIAlertAction!) in
+        if let textFields = alertController?.textFields{
+          let theTextFields = textFields as! [UITextField]
+          let enteredText = theTextFields[0].text
+          let numberOfGroupsToMake = enteredText.toInt()
+          self!.divideStudentsIntoGroups(numberOfGroupsToMake!)
+        }
+      })
+    
+    let cancelAction = UIAlertAction(
+      title: "Cancel",
+      style: UIAlertActionStyle.Cancel,
+      handler: nil
+    )
+    
+    let removeGroups = UIAlertAction(
+      title: "Remove Groups",
+      style: UIAlertActionStyle.Default,
+      handler: {[weak self]
+        (paramAction:UIAlertAction!) in
+        self!.divideStudentsIntoGroups(1)
+    })
+    
+    alertController?.addAction(cancelAction)
+    alertController?.addAction(submitAction)
+    alertController?.addAction(removeGroups)
+    
+    self.presentViewController(alertController!,
+      animated: true,
+      completion: nil)
+    
+    
+  }
+  
+  var numberOfStudentGroups = 1
 
   // Mark: - Divide Into Groups
   
-  func divideStudentsIntoGroups(numberOfGroups: Int) {
+  func divideStudentsIntoGroups(numberOfGroupsToMake: Int) {
     
     var allStudentGroups = Dictionary<Int, Array<TeacherStudent>>()
-    var currentGroupIndex = 0
+    var currentGroupIndex = 1
     
     var shuffledStudents = allTeacherStudents
     
@@ -117,14 +172,16 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         allStudentGroups[currentGroupIndex] = [TeacherStudent]()
       }
       allStudentGroups[currentGroupIndex]!.append(student)
-      if currentGroupIndex < numberOfGroups - 1 {
+      if currentGroupIndex < numberOfGroupsToMake {
         currentGroupIndex++
       } else {
-        currentGroupIndex = 0
+        currentGroupIndex = 1
       }
     }
     
     assignGroupToStudentModels(allStudentGroups)
+    
+    numberOfStudentGroups = numberOfGroupsToMake
     
     
   }
