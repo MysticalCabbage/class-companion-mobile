@@ -18,7 +18,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       listenForStudentSelection()
       listenForStudentGroups()
       
-      
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -106,14 +106,15 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   func showMakeGroupsAlert() {
     var alertController:UIAlertController?
     
-    alertController = UIAlertController(title: "Make Groups",
-      message: "Enter the number of groups below",
+    alertController = UIAlertController(title: "Groups",
+      message: "Enter the number of groups to make below",
       preferredStyle: .Alert)
     
     alertController!.addTextFieldWithConfigurationHandler(
       {(textField: UITextField!) in
         textField.placeholder = "Number of Groups"
         textField.autocapitalizationType = UITextAutocapitalizationType.Words
+        textField.becomeFirstResponder()
     })
     
     let submitAction = UIAlertAction(
@@ -124,8 +125,12 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         if let textFields = alertController?.textFields{
           let theTextFields = textFields as! [UITextField]
           let enteredText = theTextFields[0].text
-          let numberOfGroupsToMake = enteredText.toInt()
-          self!.divideStudentsIntoGroups(numberOfGroupsToMake!)
+          
+          if let numberOfGroupsToMake = enteredText.toInt() {
+            self!.divideStudentsIntoGroups(numberOfGroupsToMake)
+          } else {
+            theTextFields[0].text = ""
+          }
         }
       })
     
