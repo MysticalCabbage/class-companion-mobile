@@ -85,3 +85,7 @@ func assignStudentModelToGroup(studentId: String, groupNumber: String) {
   
 }
 
+func sortTeacherStudentsByGroupNumber () {
+  allTeacherStudents.sort({$0.groupNumber < $1.groupNumber})
+}
+
