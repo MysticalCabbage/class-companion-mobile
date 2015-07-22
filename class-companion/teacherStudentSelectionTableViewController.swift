@@ -313,6 +313,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
           numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupFromServer.toInt()!)
         }
       }
+      sortTeacherStudentsByGroupNumber()
       self.tableView.reloadData()
       
       self.currentNumberOfStudentGroups = numberOfGroupsOnServer

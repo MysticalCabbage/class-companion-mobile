@@ -85,3 +85,16 @@ func assignStudentModelToGroup(studentId: String, groupNumber: String) {
   
 }
 
+func sortTeacherStudentsByGroupNumber () {
+  allTeacherStudents.sort({
+    
+    $0.groupNumber < $1.groupNumber
+//    if let student1Group = $0.groupNumber!.toInt() {
+//      if let student2Group = $1.groupNumber!.toInt() {
+//        return student1Group > student2Group
+//      }
+//    }
+
+})
+}
+
