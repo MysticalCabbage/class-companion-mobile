@@ -63,7 +63,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       
       if let groupNumber =  selectedStudent.groupNumber {
         println("group number is \(groupNumber)")
-        cell.groupNumberLabel.text = "\(groupNumber)"
+        cell.groupNumberLabel.text = "Group \(groupNumber)"
       } else {
         cell.groupNumberLabel.text = ""
       }
