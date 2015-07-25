@@ -169,18 +169,29 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     var currentGroupIndex = 1
     
     var shuffledStudents = allTeacherStudents
-    
+    // randomly shuffle the students so the groups are distributed randomly
     shuffledStudents.shuffle()
     
     for student in shuffledStudents {
+      // set all students to not currently selected to prevent selection from persisting after creating a group
+      student.currentlySelected = false
+      // get the current group index as a string
       let currentGroupIndexString = String(currentGroupIndex)
+      // if the bucket for the current group index in allStudentGroups does not exist
       if allStudentGroups[currentGroupIndexString] == nil {
+        // create an empty bucket at the current group index
         allStudentGroups[currentGroupIndexString] = [TeacherStudent]()
       }
+      // add the current student to the corresponding group index
       allStudentGroups[currentGroupIndexString]!.append(student)
+      // if there are more group indexes
       if currentGroupIndex < numberOfGroupsToMake {
+        // increase the group index counter
         currentGroupIndex++
-      } else {
+      } // else if this is the highest number group index
+      else {
+        // reset the group index to 1
+        // note we reset to 1 instead of 0, so the groups start with "Group 1"
         currentGroupIndex = 1
       }
     }
