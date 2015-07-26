@@ -37,11 +37,26 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username and password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-uI-4Io">
-                                <rect key="frame" x="16" y="323" width="235" height="21"/>
+                                <rect key="frame" x="16" y="323" width="234.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Companion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="8Lw-Ei-qnF">
+                                <rect key="frame" x="139" y="40" width="322" height="47"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="38"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krr-0D-Oke">
+                                <rect key="frame" x="430" y="209" width="154" height="30"/>
+                                <state key="normal" title="Signup for an Account">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signupButton:" destination="21D-YK-RAv" eventType="touchUpInside" id="Ji6-Qn-PTX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -56,12 +71,16 @@
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="Jo5-40-JcC"/>
                             <constraint firstItem="Tsn-uI-4Io" firstAttribute="top" secondItem="Obj-gf-ZdK" secondAttribute="bottom" constant="8" id="L4j-Qe-8Q7"/>
                             <constraint firstItem="Tsn-uI-4Io" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="MUT-fi-EVk"/>
+                            <constraint firstItem="8Lw-Ei-qnF" firstAttribute="top" secondItem="81Q-u2-yBH" secondAttribute="bottom" constant="20" id="Nps-qv-q0M"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="top" secondItem="ZIr-uA-Mm4" secondAttribute="bottom" constant="8" id="V18-Jc-0Ya"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" constant="265" id="bFB-dw-bDz"/>
+                            <constraint firstItem="ZIr-uA-Mm4" firstAttribute="top" secondItem="krr-0D-Oke" secondAttribute="bottom" constant="8" id="chb-Xk-epc"/>
+                            <constraint firstAttribute="centerX" secondItem="8Lw-Ei-qnF" secondAttribute="centerX" id="dwQ-I2-pcL"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="centerX" secondItem="ZIr-uA-Mm4" secondAttribute="centerX" id="ffj-45-eKY"/>
                             <constraint firstAttribute="centerX" secondItem="TKi-7x-TIJ" secondAttribute="centerX" id="ger-KB-nJg"/>
                             <constraint firstItem="ZIr-uA-Mm4" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="lC2-kN-Xlp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TKi-7x-TIJ" secondAttribute="trailing" constant="265" id="ll9-sI-Djs"/>
+                            <constraint firstItem="krr-0D-Oke" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="llz-27-sig"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="top" secondItem="Obj-gf-ZdK" secondAttribute="bottom" constant="8" symbolic="YES" id="mTH-Vf-HHs"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="centerX" secondItem="Obj-gf-ZdK" secondAttribute="centerX" id="rvI-d3-36E"/>
                         </constraints>

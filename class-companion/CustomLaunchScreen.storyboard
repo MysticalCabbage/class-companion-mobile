@@ -16,17 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Launch Screen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-Ip-JTd">
-                                <rect key="frame" x="242" y="289" width="115" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Companion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="WST-mH-hqG">
+                                <rect key="frame" x="139" y="102" width="322" height="47"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="38"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="TgZ-Ip-JTd" secondAttribute="centerY" id="TOc-0p-M3F"/>
-                            <constraint firstAttribute="centerX" secondItem="TgZ-Ip-JTd" secondAttribute="centerX" id="bKX-i6-Npc"/>
+                            <constraint firstAttribute="centerX" secondItem="WST-mH-hqG" secondAttribute="centerX" id="cmj-98-LQ1"/>
+                            <constraint firstItem="WST-mH-hqG" firstAttribute="top" secondItem="a5C-Bn-4gH" secondAttribute="bottom" constant="20" id="ylj-XA-GEa"/>
                         </constraints>
                     </view>
                 </viewController>

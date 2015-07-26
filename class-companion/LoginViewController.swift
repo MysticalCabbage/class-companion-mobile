@@ -77,6 +77,12 @@ class LoginViewController: UIViewController {
   
 //  let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
   
+  @IBAction func signupButton(sender: UIButton) {
+    
+    if let websiteAddress = NSURL(string: "http://class-companion.com") {
+      UIApplication.sharedApplication().openURL(websiteAddress)
+    }
+  }
   
   func createFirebaseTestUser () {
     
