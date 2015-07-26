@@ -37,7 +37,8 @@ class TeacherStudent: Printable {
       self.attendanceStatus = "Present"
     }
     self.currentlySelected = false
-    self.groupNumber = nil
+    // TODO:
+    self.groupNumber = "1"
   }
   
   // when initializing with the snapshot data

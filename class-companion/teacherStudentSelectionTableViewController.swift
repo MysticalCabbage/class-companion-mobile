@@ -63,12 +63,16 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       }
       
       
-      if let groupNumber = selectedStudent.groupNumber where currentNumberOfStudentGroups > 1 {
-        cell.groupNumberLabel.text = "Group \(groupNumber)"
+      if currentNumberOfStudentGroups > 1 {
+        if let groupNumber = selectedStudent.groupNumber {
+          cell.groupNumberLabel.text = "Group \(groupNumber)"
+        } else {
+          cell.groupNumberLabel.text = "Group 1"
+        }
       } else {
         cell.groupNumberLabel.text = ""
       }
-
+  
       return cell
     }
   
@@ -155,7 +159,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     self.presentViewController(alertController!,
       animated: true,
       completion: nil)
-    
     
   }
   
@@ -310,14 +313,11 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     let firebaseGroupsRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
-      .childByAppendingPath("groups/")
     
     firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
-      
-      
       var numberOfGroupsOnServer = 1
-      
-      for studentInfo in snapshot.children.allObjects as! [FDataSnapshot] {
+      var group = snapshot.value["groups"]
+      for studentInfo in snapshot.childSnapshotForPath("groups").children.allObjects as! [FDataSnapshot] {
         let studentIdFromServer = studentInfo.key
         if let studentGroupFromServer = studentInfo.value as? String {
           assignStudentModelToGroup(studentIdFromServer, studentGroupFromServer)
@@ -325,11 +325,8 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         }
       }
       sortTeacherStudentsByGroupNumber()
-      self.tableView.reloadData()
-      
       self.currentNumberOfStudentGroups = numberOfGroupsOnServer
-      
-      
+      self.tableView.reloadData()
 
     })
     
