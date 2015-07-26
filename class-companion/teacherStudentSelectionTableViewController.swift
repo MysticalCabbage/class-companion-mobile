@@ -62,14 +62,20 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         cell.selectionStatusLabel.text = ""
       }
       
-      
+      // if there is currently more than one student group
       if currentNumberOfStudentGroups > 1 {
+        // if the student has a group number
         if let groupNumber = selectedStudent.groupNumber {
+          // display that group number
           cell.groupNumberLabel.text = "Group \(groupNumber)"
-        } else {
+        } // else if the student does not have a group number on the model
+        else {
+          // display group 1
           cell.groupNumberLabel.text = "Group 1"
         }
-      } else {
+      } // else if there is only 1 student group (which means there are no groups)
+      else {
+        // display an empty label
         cell.groupNumberLabel.text = ""
       }
   
@@ -313,19 +319,26 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     let firebaseGroupsRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
-    
+    // observe the current class root for changes
     firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
+      // set the default number of groups to 1
       var numberOfGroupsOnServer = 1
-      var group = snapshot.value["groups"]
+      // for each student in the groups path
       for studentInfo in snapshot.childSnapshotForPath("groups").children.allObjects as! [FDataSnapshot] {
         let studentIdFromServer = studentInfo.key
+        // if the student has a group number
         if let studentGroupFromServer = studentInfo.value as? String {
+          // assign that group to the local student model
           assignStudentModelToGroup(studentIdFromServer, studentGroupFromServer)
+          // if the current group number is the highest seen so far, store it
           numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupFromServer.toInt()!)
         }
       }
+      // rearrange the local array of students to match the groups
       sortTeacherStudentsByGroupNumber()
+      // set the local current number of groups to the highest number of groups found the on the server
       self.currentNumberOfStudentGroups = numberOfGroupsOnServer
+      // reload the table to display the new group data
       self.tableView.reloadData()
 
     })
