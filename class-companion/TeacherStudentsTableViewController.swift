@@ -26,7 +26,6 @@ class TeacherStudentsTableViewController: UITableViewController {
     // refresh the table
     emptyAllTeacherStudentsLocally()  
     getAllStudentsFromServer()
-    
   }
   
 //   func didReceiveMemoryWarning() {
@@ -35,7 +34,7 @@ class TeacherStudentsTableViewController: UITableViewController {
 //  }
   
   func setUpNavBarTitle() {
-    self.title = "\(currentClassName!) Behavior"
+    self.navigationItem.title = "\(currentClassName!) Behavior"
   }
   
   /*

@@ -29,7 +29,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     assignAttendanceToAllStudents()
   }
   override func setUpNavBarTitle() {
-    self.title = "\(currentClassName!) Attendance"
+    self.navigationItem.title = "\(currentClassName!) Attendance"
   }
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

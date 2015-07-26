@@ -27,6 +27,8 @@
 		69AF6E911B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E901B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift */; };
 		69AF6E931B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */; };
 		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
+		69D8DC741B65927800728E9D /* FAIcon.swift in Resources */ = {isa = PBXBuildFile; fileRef = 69D8DC731B65927800728E9D /* FAIcon.swift */; };
+		69D8DC761B65929D00728E9D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69D8DC751B65929D00728E9D /* FontAwesome.ttf */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
 		69F717511B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +69,8 @@
 		69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentAttendanceTableView.swift; sourceTree = "<group>"; };
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		69D8DC731B65927800728E9D /* FAIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FAIcon.swift; path = "class-companion/FontAwesome/FAIcon.swift"; sourceTree = "<group>"; };
+		69D8DC751B65929D00728E9D /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "class-companion/FontAwesome.ttf"; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		8E4731F839F0B2D02C6B9E66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +99,8 @@
 		69480CD01B55E98000F80FAF = {
 			isa = PBXGroup;
 			children = (
+				69D8DC751B65929D00728E9D /* FontAwesome.ttf */,
+				69D8DC731B65927800728E9D /* FAIcon.swift */,
 				69480CDB1B55E98100F80FAF /* class-companion */,
 				69480CF11B55E98100F80FAF /* class-companionTests */,
 				69480CDA1B55E98100F80FAF /* Products */,
@@ -266,6 +272,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D8DC761B65929D00728E9D /* FontAwesome.ttf in Resources */,
+				69D8DC741B65927800728E9D /* FAIcon.swift in Resources */,
 				69480CE41B55E98100F80FAF /* Main.storyboard in Resources */,
 				69480CE91B55E98100F80FAF /* LaunchScreen.xib in Resources */,
 				69480CE61B55E98100F80FAF /* Images.xcassets in Resources */,
