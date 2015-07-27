@@ -12,6 +12,8 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
 
   @IBOutlet weak var dashboardNavigationBar: UINavigationBar!
   
+    var allFirebaseListenerRefs = [Firebase]()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +45,10 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
     return .TopAttached
   }
-  // MARK: - Show Class View
+  
+  override func viewWillDisappear(animated: Bool) {
+    removeAllFirebaseListeners()
+  }
   
   
   
@@ -177,13 +182,17 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
   // MARK: - Firebase Class Retrieval
   
   func getAllClassesFromServer() {
-    let firebaseTeacherClassesRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId).childByAppendingPath("classes/")
+    let firebaseTeacherClassesRef =
+      firebaseTeacherRootRef
+        .childByAppendingPath(currentUserId)
+        .childByAppendingPath("classes/")
+    
+    addFirebaseReferenceToCollection(firebaseTeacherClassesRef)
+    
     firebaseTeacherClassesRef.observeEventType(.Value, withBlock: { snapshot in
       for classFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-//        println("CLASS FROM SERVER IS \(classFromServer)")
         let newTeacherClass = TeacherClass(snap: classFromServer)
         addNewTeacherClass(newTeacherClass)
-//        println(allTeacherClasses)
       }
       // after adding the new classes to the classes array, reload the table
       self.classTableView.reloadData()
@@ -272,39 +281,34 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     
   }
   
-//  func deleteAllClassesFromServer() {
-//    let firebaseUserTeacherRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-//    
-//
-//    
-//    firebaseClassRootRef.removeValue()
-//  }
-  
   
 // MARK: - Firebase Listeners
   
   func setupDeleteListener() {
-    let firebaseTeacherUserRootRef = firebaseTeacherRootRef.childByAppendingPath(currentUserId)
-    let firebaseClassTeacherRef = firebaseTeacherUserRootRef.childByAppendingPath("classes/")
+    let firebaseAllClassesRef =
+      firebaseTeacherRootRef
+        .childByAppendingPath(currentUserId)
+        .childByAppendingPath("classes/")
     
-//    println(firebaseClassTeacherRef)
+    addFirebaseReferenceToCollection(firebaseAllClassesRef)
     
-    firebaseClassTeacherRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+    firebaseAllClassesRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
       println("DELETED \(snapshot.value)")
       emptyAllTeacherClassesLocally()
       self.getAllClassesFromServer()
     })
   }
   
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  func addFirebaseReferenceToCollection(newRef: Firebase) {
+    allFirebaseListenerRefs.append(newRef)
+  }
+  
+  // called on viewWillDisappear to remove every listener
+  func removeAllFirebaseListeners() {
+    for listener in allFirebaseListenerRefs {
+      listener.removeAllObservers()
     }
-    */
-
+    allFirebaseListenerRefs.removeAll()
+  }
   
 }

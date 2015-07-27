@@ -9,7 +9,6 @@
 import UIKit
 
 class teacherStudentSelectionTableViewController: TeacherStudentsTableViewController {
-
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +40,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
 //    }
 
   override func setUpNavBarTitle() {
-    self.title = "\(currentClassName!) Selection"
+    self.navigationItem.title = "\(currentClassName!) Selection"
   }
   
   
@@ -62,13 +61,23 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         cell.selectionStatusLabel.text = ""
       }
       
-      
-      if let groupNumber = selectedStudent.groupNumber where currentNumberOfStudentGroups > 1 {
-        cell.groupNumberLabel.text = "Group \(groupNumber)"
-      } else {
+      // if there is currently more than one student group
+      if currentNumberOfStudentGroups > 1 {
+        // if the student has a group number
+        if let groupNumber = selectedStudent.groupNumber {
+          // display that group number
+          cell.groupNumberLabel.text = "Group \(groupNumber)"
+        } // else if the student does not have a group number on the model
+        else {
+          // display group 1
+          cell.groupNumberLabel.text = "Group 1"
+        }
+      } // else if there is only 1 student group (which means there are no groups)
+      else {
+        // display an empty label
         cell.groupNumberLabel.text = ""
       }
-
+  
       return cell
     }
   
@@ -148,14 +157,14 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         self!.divideStudentsIntoGroups(1)
     })
     
-    alertController?.addAction(cancelAction)
     alertController?.addAction(submitAction)
     alertController?.addAction(removeGroups)
+    alertController?.addAction(cancelAction)
+
     
     self.presentViewController(alertController!,
       animated: true,
       completion: nil)
-    
     
   }
   
@@ -169,18 +178,29 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     var currentGroupIndex = 1
     
     var shuffledStudents = allTeacherStudents
-    
+    // randomly shuffle the students so the groups are distributed randomly
     shuffledStudents.shuffle()
     
     for student in shuffledStudents {
+      // set all students to not currently selected to prevent selection from persisting after creating a group
+      student.currentlySelected = false
+      // get the current group index as a string
       let currentGroupIndexString = String(currentGroupIndex)
+      // if the bucket for the current group index in allStudentGroups does not exist
       if allStudentGroups[currentGroupIndexString] == nil {
+        // create an empty bucket at the current group index
         allStudentGroups[currentGroupIndexString] = [TeacherStudent]()
       }
+      // add the current student to the corresponding group index
       allStudentGroups[currentGroupIndexString]!.append(student)
+      // if there are more group indexes
       if currentGroupIndex < numberOfGroupsToMake {
+        // increase the group index counter
         currentGroupIndex++
-      } else {
+      } // else if this is the highest number group index
+      else {
+        // reset the group index to 1
+        // note we reset to 1 instead of 0, so the groups start with "Group 1"
         currentGroupIndex = 1
       }
     }
@@ -282,6 +302,8 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("selection/")
     
+    addFirebaseReferenceToCollection(firebaseSelectionRef)
+    
     firebaseSelectionRef.observeEventType(.ChildChanged, withBlock: { snapshot in
       
       let serverStudentId = snapshot.value as! String
@@ -299,26 +321,30 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     let firebaseGroupsRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
-      .childByAppendingPath("groups/")
+    // observe the current class root for changes
+    
+    addFirebaseReferenceToCollection(firebaseGroupsRef)
     
     firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
-      
-      
+      // set the default number of groups to 1
       var numberOfGroupsOnServer = 1
-      
-      for studentInfo in snapshot.children.allObjects as! [FDataSnapshot] {
+      // for each student in the groups path
+      for studentInfo in snapshot.childSnapshotForPath("groups").children.allObjects as! [FDataSnapshot] {
         let studentIdFromServer = studentInfo.key
+        // if the student has a group number
         if let studentGroupFromServer = studentInfo.value as? String {
+          // assign that group to the local student model
           assignStudentModelToGroup(studentIdFromServer, studentGroupFromServer)
+          // if the current group number is the highest seen so far, store it
           numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupFromServer.toInt()!)
         }
       }
+      // rearrange the local array of students to match the groups
       sortTeacherStudentsByGroupNumber()
-      self.tableView.reloadData()
-      
+      // set the local current number of groups to the highest number of groups found the on the server
       self.currentNumberOfStudentGroups = numberOfGroupsOnServer
-      
-      
+      // reload the table to display the new group data
+      self.tableView.reloadData()
 
     })
     
@@ -326,51 +352,5 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
 
   
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

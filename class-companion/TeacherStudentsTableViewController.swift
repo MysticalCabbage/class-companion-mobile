@@ -9,6 +9,8 @@
 import UIKit
 
 class TeacherStudentsTableViewController: UITableViewController {
+  
+  var allFirebaseListenerRefs = [Firebase]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,13 +22,12 @@ class TeacherStudentsTableViewController: UITableViewController {
 
     // set up listeners
     setupReloadDataListener()
-    setupDeleteListener()
-    setUpBehaviorListener()
+    
+    setupFirebaseListeners()
     
     // refresh the table
     emptyAllTeacherStudentsLocally()  
     getAllStudentsFromServer()
-    
   }
   
 //   func didReceiveMemoryWarning() {
@@ -35,28 +36,12 @@ class TeacherStudentsTableViewController: UITableViewController {
 //  }
   
   func setUpNavBarTitle() {
-    self.title = "\(currentClassName!) Behavior"
+    self.navigationItem.title = "\(currentClassName!) Behavior"
   }
   
-  /*
-  func setUpRightBarButton() {
-    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
-    
-//    self.navigationItem.rightBarButtonItem = addStudentButton
-//    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
-
+  override func viewWillDisappear(animated: Bool) {
+    removeAllFirebaseListeners()
   }
-  */
-  
-  /*
-  func setUpLeftBarButton() {
-    
-    
-    var backButton : UIBarButtonItem = UIBarButtonItem(title: "Classes", style: UIBarButtonItemStyle.Plain, target: self, action: "returnToDashboardView")
-    self.navigationItem.leftBarButtonItem = backButton
-
-  }
-  */
   
   @IBAction func returnToTeacherDashboard(sender: UIBarButtonItem) {
     var next = self.storyboard?.instantiateViewControllerWithIdentifier("TeacherDashboard") as! TeacherDashboardViewController
@@ -235,6 +220,8 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath(currentClassId)
         .childByAppendingPath("students/")
     
+    addFirebaseReferenceToCollection(firebaseClassStudentRef)
+    
     
     firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
@@ -324,6 +311,11 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   // MARK: - Firebase Listeners
   
+  func setupFirebaseListeners() {
+    setupDeleteListener()
+    setupStudentsChangeListener()
+  }
+  
   func setupDeleteListener() {
 
     let firebaseClassStudentRef =
@@ -331,24 +323,29 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
     
+    addFirebaseReferenceToCollection(firebaseClassStudentRef)
+    
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
   }
   
-  func setUpBehaviorListener() {
+  func setupStudentsChangeListener() {
     // TODO set firebase ref to student behavior
-    let firebaseStudentBehaviorRef =
+    let firebaseStudentsrRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
     
-    firebaseStudentBehaviorRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+    addFirebaseReferenceToCollection(firebaseStudentsrRef)
+    
+    firebaseStudentsrRef.observeEventType(.ChildChanged, withBlock: { snapshot in
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
   }
+  
   
   // MARK: - Reload Table Data Listener
   func setupReloadDataListener() {
@@ -357,12 +354,24 @@ class TeacherStudentsTableViewController: UITableViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
 
   }
+  
+  func addFirebaseReferenceToCollection(newRef: Firebase) {
+    allFirebaseListenerRefs.append(newRef)
+  }
+  
+  // called on viewWillDisappear to remove every listener
+  func removeAllFirebaseListeners() {
+    for listener in allFirebaseListenerRefs {
+      listener.removeAllObservers()
+    }
+  }
 
   
   // MARK: - Reload Table Data
   func reloadTableData(notification: NSNotification) {
     tableView.reloadData()
   }
+  
   /*
   // MARK: - Navigation
   

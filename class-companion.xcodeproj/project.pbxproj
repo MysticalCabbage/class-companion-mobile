@@ -26,6 +26,8 @@
 		698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */; };
 		69AF6E911B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E901B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift */; };
 		69AF6E931B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */; };
+		69BB3D311B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */; };
+		69BB3D331B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB3D321B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift */; };
 		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
 		69F717511B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */; };
@@ -65,6 +67,8 @@
 		698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorCollectionViewCell.swift; sourceTree = "<group>"; };
 		69AF6E901B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentAttendanceTableViewController.swift; sourceTree = "<group>"; };
 		69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentAttendanceTableView.swift; sourceTree = "<group>"; };
+		69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomLaunchScreen.storyboard; sourceTree = "<group>"; };
+		69BB3D321B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLaunchScreenViewController.swift; sourceTree = "<group>"; };
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 			children = (
 				69480CDE1B55E98100F80FAF /* AppDelegate.swift */,
 				69480CE21B55E98100F80FAF /* Main.storyboard */,
+				69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */,
+				69BB3D321B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift */,
 				69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */,
 				690E3B371B5EC3600045A68D /* teacherStudentSelectionTableViewController.swift */,
 				69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */,
@@ -234,6 +240,7 @@
 				TargetAttributes = {
 					69480CD81B55E98100F80FAF = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = V2N4435AS4;
 					};
 					69480CED1B55E98100F80FAF = {
 						CreatedOnToolsVersion = 6.4;
@@ -266,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69480CE41B55E98100F80FAF /* Main.storyboard in Resources */,
+				69BB3D311B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard in Resources */,
 				69480CE91B55E98100F80FAF /* LaunchScreen.xib in Resources */,
 				69480CE61B55E98100F80FAF /* Images.xcassets in Resources */,
 			);
@@ -326,6 +334,7 @@
 				694563221B5DF298002AFB2D /* HelperFunctions.swift in Sources */,
 				69AF6E931B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift in Sources */,
 				69480CDF1B55E98100F80FAF /* AppDelegate.swift in Sources */,
+				69BB3D331B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift in Sources */,
 				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,
 				691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
@@ -465,11 +474,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "class-companion/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "class-companion-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -479,10 +490,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "class-companion/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "class-companion-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

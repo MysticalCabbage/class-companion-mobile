@@ -29,7 +29,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     assignAttendanceToAllStudents()
   }
   override func setUpNavBarTitle() {
-    self.title = "\(currentClassName!) Attendance"
+    self.navigationItem.title = "\(currentClassName!) Attendance"
   }
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -68,6 +68,8 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   }
   
   func assignAttendanceToAllStudents() {
+    
+    removeAllFirebaseListeners()
 
     for student in allTeacherStudents {
       
@@ -76,6 +78,10 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     }
     
     toggleAttendanceStatus = !toggleAttendanceStatus
+    setupFirebaseListeners()
+    emptyAllTeacherStudentsLocally()
+    getAllStudentsFromServer()
+    
 
   }
   
@@ -100,9 +106,9 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   func getNewAttendanceStatus(student: TeacherStudent, togglingAllStudents: Bool) -> String {
     if togglingAllStudents {
       if toggleAttendanceStatus {
-        return "Present"
-      } else {
         return "Absent"
+      } else {
+        return "Present"
       }
     } else {
       if student.attendanceStatus == "Present" {

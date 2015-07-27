@@ -14,10 +14,11 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   
   let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 
+  var allFirebaseListenerRefs = [Firebase]()
 
     override func viewDidLoad() {
       super.viewDidLoad()
-      self.title = "\(currentStudentName!)'s Behavior"
+      self.navigationItem.title = "\(currentStudentName!)'s Behavior"
       
 
         // Uncomment the following line to preserve selection between presentations
@@ -155,6 +156,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       .childByAppendingPath("info/")
       .childByAppendingPath("behavior/")
     
+    addFirebaseReferenceToCollection(firebaseClassBehaviorRef)
+    
     // retrieve all behaviors in ascending order with respect to behavior value
     firebaseClassBehaviorRef.queryOrderedByValue().observeEventType(.Value, withBlock: { snapshot in
       // we reverse the query result to sort the data in descending order by behavior value
@@ -176,41 +179,23 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
   }
   
+  func addFirebaseReferenceToCollection(newRef: Firebase) {
+    allFirebaseListenerRefs.append(newRef)
+  }
+  
+  // called on viewWillDisappear to remove every listener
+  func removeAllFirebaseListeners() {
+    for listener in allFirebaseListenerRefs {
+      listener.removeAllObservers()
+    }
+  }
   
   
   
+  
+  
 
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 
 
 }
