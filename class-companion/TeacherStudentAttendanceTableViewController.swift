@@ -106,9 +106,9 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   func getNewAttendanceStatus(student: TeacherStudent, togglingAllStudents: Bool) -> String {
     if togglingAllStudents {
       if toggleAttendanceStatus {
-        return "Present"
-      } else {
         return "Absent"
+      } else {
+        return "Present"
       }
     } else {
       if student.attendanceStatus == "Present" {
