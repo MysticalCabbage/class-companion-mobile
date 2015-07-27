@@ -9,6 +9,8 @@
 import UIKit
 
 class TeacherStudentsTableViewController: UITableViewController {
+  
+  var allFirebaseListenerRefs = [Firebase]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -234,6 +236,8 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath(currentClassId)
         .childByAppendingPath("students/")
     
+    addFirebaseReferenceToCollection(firebaseClassStudentRef)
+    
     
     firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
@@ -330,6 +334,8 @@ class TeacherStudentsTableViewController: UITableViewController {
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
     
+    addFirebaseReferenceToCollection(firebaseClassStudentRef)
+    
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
@@ -342,6 +348,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
+    
+    addFirebaseReferenceToCollection(firebaseStudentBehaviorRef)
     
     firebaseStudentBehaviorRef.observeEventType(.ChildChanged, withBlock: { snapshot in
       emptyAllTeacherStudentsLocally()
@@ -356,12 +364,24 @@ class TeacherStudentsTableViewController: UITableViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableData:", name: "reload", object: nil)
 
   }
+  
+  func addFirebaseReferenceToCollection(newRef: Firebase) {
+    allFirebaseListenerRefs.append(newRef)
+  }
+  
+  // called on viewWillDisappear to remove every listener
+  func removeAllFirebaseListeners() {
+    for listener in allFirebaseListenerRefs {
+      listener.removeAllObservers()
+    }
+  }
 
   
   // MARK: - Reload Table Data
   func reloadTableData(notification: NSNotification) {
     tableView.reloadData()
   }
+  
   /*
   // MARK: - Navigation
   
