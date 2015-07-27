@@ -308,6 +308,7 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     for listener in allFirebaseListenerRefs {
       listener.removeAllObservers()
     }
+    allFirebaseListenerRefs.removeAll()
   }
   
 }

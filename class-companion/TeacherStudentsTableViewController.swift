@@ -39,25 +39,9 @@ class TeacherStudentsTableViewController: UITableViewController {
     self.navigationItem.title = "\(currentClassName!) Behavior"
   }
   
-  /*
-  func setUpRightBarButton() {
-    var addStudentButton : UIBarButtonItem = UIBarButtonItem(title: "Add Student", style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTeacherStudentAlert")
-    
-//    self.navigationItem.rightBarButtonItem = addStudentButton
-//    self.tabBarController!.navigationItem.rightBarButtonItem = addStudentButton
-
+  override func viewWillDisappear(animated: Bool) {
+    removeAllFirebaseListeners()
   }
-  */
-  
-  /*
-  func setUpLeftBarButton() {
-    
-    
-    var backButton : UIBarButtonItem = UIBarButtonItem(title: "Classes", style: UIBarButtonItemStyle.Plain, target: self, action: "returnToDashboardView")
-    self.navigationItem.leftBarButtonItem = backButton
-
-  }
-  */
   
   @IBAction func returnToTeacherDashboard(sender: UIBarButtonItem) {
     var next = self.storyboard?.instantiateViewControllerWithIdentifier("TeacherDashboard") as! TeacherDashboardViewController
@@ -372,6 +356,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   // called on viewWillDisappear to remove every listener
   func removeAllFirebaseListeners() {
     for listener in allFirebaseListenerRefs {
+      println("removing listener \(listener)")
       listener.removeAllObservers()
     }
   }
