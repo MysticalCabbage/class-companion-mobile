@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="21D-YK-RAv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -306,7 +307,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OrY-n1-zOQ">
-                            <size key="itemSize" width="157" height="150"/>
+                            <size key="itemSize" width="105" height="101"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -316,18 +317,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="157" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="105" height="101"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
-                                            <rect key="frame" x="21" y="65" width="114" height="20"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
+                                            <rect key="frame" x="35" y="76" width="35" height="17"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
-                                            <rect key="frame" x="61" y="105" width="35" height="17"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
+                                            <rect key="frame" x="-5" y="31" width="114" height="20"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -336,11 +337,17 @@
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="nOH-Xv-35A" secondAttribute="centerX" id="AH4-nt-ehP"/>
-                                    <constraint firstAttribute="centerY" secondItem="nOH-Xv-35A" secondAttribute="centerY" id="RSF-gX-8Uy"/>
+                                    <constraint firstAttribute="centerY" secondItem="nOH-Xv-35A" secondAttribute="bottom" id="2dB-TM-8Za"/>
+                                    <constraint firstAttribute="centerX" secondItem="nOH-Xv-35A" secondAttribute="centerX" id="S4d-AJ-bn4"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="fPM-3B-L4a" secondAttribute="trailing" constant="53" id="cMJ-Dw-AnG"/>
-                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="top" secondItem="nOH-Xv-35A" secondAttribute="bottom" constant="20.5" id="rRA-e3-MO9"/>
+                                    <constraint firstAttribute="centerX" secondItem="fPM-3B-L4a" secondAttribute="centerX" id="dPy-d2-NCR"/>
+                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="bottom" secondItem="0Pm-ET-qph" secondAttribute="bottomMargin" id="k4P-9a-0hE"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cMJ-Dw-AnG"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="behaviorNameLabel" destination="nOH-Xv-35A" id="RLN-fR-Cq2"/>
                                     <outlet property="behaviorValueLabel" destination="fPM-3B-L4a" id="RBx-FW-vom"/>
