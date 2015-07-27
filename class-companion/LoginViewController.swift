@@ -14,9 +14,7 @@ class LoginViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-//    handleUserAlreadyLoggedIn()
-//    createFirebaseTestUser()
+
     
   }
   
@@ -41,30 +39,10 @@ class LoginViewController: UIViewController {
         
         checkLoginCredentials(username, password: password)
         
-//        let loginResult = checkLoginCredentials(username, password: password)
-//        if loginResult {
-//          userDefaults.setObject(true, forKey: userIsAuthenticatedConstant)
-//          goToTeacherDashboardView()
-//        } else {
-//          statusLabel.text = "Invalid login credentials"
-//        }
       }
     }
   }
   
-  // DISABLED FOR NOW
-  func handleUserAlreadyLoggedIn (){
-    if let userLoggedIn = userDefaults.stringForKey(userIsAuthenticatedConstant) {
-      if userLoggedIn == "1" {
-        println("Is the user already logged in? \(userLoggedIn)")
-        goToTeacherDashboardView()
-      } else {
-        println("User is not logged in, but they have credentials")
-      }
-    } else {
-      println("User is not logged in")
-    }
-  }
   
   func goToTeacherDashboardView () {
     self.performSegueWithIdentifier("showTeacherDashboard", sender: self)
@@ -74,36 +52,61 @@ class LoginViewController: UIViewController {
   
   // MARK: -Firebase Auth
   
-  
-//  let firebaseRef = Firebase(url: "https://shining-fire-7845.firebaseIO.com")
-  
+  // sends the user to safari to signup for an account
   @IBAction func signupButton(sender: UIButton) {
     
-    if let websiteAddress = NSURL(string: "http://class-companion.com") {
-      UIApplication.sharedApplication().openURL(websiteAddress)
+    if let username = usernameField.text {
+      if let password = passwordField.text {
+        
+        createFirebaseUser(username, password: password)
+        
+      }
     }
   }
   
-  func createFirebaseTestUser () {
-    
-    
-    firebaseRef.createUser("mysticalcabbage@mc.com", password: "password",
-      withValueCompletionBlock: { error, result in
-        if error != nil {
-          println("There was an error creating account\(error)")
+  func createFirebaseUser (username: String, password: String) {
+
+    firebaseRef.createUser(username, password: password,
+      withValueCompletionBlock: { authError, result in
+        if authError != nil {
+          println("There was an error creating account\(authError)")
+          self.handleErrorMessage(authError)
         } else {
-          let uid = result["uid"] as? String
-          println("Successfully created user account with uid: \(uid)")
+          self.checkLoginCredentials(username, password: password)
         }
     })
+  }
+  
+  
+  // handles error messages from the firebase auth server
+  func handleErrorMessage(authError: NSError) {
+    let status = statusLabel
+    
+    if let errorCode = FAuthenticationError(rawValue: authError.code) {
+      switch (errorCode) {
+      case .UserDoesNotExist:
+        status.text = "User does not exist";
+      case .InvalidEmail:
+        status.text = "Invalid email format";
+      case .InvalidPassword:
+        status.text = "Password is incorrect";
+      case .EmailTaken:
+        status.text = "Email is already taken";
+      case .NetworkError:
+        status.text = "Network error, try again";
+      default:
+        status.text = "Login/Signup error, try again";
+      }
+    }
   }
   
   func checkLoginCredentials(username: String, password: String){
 
     firebaseRef.authUser(username, password: password,
-      withCompletionBlock: { error, authData in
-        if authData == nil {
+      withCompletionBlock: { authError, authData in
+        if authError != nil {
           self.statusLabel.text = "Invalid login credentials"
+          self.handleErrorMessage(authError)
         } else {
           let userId = authData.uid
           self.setLoggedInUserId(userId)
