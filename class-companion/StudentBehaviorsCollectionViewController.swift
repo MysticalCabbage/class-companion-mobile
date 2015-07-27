@@ -23,11 +23,12 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-      
+      setupBackgroundTile()
       getAllBehaviorsFromServer()
       
       
     }
+  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -190,12 +191,13 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     }
   }
   
-  
-  
-  
-  
+  func setupBackgroundTile() {
+    let image = UIImage(named: "paper-background")!
+    let scaled = UIImage(CGImage: image.CGImage, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
+    
+    self.view.backgroundColor = UIColor(patternImage: scaled!)
+  }
 
-
-
-
+  
 }
+
