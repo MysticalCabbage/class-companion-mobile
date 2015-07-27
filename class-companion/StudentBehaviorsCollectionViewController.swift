@@ -21,7 +21,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
       setupCellSpacing()
       setupBackgroundTile()
       getAllBehaviorsFromServer()
-      
     }
   
 
@@ -57,7 +56,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     
     cell.behaviorValueLabel.text = behaviorValueString
     
+    // if the value of the behavior is positive
     if (behaviorValue > 0) {
+      // add a "+" to the label before the number
       cell.behaviorValueLabel.text = "+" + behaviorValueString
       cell.behaviorValueLabel.textColor = UIColor.blueColor()
     } else {
@@ -156,7 +157,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     
     // retrieve all behaviors in ascending order with respect to behavior value
     firebaseClassBehaviorRef.queryOrderedByValue().observeSingleEventOfType(.Value, withBlock: { snapshot in
-      // we reverse the query result to sort the data in descending order by behavior value
+      // reverse the query result to sort the data in descending order by behavior value
       for behaviorFromServer in reverse(snapshot.children.allObjects as! [FDataSnapshot]) {
         let newBehavior = Behavior(snap: behaviorFromServer)
         addNewBehavior(newBehavior)
@@ -172,7 +173,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
   // Mark: - Firebase Send New Behavior
   
   func sendNewBehaviorToServer(behaviorName: String, behaviorValue: Int) {
-    
+    // TODO: Implement creating new behaviors
   }
   
   func addFirebaseReferenceToCollection(newRef: Firebase) {
@@ -199,7 +200,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     layout.sectionInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
     layout.minimumInteritemSpacing = 5
     layout.minimumLineSpacing = 10
-    
     self.collectionView!.collectionViewLayout = layout
   }
 
