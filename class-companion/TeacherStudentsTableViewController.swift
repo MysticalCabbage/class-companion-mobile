@@ -22,8 +22,8 @@ class TeacherStudentsTableViewController: UITableViewController {
 
     // set up listeners
     setupReloadDataListener()
-    setupDeleteListener()
-    setUpBehaviorListener()
+    
+    setupFirebaseListeners()
     
     // refresh the table
     emptyAllTeacherStudentsLocally()  
@@ -311,6 +311,11 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   // MARK: - Firebase Listeners
   
+  func setupFirebaseListeners() {
+    setupDeleteListener()
+    setupStudentsChangeListener()
+  }
+  
   func setupDeleteListener() {
 
     let firebaseClassStudentRef =
@@ -326,20 +331,21 @@ class TeacherStudentsTableViewController: UITableViewController {
     })
   }
   
-  func setUpBehaviorListener() {
+  func setupStudentsChangeListener() {
     // TODO set firebase ref to student behavior
-    let firebaseStudentBehaviorRef =
+    let firebaseStudentsrRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
     
-    addFirebaseReferenceToCollection(firebaseStudentBehaviorRef)
+    addFirebaseReferenceToCollection(firebaseStudentsrRef)
     
-    firebaseStudentBehaviorRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+    firebaseStudentsrRef.observeEventType(.ChildChanged, withBlock: { snapshot in
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
   }
+  
   
   // MARK: - Reload Table Data Listener
   func setupReloadDataListener() {

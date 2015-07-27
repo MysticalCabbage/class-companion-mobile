@@ -157,9 +157,10 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
         self!.divideStudentsIntoGroups(1)
     })
     
-    alertController?.addAction(cancelAction)
     alertController?.addAction(submitAction)
     alertController?.addAction(removeGroups)
+    alertController?.addAction(cancelAction)
+
     
     self.presentViewController(alertController!,
       animated: true,
