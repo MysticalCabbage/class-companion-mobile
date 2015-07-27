@@ -10,10 +10,8 @@ import UIKit
 
 let reuseIdentifier = "behaviorActionCell"
 
-class StudentBehaviorsCollectionViewController: UICollectionViewController {
+class StudentBehaviorsCollectionViewController: UICollectionViewController, UICollectionViewDelegate {
   
-  let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-
   var allFirebaseListenerRefs = [Firebase]()
 
     override func viewDidLoad() {
@@ -23,6 +21,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+      setupCellInsets()
       setupBackgroundTile()
       getAllBehaviorsFromServer()
       
@@ -97,6 +96,10 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     updateBehaviorList(behaviorName)
     // TODO: dismiss the modal
     
+  }
+  
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    return CGSize(width: 90, height: 90) // The size of one cell
   }
   
   // MARK: - Firebase Update Behavior Points
@@ -196,6 +199,17 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     let scaled = UIImage(CGImage: image.CGImage, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
     
     self.view.backgroundColor = UIColor(patternImage: scaled!)
+  }
+  
+  
+  
+  func setupCellInsets() {
+    let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    layout.sectionInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
+    layout.minimumInteritemSpacing = 5
+//    layout.minimumLineSpacing = 10
+    
+    self.collectionView!.collectionViewLayout = layout
   }
 
   

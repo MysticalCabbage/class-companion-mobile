@@ -317,17 +317,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="95" height="92"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
-                                            <rect key="frame" x="30" y="67" width="35" height="17"/>
+                                            <rect key="frame" x="58" y="125" width="35" height="17"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
-                                            <rect key="frame" x="14" y="27" width="66" height="20"/>
+                                            <rect key="frame" x="42" y="56" width="66" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -343,6 +343,7 @@
                                     <constraint firstAttribute="centerX" secondItem="fPM-3B-L4a" secondAttribute="centerX" id="dPy-d2-NCR"/>
                                     <constraint firstItem="fPM-3B-L4a" firstAttribute="bottom" secondItem="0Pm-ET-qph" secondAttribute="bottomMargin" id="k4P-9a-0hE"/>
                                 </constraints>
+                                <size key="customSize" width="150" height="150"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="cMJ-Dw-AnG"/>
