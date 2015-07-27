@@ -195,7 +195,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
   }
   
   func setupBackgroundTile() {
-    let image = UIImage(named: "paper-background")!
+    let image = UIImage(named: "handmade-paper.png")!
     let scaled = UIImage(CGImage: image.CGImage, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
     
     self.view.backgroundColor = UIColor(patternImage: scaled!)
