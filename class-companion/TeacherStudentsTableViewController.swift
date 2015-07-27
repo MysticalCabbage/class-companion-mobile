@@ -362,7 +362,6 @@ class TeacherStudentsTableViewController: UITableViewController {
   // called on viewWillDisappear to remove every listener
   func removeAllFirebaseListeners() {
     for listener in allFirebaseListenerRefs {
-      println("removing listener \(listener)")
       listener.removeAllObservers()
     }
   }
