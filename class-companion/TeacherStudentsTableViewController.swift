@@ -30,13 +30,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     getAllStudentsFromServer()
   }
   
-//   func didReceiveMemoryWarning() {
-//    super.didReceiveMemoryWarning()
-//    // Dispose of any resources that can be recreated.
-//  }
   
   func setUpNavBarTitle() {
-//    self.navigationItem.title = "\(currentClassName!) Behavior"
     self.navigationItem.title = "\(currentClassName!)"
 
   }

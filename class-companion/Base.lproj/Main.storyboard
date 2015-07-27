@@ -320,15 +320,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
-                                            <rect key="frame" x="58" y="125" width="35" height="17"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
+                                            <rect key="frame" x="42" y="55" width="66" height="20"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
-                                            <rect key="frame" x="42" y="56" width="66" height="20"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
+                                            <rect key="frame" x="54" y="121" width="44" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -339,9 +339,9 @@
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="nOH-Xv-35A" secondAttribute="bottom" id="2dB-TM-8Za"/>
                                     <constraint firstAttribute="centerX" secondItem="nOH-Xv-35A" secondAttribute="centerX" id="S4d-AJ-bn4"/>
+                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="bottom" secondItem="0Pm-ET-qph" secondAttribute="bottomMargin" id="UHW-ZD-HsD"/>
+                                    <constraint firstAttribute="centerX" secondItem="fPM-3B-L4a" secondAttribute="centerX" id="UJq-io-TrG"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="fPM-3B-L4a" secondAttribute="trailing" constant="53" id="cMJ-Dw-AnG"/>
-                                    <constraint firstAttribute="centerX" secondItem="fPM-3B-L4a" secondAttribute="centerX" id="dPy-d2-NCR"/>
-                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="bottom" secondItem="0Pm-ET-qph" secondAttribute="bottomMargin" id="k4P-9a-0hE"/>
                                 </constraints>
                                 <size key="customSize" width="150" height="150"/>
                                 <variation key="default">

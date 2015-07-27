@@ -18,13 +18,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
       super.viewDidLoad()
       self.navigationItem.title = "\(currentStudentName!)'s Behavior"
       
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-      setupCellInsets()
+      setupCellSpacing()
       setupBackgroundTile()
       getAllBehaviorsFromServer()
-      
       
     }
   
@@ -34,15 +30,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -72,13 +59,17 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     
     if (behaviorValue > 0) {
       cell.behaviorValueLabel.text = "+" + behaviorValueString
-      cell.behaviorValueLabel.textColor = UIColor.greenColor()
+      cell.behaviorValueLabel.textColor = UIColor.blueColor()
     } else {
       cell.behaviorValueLabel.textColor = UIColor.redColor()
 
     }
     
     return cell
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    removeAllFirebaseListeners()
   }
   
   
@@ -94,8 +85,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     updateBehaviorPoints(behaviorPoints)
     
     updateBehaviorList(behaviorName)
-    // TODO: dismiss the modal
     
+    // dismiss the modal
+    self.dismissViewControllerAnimated(true, completion: {});
   }
   
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -163,7 +155,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     addFirebaseReferenceToCollection(firebaseClassBehaviorRef)
     
     // retrieve all behaviors in ascending order with respect to behavior value
-    firebaseClassBehaviorRef.queryOrderedByValue().observeEventType(.Value, withBlock: { snapshot in
+    firebaseClassBehaviorRef.queryOrderedByValue().observeSingleEventOfType(.Value, withBlock: { snapshot in
       // we reverse the query result to sort the data in descending order by behavior value
       for behaviorFromServer in reverse(snapshot.children.allObjects as! [FDataSnapshot]) {
         let newBehavior = Behavior(snap: behaviorFromServer)
@@ -194,20 +186,19 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     }
   }
   
+  // Mark: - Layout
+  
   func setupBackgroundTile() {
     let image = UIImage(named: "handmade-paper.png")!
     let scaled = UIImage(CGImage: image.CGImage, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
-    
     self.view.backgroundColor = UIColor(patternImage: scaled!)
   }
   
-  
-  
-  func setupCellInsets() {
+  func setupCellSpacing() {
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     layout.sectionInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
     layout.minimumInteritemSpacing = 5
-//    layout.minimumLineSpacing = 10
+    layout.minimumLineSpacing = 10
     
     self.collectionView!.collectionViewLayout = layout
   }
