@@ -40,7 +40,9 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
 //    }
 
   override func setUpNavBarTitle() {
-    self.navigationItem.title = "\(currentClassName!) Selection"
+//    self.navigationItem.title = "\(currentClassName!) Selection"
+    self.navigationItem.title = "\(currentClassName!)"
+
   }
   
   

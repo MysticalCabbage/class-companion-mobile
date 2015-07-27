@@ -36,7 +36,9 @@ class TeacherStudentsTableViewController: UITableViewController {
 //  }
   
   func setUpNavBarTitle() {
-    self.navigationItem.title = "\(currentClassName!) Behavior"
+//    self.navigationItem.title = "\(currentClassName!) Behavior"
+    self.navigationItem.title = "\(currentClassName!)"
+
   }
   
   override func viewWillDisappear(animated: Bool) {
