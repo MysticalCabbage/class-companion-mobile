@@ -14,6 +14,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   
   let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 
+  var allFirebaseListenerRefs = [Firebase]()
 
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -155,6 +156,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
       .childByAppendingPath("info/")
       .childByAppendingPath("behavior/")
     
+    addFirebaseReferenceToCollection(firebaseClassBehaviorRef)
+    
     // retrieve all behaviors in ascending order with respect to behavior value
     firebaseClassBehaviorRef.queryOrderedByValue().observeEventType(.Value, withBlock: { snapshot in
       // we reverse the query result to sort the data in descending order by behavior value
@@ -175,6 +178,18 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   func sendNewBehaviorToServer(behaviorName: String, behaviorValue: Int) {
     
   }
+  
+  func addFirebaseReferenceToCollection(newRef: Firebase) {
+    allFirebaseListenerRefs.append(newRef)
+  }
+  
+  // called on viewWillDisappear to remove every listener
+  func removeAllFirebaseListeners() {
+    for listener in allFirebaseListenerRefs {
+      listener.removeAllObservers()
+    }
+  }
+  
   
   
   
