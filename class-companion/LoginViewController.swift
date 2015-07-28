@@ -9,13 +9,14 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
   
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    
+    self.passwordField.delegate = self
+    self.usernameField.delegate  = self
   }
   
 
@@ -29,8 +30,15 @@ class LoginViewController: UIViewController {
   
   @IBOutlet weak var statusLabel: UILabel!
   
-  @IBAction func logoutButton(sender: UIBarButtonItem) {
-    userDefaults.setObject(false, forKey: userIsAuthenticatedConstant)
+  func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
+  {
+    textField.resignFirstResponder()
+    return true;
+  }
+  
+  override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    self.view.endEditing(true)
+//    println("touched") // Nothing is printed when I touch anyhting in the scrollview
   }
   
   @IBAction func loginButton() {
