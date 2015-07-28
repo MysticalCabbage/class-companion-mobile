@@ -18,20 +18,24 @@ class TeacherStudentsTableViewController: UITableViewController {
     // set up the navigation bar itle
     setUpNavBarTitle()
     
-    // set up listeners
-    setupReloadDataListener()
     
-    setupFirebaseListeners()
-    
-    // refresh the table
-    emptyAllTeacherStudentsLocally()  
-    getAllStudentsFromServer()
   }
   
   
   func setUpNavBarTitle() {
     self.navigationItem.title = "\(currentClassName!)"
 
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    // set up listeners
+    setupReloadDataListener()
+    
+    setupFirebaseListeners()
+    
+    // refresh the table
+    emptyAllTeacherStudentsLocally()
+    getAllStudentsFromServer()
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -217,9 +221,9 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseClassStudentRef)
     
     
-    firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
+    firebaseClassStudentRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+      println("GETTING ALL STUDENTS FROM SERER")
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-//        println("STUDENT FROM SERVER IS \(studentFromServer)")
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
         addNewTeacherStudent(newTeacherStudent)
       }
@@ -331,6 +335,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseClassStudentRef)
     
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+      println("STUDENT REMOVED, UPDATING")
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
@@ -346,6 +351,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseStudentsrRef)
     
     firebaseStudentsrRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+      println("STUDENT CHANGED, UPDATING")
       emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
