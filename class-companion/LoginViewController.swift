@@ -30,23 +30,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
   
   @IBOutlet weak var statusLabel: UILabel!
   
-  func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
-  {
+  // when pressing enter on a keyboard
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    // hide the keyboard
     textField.resignFirstResponder()
+    // try and log in with the current username/password field
     loginButton()
     return true;
   }
-  
+  // when a user touches on the screen
   override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    // dismiss the keyboard
     self.view.endEditing(true)
   }
   
   @IBAction func loginButton() {
     if let username = usernameField.text {
       if let password = passwordField.text {
-        
         checkLoginCredentials(username, password: password)
-        
       }
     }
   }
@@ -66,15 +67,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     if let webAppUrl = NSURL(string: "http://class-companion.com") {
       UIApplication.sharedApplication().openURL(webAppUrl)
     }
-    
-//  Disabled in-app signup due to missing fields for title, firstname, lastname, etc.
-//    if let username = usernameField.text {
-//      if let password = passwordField.text {
-//        
-//        createFirebaseUser(username, password: password)
-//        
-//      }
-//    }
+  /*
+  Disabled in-app signup due to missing fields for title, firstname, lastname, etc.
+    if let username = usernameField.text {
+      if let password = passwordField.text {
+        
+        createFirebaseUser(username, password: password)
+        
+      }
+    }
+  */
   }
   // This feature is not currently being used due to lack of
   // dedicated signup page to handle all user account fields

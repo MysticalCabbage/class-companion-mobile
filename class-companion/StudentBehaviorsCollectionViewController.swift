@@ -95,6 +95,68 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     return CGSize(width: 90, height: 90) // The size of one cell
   }
   
+  @IBAction func addBehaviorButton(sender: UIBarButtonItem) {
+    addBehaviorAlert()
+  }
+  // MARK: - Add Behavior
+  
+  func addBehaviorAlert() {
+    var alertController:UIAlertController?
+    
+    alertController = UIAlertController(title: "Behavior",
+      message: "Enter the behavior to make below",
+      preferredStyle: .Alert)
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(nameTextField: UITextField!) in
+        nameTextField.placeholder = "Behavior Name"
+        nameTextField.autocapitalizationType = UITextAutocapitalizationType.Words
+        nameTextField.becomeFirstResponder()
+    })
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(valueTextField: UITextField!) in
+        valueTextField.placeholder = "value ex) 4 ex) -2"
+        valueTextField.becomeFirstResponder()
+    })
+    
+    let submitAction = UIAlertAction(
+      title: "Make Behavior",
+      style: UIAlertActionStyle.Default,
+      handler: {[weak self]
+        (paramAction:UIAlertAction!) in
+        if let textFields = alertController?.textFields{
+          let theTextFields = textFields as! [UITextField]
+          let behaviorName = theTextFields[0].text
+          let behaviorValue = theTextFields[1].text
+          if let behaviorValueInt = behaviorValue.toInt() {
+            self!.sendBehaviorToServer(behaviorName, newBehaviorValue: behaviorValueInt)
+          } else {
+            theTextFields[1].text = ""
+          }
+        }
+      })
+    
+    let cancelAction = UIAlertAction(
+      title: "Cancel",
+      style: UIAlertActionStyle.Cancel,
+      handler: nil
+    )
+
+    
+    alertController?.addAction(submitAction)
+    alertController?.addAction(cancelAction)
+    
+    
+    self.presentViewController(alertController!,
+      animated: true,
+      completion: nil)
+  }
+  
+  func sendBehaviorToServer(newBehaviorName: String, newBehaviorValue: Int) {
+    println("new behavior name \(newBehaviorName) value \(newBehaviorValue)")
+  }
+  
   // MARK: - Firebase Update Behavior Points
   
   func updateBehaviorPoints(behaviorValueToAddOrSubtract: Int) {
