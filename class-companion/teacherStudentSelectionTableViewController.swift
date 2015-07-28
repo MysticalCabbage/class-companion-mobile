@@ -179,7 +179,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   func divideStudentsIntoGroups(numberOfGroupsToMake: Int) {
     
-    var allStudentGroups = Dictionary<String, Array<TeacherStudent>>()
+    var allStudentGroups = Dictionary<Int, Array<TeacherStudent>>()
     var currentGroupIndex = 1
     
     var shuffledStudents = allTeacherStudents
@@ -190,14 +190,14 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       // set all students to not currently selected to prevent selection from persisting after creating a group
       student.currentlySelected = false
       // get the current group index as a string
-      let currentGroupIndexString = String(currentGroupIndex)
+//      let currentGroupIndexString = String(currentGroupIndex)
       // if the bucket for the current group index in allStudentGroups does not exist
-      if allStudentGroups[currentGroupIndexString] == nil {
+      if allStudentGroups[currentGroupIndex] == nil {
         // create an empty bucket at the current group index
-        allStudentGroups[currentGroupIndexString] = [TeacherStudent]()
+        allStudentGroups[currentGroupIndex] = [TeacherStudent]()
       }
       // add the current student to the corresponding group index
-      allStudentGroups[currentGroupIndexString]!.append(student)
+      allStudentGroups[currentGroupIndex]!.append(student)
       // if there are more group indexes
       if currentGroupIndex < numberOfGroupsToMake {
         // increase the group index counter
@@ -217,7 +217,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     sendGroupsInfo(allStudentGroups)
   }
   
-  func assignGroupToStudentModels(groupedStudentsArray: Dictionary<String, Array<TeacherStudent>>) {
+  func assignGroupToStudentModels(groupedStudentsArray: Dictionary<Int, Array<TeacherStudent>>) {
     
     for (group, students) in groupedStudentsArray {
       for student in students {
@@ -281,17 +281,19 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
   
   // MARK: - Firebase Send Group Info
   
-  func sendGroupsInfo(allStudentGroups: Dictionary<String, Array<TeacherStudent>>) {
+  func sendGroupsInfo(allStudentGroups: Dictionary<Int, Array<TeacherStudent>>) {
     let firebaseGroupRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("groups/")
 
-    var studentIdsAndGroups = [String: String]()
+    var studentIdsAndGroups = [String: Int]()
     
     for (group, studentList) in allStudentGroups {
       for student in studentList {
-        studentIdsAndGroups[student.studentId] = student.groupNumber
+        if let groupNumber = student.groupNumber {
+          studentIdsAndGroups[student.studentId] = groupNumber
+        }
       }
     }
     
@@ -326,28 +328,31 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     let firebaseGroupsRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
-    // observe the current class root for changes
+      .childByAppendingPath("groups")
+    // observe the current class group root for changes
     
     addFirebaseReferenceToCollection(firebaseGroupsRef)
     
     firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
+      println("LOADING GROUPS FROM SERVER")
       // set the default number of groups to 1
       var numberOfGroupsOnServer = 1
       // for each student in the groups path
-      for studentInfo in snapshot.childSnapshotForPath("groups").children.allObjects as! [FDataSnapshot] {
+      for studentInfo in snapshot.children.allObjects as! [FDataSnapshot] {
         let studentIdFromServer = studentInfo.key
         // if the student has a group number
-        if let studentGroupNumberFromServer = studentInfo.value as? String {
+        if let studentGroupNumberFromServer = studentInfo.value as? Int {
           // assign that group to the local student model
           assignStudentModelToGroup(studentIdFromServer, studentGroupNumberFromServer)
           // if the current group number is the highest seen so far, store it
-          numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupNumberFromServer.toInt()!)
+          numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupNumberFromServer)
         }
       }
       // rearrange the local array of students to match the groups
       sortTeacherStudentsByGroupNumber()
       // set the local current number of groups to the highest number of groups found the on the server
       self.currentNumberOfStudentGroups = numberOfGroupsOnServer
+      println("number of groups on server \(self.currentNumberOfStudentGroups)")
       // reload the table to display the new group data
       self.tableView.reloadData()
 

@@ -305,7 +305,7 @@ class TeacherStudentsTableViewController: UITableViewController {
       firebaseClassStudentAttendanceRef.setValue("Present")
       
       // by default, set the student group to 1
-      firebaseClassGroupsRef.setValue("1")
+      firebaseClassGroupsRef.setValue(1)
       
       setupFirebaseListeners()
       getAllStudentsFromServer()
@@ -393,7 +393,6 @@ class TeacherStudentsTableViewController: UITableViewController {
       listener.removeAllObservers()
     }
     allFirebaseListenerRefs.removeAll()
-    println(allFirebaseListenerRefs)
   }
 
   
