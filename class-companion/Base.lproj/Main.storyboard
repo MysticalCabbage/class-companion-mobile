@@ -37,12 +37,6 @@
                                     <action selector="loginButton" destination="21D-YK-RAv" eventType="touchUpInside" id="56m-Sd-sNf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username and password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-uI-4Io">
-                                <rect key="frame" x="16" y="323" width="235" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krr-0D-Oke">
                                 <rect key="frame" x="430" y="209" width="154" height="30"/>
                                 <state key="normal" title="Signup for an Account">
@@ -58,9 +52,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username and password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-uI-4Io">
+                                <rect key="frame" x="16" y="327" width="235" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="0QJ-bU-IHc"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leading" constant="277" id="27C-0Y-vAX"/>
                             <constraint firstItem="ZIr-uA-Mm4" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="690-VC-cQy"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="6pS-JD-dRe"/>
@@ -69,9 +70,8 @@
                             <constraint firstItem="ZIr-uA-Mm4" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="Af9-TA-5QZ"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="DHr-PK-Cb8"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="centerY" secondItem="HWy-Kl-I0t" secondAttribute="centerY" id="HMm-sf-ha6"/>
+                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="baseline" secondItem="TKi-7x-TIJ" secondAttribute="baseline" id="J0r-HQ-eEZ"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="Jo5-40-JcC"/>
-                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="top" secondItem="Obj-gf-ZdK" secondAttribute="bottom" constant="8" id="L4j-Qe-8Q7"/>
-                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="MUT-fi-EVk"/>
                             <constraint firstItem="8Lw-Ei-qnF" firstAttribute="top" secondItem="81Q-u2-yBH" secondAttribute="bottom" constant="20" id="Nps-qv-q0M"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="top" secondItem="ZIr-uA-Mm4" secondAttribute="bottom" constant="8" id="V18-Jc-0Ya"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" constant="265" id="bFB-dw-bDz"/>

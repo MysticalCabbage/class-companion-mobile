@@ -33,12 +33,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
   {
     textField.resignFirstResponder()
+    loginButton()
     return true;
   }
   
   override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
     self.view.endEditing(true)
-//    println("touched") // Nothing is printed when I touch anyhting in the scrollview
   }
   
   @IBAction func loginButton() {
