@@ -95,11 +95,10 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     return CGSize(width: 90, height: 90) // The size of one cell
   }
   
-  @IBAction func addBehaviorButton(sender: UIBarButtonItem) {
-    addBehaviorAlert()
-  }
-  // MARK: - Add Behavior
   
+  // MARK: - Add Behavior
+  // TODO: Finish implemeneting sending behaviors to the server
+  // currently it sends the values correctly to the sending function
   func addBehaviorAlert() {
     var alertController:UIAlertController?
     
@@ -130,7 +129,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
           let behaviorName = theTextFields[0].text
           let behaviorValue = theTextFields[1].text
           if let behaviorValueInt = behaviorValue.toInt() {
-            self!.sendBehaviorToServer(behaviorName, newBehaviorValue: behaviorValueInt)
+            self!.sendNewBehaviorToServer(behaviorName, behaviorValue: behaviorValueInt)
           } else {
             theTextFields[1].text = ""
           }
@@ -152,10 +151,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
       animated: true,
       completion: nil)
   }
-  
-  func sendBehaviorToServer(newBehaviorName: String, newBehaviorValue: Int) {
-    println("new behavior name \(newBehaviorName) value \(newBehaviorValue)")
-  }
+
   
   // MARK: - Firebase Update Behavior Points
   
@@ -236,6 +232,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
   
   func sendNewBehaviorToServer(behaviorName: String, behaviorValue: Int) {
     // TODO: Implement creating new behaviors
+    
+    
+    
   }
   
   func addFirebaseReferenceToCollection(newRef: Firebase) {

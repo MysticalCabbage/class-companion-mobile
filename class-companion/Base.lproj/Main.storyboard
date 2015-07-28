@@ -361,14 +361,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Assign a student behavior" id="Gdr-iw-k5s">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wv3-mt-Bb3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="wv3-mt-Bb3">
                             <connections>
                                 <action selector="cancelAssignBehavior:" destination="YcX-yM-aiM" id="TX2-Dv-L7I"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add Behavior" id="mAJ-ei-3lY">
-                            <connections>
-                                <action selector="addBehaviorButton:" destination="YcX-yM-aiM" id="pUL-2l-DJi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
