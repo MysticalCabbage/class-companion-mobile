@@ -53,6 +53,9 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
 
       let currentRow = indexPath.row
       
+//      println("TRYING TO GET selection STUDENT AT ROW \(currentRow)")
+
+      
       let selectedStudent = allTeacherStudents[currentRow]
       
       cell.studentNameLabel.text = selectedStudent.studentTitle

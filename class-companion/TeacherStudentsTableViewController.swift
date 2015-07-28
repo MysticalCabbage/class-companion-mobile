@@ -18,7 +18,16 @@ class TeacherStudentsTableViewController: UITableViewController {
     // set up the navigation bar itle
     setUpNavBarTitle()
     
+    removeAllFirebaseListeners()
     
+    // refresh the table
+    getAllStudentsFromServer()
+    
+    // set up listeners
+    setupFirebaseListeners()
+    setupReloadDataListener()
+    println("view is appearing")
+
   }
   
   
@@ -28,19 +37,13 @@ class TeacherStudentsTableViewController: UITableViewController {
   }
   
   override func viewWillAppear(animated: Bool) {
-    // set up listeners
-    setupReloadDataListener()
+    super.viewWillAppear(true)
     
-    setupFirebaseListeners()
     
-    // refresh the table
-    emptyAllTeacherStudentsLocally()
-    getAllStudentsFromServer()
+ 
+    
   }
   
-  override func viewWillDisappear(animated: Bool) {
-    removeAllFirebaseListeners()
-  }
   
   @IBAction func returnToTeacherDashboard(sender: UIBarButtonItem) {
     var next = self.storyboard?.instantiateViewControllerWithIdentifier("TeacherDashboard") as! TeacherDashboardViewController
@@ -114,7 +117,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     let cell = self.tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
     
     let row = indexPath.row
-    
+//    println("TRYING TO GET behavior STUDENT AT ROW \(row)")
     cell.textLabel?.text = allTeacherStudents[row].studentTitle
     cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal)
     
@@ -213,6 +216,11 @@ class TeacherStudentsTableViewController: UITableViewController {
   // MARK: - Firebase Student Retrieval
   
   func getAllStudentsFromServer() {
+    
+    emptyAllTeacherStudentsLocally()
+    
+    removeAllFirebaseListeners()
+    
     let firebaseClassStudentRef =
       firebaseClassRootRef
         .childByAppendingPath(currentClassId)
@@ -222,13 +230,17 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     
     firebaseClassStudentRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-      println("GETTING ALL STUDENTS FROM SERER")
+      println("GETTING ALL STUDENTS FROM SERVER")
+      
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
         addNewTeacherStudent(newTeacherStudent)
       }
+      
       // after adding the new classes to the classes array, reload the table
       NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+      
+      self.setupFirebaseListeners()
       
       }, withCancelBlock: { error in
         println(error.description)
@@ -336,23 +348,24 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
       println("STUDENT REMOVED, UPDATING")
-      emptyAllTeacherStudentsLocally()
       self.getAllStudentsFromServer()
     })
   }
   
   func setupStudentsChangeListener() {
     // TODO set firebase ref to student behavior
-    let firebaseStudentsrRef =
+    let firebaseStudentsRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
     
-    addFirebaseReferenceToCollection(firebaseStudentsrRef)
+    addFirebaseReferenceToCollection(firebaseStudentsRef)
     
-    firebaseStudentsrRef.observeEventType(.ChildChanged, withBlock: { snapshot in
-      println("STUDENT CHANGED, UPDATING")
-      emptyAllTeacherStudentsLocally()
+    firebaseStudentsRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+      let studentData: AnyObject! = snapshot.value
+      let studentName = studentData["studentTitle"]
+      println("STUDENT CHANGED, UPDATING \(studentName)")
+
       self.getAllStudentsFromServer()
     })
   }
@@ -375,6 +388,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     for listener in allFirebaseListenerRefs {
       listener.removeAllObservers()
     }
+    allFirebaseListenerRefs.removeAll()
+    println(allFirebaseListenerRefs)
   }
 
   

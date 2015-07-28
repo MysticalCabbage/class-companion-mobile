@@ -21,7 +21,6 @@ func getCurrentDateInString() -> String {
 
 func getRandomIndex(fromArray: [AnyObject]) -> Int {
   let randomIndex = Int(arc4random_uniform(UInt32(fromArray.count)))
-  
   return randomIndex
 }
 

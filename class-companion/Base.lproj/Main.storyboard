@@ -401,8 +401,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="OU7-Ji-eWd" kind="relationship" relationship="viewControllers" id="3YG-qA-A2T"/>
                         <segue destination="G6i-Vy-LL7" kind="relationship" relationship="viewControllers" id="j36-cJ-wQ2"/>
+                        <segue destination="OU7-Ji-eWd" kind="relationship" relationship="viewControllers" id="3YG-qA-A2T"/>
                         <segue destination="lRS-MW-WVJ" kind="relationship" relationship="viewControllers" id="OLu-Pe-X9U"/>
                     </connections>
                 </tabBarController>

@@ -40,6 +40,8 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     let row = indexPath.row
     
+//    println("TRYING TO GET attendance STUDENT AT ROW \(row)")
+
     let studentTitle = allTeacherStudents[row].studentTitle
     let attendanceStatus = allTeacherStudents[row].attendanceStatus
     
@@ -65,7 +67,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     let row = indexPath.row
     let selectedStudent = allTeacherStudents[row]
     
-    assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false)
+    assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false, cameFromServer: false)
     
   }
   
@@ -75,19 +77,18 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
 
     for student in allTeacherStudents {
       
-      assignAttendanceToOneStudent(student, togglingAllStudents: true)
+      assignAttendanceToOneStudent(student, togglingAllStudents: true, cameFromServer: false)
       
     }
     
     toggleAttendanceStatus = !toggleAttendanceStatus
     setupFirebaseListeners()
-    emptyAllTeacherStudentsLocally()
     getAllStudentsFromServer()
     
 
   }
   
-  func assignAttendanceToOneStudent(student: TeacherStudent, togglingAllStudents: Bool) {
+  func assignAttendanceToOneStudent(student: TeacherStudent, togglingAllStudents: Bool, cameFromServer: Bool) {
     
     let newAttendanceStatus = getNewAttendanceStatus(student, togglingAllStudents: togglingAllStudents)
 
@@ -101,7 +102,9 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
       .childByAppendingPath("attendance/")
       .childByAppendingPath(currentDate)
     
-    firebaseClassStudentAttendanceRef.setValue(newAttendanceStatus)
+    if (!cameFromServer) {
+      firebaseClassStudentAttendanceRef.setValue(newAttendanceStatus)
+    }
     
   }
   
