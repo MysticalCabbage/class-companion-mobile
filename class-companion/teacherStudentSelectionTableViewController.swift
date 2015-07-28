@@ -334,11 +334,11 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       for studentInfo in snapshot.childSnapshotForPath("groups").children.allObjects as! [FDataSnapshot] {
         let studentIdFromServer = studentInfo.key
         // if the student has a group number
-        if let studentGroupFromServer = studentInfo.value as? String {
+        if let studentGroupNumberFromServer = studentInfo.value as? String {
           // assign that group to the local student model
-          assignStudentModelToGroup(studentIdFromServer, studentGroupFromServer)
+          assignStudentModelToGroup(studentIdFromServer, studentGroupNumberFromServer)
           // if the current group number is the highest seen so far, store it
-          numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupFromServer.toInt()!)
+          numberOfGroupsOnServer = max(numberOfGroupsOnServer, studentGroupNumberFromServer.toInt()!)
         }
       }
       // rearrange the local array of students to match the groups

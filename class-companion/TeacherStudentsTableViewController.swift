@@ -15,11 +15,9 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // set up the navigation bar
+    // set up the navigation bar itle
     setUpNavBarTitle()
-//    setUpRightBarButton()
-//    setUpLeftBarButton()
-
+    
     // set up listeners
     setupReloadDataListener()
     
@@ -51,7 +49,6 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   
   // MARK: - Add / Delete Class Alerts
-  // ADD CLASS ALERT
   @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
     var alertController:UIAlertController?
     
@@ -252,6 +249,8 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath("students/")
         .childByAutoId()
       
+      let studentKey = firebaseClassStudentRef.key
+      
       let firebaseClassStudentBehaviorRef =
         firebaseClassStudentRef
         .childByAppendingPath("behavior/")
@@ -260,6 +259,12 @@ class TeacherStudentsTableViewController: UITableViewController {
         firebaseClassStudentRef
         .childByAppendingPath("attendance/")
         .childByAppendingPath(currentDate)
+      
+      let firebaseClassGroupsRef =
+      firebaseClassRootRef
+        .childByAppendingPath(currentClassId)
+        .childByAppendingPath("groups/")
+        .childByAppendingPath(studentKey)
       
       let studentInfoForClassRoot =
       [
@@ -281,6 +286,9 @@ class TeacherStudentsTableViewController: UITableViewController {
       
       // by default, set the student attendance to "Present" for today
       firebaseClassStudentAttendanceRef.setValue("Present")
+      
+      // by default, set the student group to 1
+      firebaseClassGroupsRef.setValue("1")
       
     }
     else {
