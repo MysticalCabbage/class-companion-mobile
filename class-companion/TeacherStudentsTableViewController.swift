@@ -26,7 +26,6 @@ class TeacherStudentsTableViewController: UITableViewController {
     // set up listeners
     setupFirebaseListeners()
     setupReloadDataListener()
-    println("view is appearing")
 
   }
   
@@ -55,7 +54,7 @@ class TeacherStudentsTableViewController: UITableViewController {
 
   
   
-  // MARK: - Add / Delete Class Alerts
+  // MARK: - Add / Delete Student Alerts
   @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
     var alertController:UIAlertController?
     
@@ -79,7 +78,7 @@ class TeacherStudentsTableViewController: UITableViewController {
           let enteredText = theTextFields[0].text
           let newstudentName = enteredText
           self!.sendStudentToServer(newstudentName)
-          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+//          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
 
         }
       })
@@ -255,6 +254,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       
+      removeAllFirebaseListeners()
+      
       let currentDate = getCurrentDateInString()
 
       // prepare data to send to teacher section of database
@@ -305,6 +306,9 @@ class TeacherStudentsTableViewController: UITableViewController {
       
       // by default, set the student group to 1
       firebaseClassGroupsRef.setValue("1")
+      
+      setupFirebaseListeners()
+      getAllStudentsFromServer()
       
     }
     else {
