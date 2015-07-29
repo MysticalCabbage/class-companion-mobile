@@ -118,7 +118,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     let row = indexPath.row
 //    println("TRYING TO GET behavior STUDENT AT ROW \(row)")
     cell.textLabel?.text = allTeacherStudents[row].studentTitle
-    cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal)
+    cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal) + " points"
     
     
     return cell
