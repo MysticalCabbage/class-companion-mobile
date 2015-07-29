@@ -61,9 +61,13 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   }
   
 
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {    
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let row = indexPath.row
+    // if we have a race condition where we are trying to select a row that
+    // doesn't exist in the allTeacherstudents array
+    // Note: this happens when very rapidly changing attendance with many students
     if row > allTeacherStudents.count {
+      // eject from the function and do not select anything
       return
     }
     let selectedStudent = allTeacherStudents[row]
