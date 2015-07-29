@@ -18,7 +18,7 @@ class BehaviorCollectionViewCell: UICollectionViewCell {
   }
   
   func setupBackgroundTile() {
-    self.layer.borderWidth = 2
+    self.layer.borderWidth = 1
     self.layer.borderColor = UIColor.blackColor().CGColor
   }
 

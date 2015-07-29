@@ -72,7 +72,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     }
     let selectedStudent = allTeacherStudents[row]
     
-    assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false, cameFromServer: false)
+    assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false)
     
   }
   
@@ -82,7 +82,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
 
     for student in allTeacherStudents {
       
-      assignAttendanceToOneStudent(student, togglingAllStudents: true, cameFromServer: false)
+      assignAttendanceToOneStudent(student, togglingAllStudents: true)
       
     }
     
@@ -93,7 +93,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
 
   }
   
-  func assignAttendanceToOneStudent(student: TeacherStudent, togglingAllStudents: Bool, cameFromServer: Bool) {
+  func assignAttendanceToOneStudent(student: TeacherStudent, togglingAllStudents: Bool) {
     
     let newAttendanceStatus = getNewAttendanceStatus(student, togglingAllStudents: togglingAllStudents)
 
@@ -107,9 +107,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
       .childByAppendingPath("attendance/")
       .childByAppendingPath(currentDate)
     
-    if (!cameFromServer) {
-      firebaseClassStudentAttendanceRef.setValue(newAttendanceStatus)
-    }
+    firebaseClassStudentAttendanceRef.setValue(newAttendanceStatus)
     
   }
   
