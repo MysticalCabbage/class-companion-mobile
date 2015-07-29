@@ -301,6 +301,17 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
 
   }
   
+  // MARK: - Firebase Set Up Unique Group/Selection Listeners
+  
+  override func setupFirebaseListeners() {
+    super.setupFirebaseListeners()
+    setupFirebaseGroupAndSelectionListeners()
+  }
+  func setupFirebaseGroupAndSelectionListeners() {
+    listenForStudentSelection()
+    listenForStudentGroups()
+  }
+  
   // MARK: - Firebase Student Selection Listener
   
   func listenForStudentSelection() {
@@ -334,11 +345,22 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     addFirebaseReferenceToCollection(firebaseGroupsRef)
     
     firebaseGroupsRef.observeEventType(.Value, withBlock: { snapshot in
-      println("LOADING GROUPS FROM SERVER")
+//      println("LOADING GROUPS FROM SERVER")
       // set the default number of groups to 1
       var numberOfGroupsOnServer = 1
       // for each student in the groups path
       for studentInfo in snapshot.children.allObjects as! [FDataSnapshot] {
+        
+        // if a new student was added while groups exist, 
+        // and the local student array does not contain the new student yet
+        if snapshot.children.allObjects.count != allTeacherStudents.count {
+          // set the current number of groups to 1
+          self.currentNumberOfStudentGroups = 1
+          // retrieve all students from server
+          self.getAllStudentsFromServer()
+          // eject from the function
+          return
+        }
         let studentIdFromServer = studentInfo.key
         // if the student has a group number
         if let studentGroupNumberFromServer = studentInfo.value as? Int {
@@ -352,7 +374,7 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       sortTeacherStudentsByGroupNumber()
       // set the local current number of groups to the highest number of groups found the on the server
       self.currentNumberOfStudentGroups = numberOfGroupsOnServer
-      println("number of groups on server \(self.currentNumberOfStudentGroups)")
+//      println("number of groups on server \(self.currentNumberOfStudentGroups)")
       // reload the table to display the new group data
       self.tableView.reloadData()
 

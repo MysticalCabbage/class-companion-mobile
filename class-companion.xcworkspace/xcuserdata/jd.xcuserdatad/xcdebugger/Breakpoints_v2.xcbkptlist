@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "class-companion/teacherStudentSelectionTableViewController.swift"
-            timestampString = "459819964.576274"
+            timestampString = "459821576.085009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
             landmarkName = "listenForStudentGroups()"
             landmarkType = "5">
          </BreakpointContent>

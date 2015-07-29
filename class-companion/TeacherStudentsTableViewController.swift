@@ -229,7 +229,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     
     firebaseClassStudentRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-      println("GETTING ALL STUDENTS FROM SERVER")
+//      println("GETTING ALL STUDENTS FROM SERVER")
       
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
@@ -351,7 +351,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseClassStudentRef)
     
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
-      println("STUDENT REMOVED, UPDATING")
+//      println("STUDENT REMOVED, UPDATING")
       self.getAllStudentsFromServer()
     })
   }
@@ -368,7 +368,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     firebaseStudentsRef.observeEventType(.ChildChanged, withBlock: { snapshot in
       let studentData: AnyObject! = snapshot.value
       let studentName = studentData["studentTitle"]
-      println("STUDENT CHANGED, UPDATING \(studentName)")
+//      println("STUDENT CHANGED, UPDATING \(studentName)")
 
       self.getAllStudentsFromServer()
     })

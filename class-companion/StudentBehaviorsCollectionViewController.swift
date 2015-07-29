@@ -212,7 +212,7 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     
     // retrieve all behaviors in ascending order with respect to behavior value
     firebaseClassBehaviorRef.queryOrderedByValue().observeSingleEventOfType(.Value, withBlock: { snapshot in
-      println("GETTING ALL BEHAVIORS")
+//      println("GETTING ALL BEHAVIORS")
       // reverse the query result to sort the data in descending order by behavior value
       for behaviorFromServer in reverse(snapshot.children.allObjects as! [FDataSnapshot]) {
         let newBehavior = Behavior(snap: behaviorFromServer)
