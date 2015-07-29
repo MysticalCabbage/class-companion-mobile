@@ -61,10 +61,11 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   }
   
 
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {    
     let row = indexPath.row
+    if row > allTeacherStudents.count {
+      return
+    }
     let selectedStudent = allTeacherStudents[row]
     
     assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false, cameFromServer: false)
