@@ -29,7 +29,9 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     assignAttendanceToAllStudents()
   }
   override func setUpNavBarTitle() {
-    self.navigationItem.title = "\(currentClassName!) Attendance"
+//    self.navigationItem.title = "\(currentClassName!) Attendance"
+    self.navigationItem.title = "\(currentClassName!)"
+
   }
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -38,6 +40,8 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     let row = indexPath.row
     
+//    println("TRYING TO GET attendance STUDENT AT ROW \(row)")
+
     let studentTitle = allTeacherStudents[row].studentTitle
     let attendanceStatus = allTeacherStudents[row].attendanceStatus
     
@@ -58,9 +62,14 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   
 
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    
     let row = indexPath.row
+    // if we have a race condition where we are trying to select a row that
+    // doesn't exist in the allTeacherstudents array
+    // Note: this happens when very rapidly changing attendance with many students
+    if row > allTeacherStudents.count {
+      // eject from the function and do not select anything
+      return
+    }
     let selectedStudent = allTeacherStudents[row]
     
     assignAttendanceToOneStudent(selectedStudent, togglingAllStudents: false)
@@ -79,7 +88,6 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     
     toggleAttendanceStatus = !toggleAttendanceStatus
     setupFirebaseListeners()
-    emptyAllTeacherStudentsLocally()
     getAllStudentsFromServer()
     
 

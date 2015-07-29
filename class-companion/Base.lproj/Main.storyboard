@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="21D-YK-RAv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -17,15 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="a" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Obj-gf-ZdK">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Obj-gf-ZdK">
                                 <rect key="frame" x="16" y="285" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aa@a.net" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZIr-uA-Mm4">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZIr-uA-Mm4">
                                 <rect key="frame" x="16" y="247" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKi-7x-TIJ">
                                 <rect key="frame" x="546" y="323" width="38" height="30"/>
@@ -36,18 +37,6 @@
                                     <action selector="loginButton" destination="21D-YK-RAv" eventType="touchUpInside" id="56m-Sd-sNf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username and password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-uI-4Io">
-                                <rect key="frame" x="16" y="323" width="235" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Companion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="8Lw-Ei-qnF">
-                                <rect key="frame" x="139" y="40" width="322" height="47"/>
-                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="38"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krr-0D-Oke">
                                 <rect key="frame" x="430" y="209" width="154" height="30"/>
                                 <state key="normal" title="Signup for an Account">
@@ -57,9 +46,22 @@
                                     <action selector="signupButton:" destination="21D-YK-RAv" eventType="touchUpInside" id="Ji6-Qn-PTX"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Companion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="8Lw-Ei-qnF">
+                                <rect key="frame" x="156" y="40" width="288" height="42"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="34"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter user email and password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-uI-4Io">
+                                <rect key="frame" x="16" y="327" width="237" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="0QJ-bU-IHc"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leading" constant="277" id="27C-0Y-vAX"/>
                             <constraint firstItem="ZIr-uA-Mm4" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="690-VC-cQy"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="6pS-JD-dRe"/>
@@ -68,9 +70,8 @@
                             <constraint firstItem="ZIr-uA-Mm4" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="Af9-TA-5QZ"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="DHr-PK-Cb8"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="centerY" secondItem="HWy-Kl-I0t" secondAttribute="centerY" id="HMm-sf-ha6"/>
+                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="baseline" secondItem="TKi-7x-TIJ" secondAttribute="baseline" id="J0r-HQ-eEZ"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="trailing" secondItem="HWy-Kl-I0t" secondAttribute="trailingMargin" id="Jo5-40-JcC"/>
-                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="top" secondItem="Obj-gf-ZdK" secondAttribute="bottom" constant="8" id="L4j-Qe-8Q7"/>
-                            <constraint firstItem="Tsn-uI-4Io" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" id="MUT-fi-EVk"/>
                             <constraint firstItem="8Lw-Ei-qnF" firstAttribute="top" secondItem="81Q-u2-yBH" secondAttribute="bottom" constant="20" id="Nps-qv-q0M"/>
                             <constraint firstItem="Obj-gf-ZdK" firstAttribute="top" secondItem="ZIr-uA-Mm4" secondAttribute="bottom" constant="8" id="V18-Jc-0Ya"/>
                             <constraint firstItem="TKi-7x-TIJ" firstAttribute="leading" secondItem="HWy-Kl-I0t" secondAttribute="leadingMargin" constant="265" id="bFB-dw-bDz"/>
@@ -304,9 +305,9 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="mdc-YX-IR7">
                         <rect key="frame" x="0.0" y="94" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OrY-n1-zOQ">
-                            <size key="itemSize" width="157" height="150"/>
+                            <size key="itemSize" width="95" height="92"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -316,31 +317,38 @@
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="157" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
-                                            <rect key="frame" x="21" y="65" width="114" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behavior" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOH-Xv-35A">
+                                            <rect key="frame" x="42" y="55" width="66" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
-                                            <rect key="frame" x="61" y="105" width="35" height="17"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-3B-L4a">
+                                            <rect key="frame" x="54" y="121" width="44" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="nOH-Xv-35A" secondAttribute="centerX" id="AH4-nt-ehP"/>
-                                    <constraint firstAttribute="centerY" secondItem="nOH-Xv-35A" secondAttribute="centerY" id="RSF-gX-8Uy"/>
+                                    <constraint firstAttribute="centerY" secondItem="nOH-Xv-35A" secondAttribute="bottom" id="2dB-TM-8Za"/>
+                                    <constraint firstAttribute="centerX" secondItem="nOH-Xv-35A" secondAttribute="centerX" id="S4d-AJ-bn4"/>
+                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="bottom" secondItem="0Pm-ET-qph" secondAttribute="bottomMargin" id="UHW-ZD-HsD"/>
+                                    <constraint firstAttribute="centerX" secondItem="fPM-3B-L4a" secondAttribute="centerX" id="UJq-io-TrG"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="fPM-3B-L4a" secondAttribute="trailing" constant="53" id="cMJ-Dw-AnG"/>
-                                    <constraint firstItem="fPM-3B-L4a" firstAttribute="top" secondItem="nOH-Xv-35A" secondAttribute="bottom" constant="20.5" id="rRA-e3-MO9"/>
                                 </constraints>
+                                <size key="customSize" width="150" height="150"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cMJ-Dw-AnG"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="behaviorNameLabel" destination="nOH-Xv-35A" id="RLN-fR-Cq2"/>
                                     <outlet property="behaviorValueLabel" destination="fPM-3B-L4a" id="RBx-FW-vom"/>
@@ -393,8 +401,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="OU7-Ji-eWd" kind="relationship" relationship="viewControllers" id="3YG-qA-A2T"/>
                         <segue destination="G6i-Vy-LL7" kind="relationship" relationship="viewControllers" id="j36-cJ-wQ2"/>
+                        <segue destination="OU7-Ji-eWd" kind="relationship" relationship="viewControllers" id="3YG-qA-A2T"/>
                         <segue destination="lRS-MW-WVJ" kind="relationship" relationship="viewControllers" id="OLu-Pe-X9U"/>
                     </connections>
                 </tabBarController>

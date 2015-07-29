@@ -10,39 +10,25 @@ import UIKit
 
 let reuseIdentifier = "behaviorActionCell"
 
-class StudentBehaviorsCollectionViewController: UICollectionViewController {
+class StudentBehaviorsCollectionViewController: UICollectionViewController, UICollectionViewDelegate {
   
-  let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-
   var allFirebaseListenerRefs = [Firebase]()
 
     override func viewDidLoad() {
       super.viewDidLoad()
       self.navigationItem.title = "\(currentStudentName!)'s Behavior"
       
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-      
+      setupCellSpacing()
+      setupBackgroundTile()
       getAllBehaviorsFromServer()
-      
-      
     }
+  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -70,9 +56,11 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     
     cell.behaviorValueLabel.text = behaviorValueString
     
+    // if the value of the behavior is positive
     if (behaviorValue > 0) {
+      // add a "+" to the label before the number
       cell.behaviorValueLabel.text = "+" + behaviorValueString
-      cell.behaviorValueLabel.textColor = UIColor.greenColor()
+      cell.behaviorValueLabel.textColor = UIColor.blueColor()
     } else {
       cell.behaviorValueLabel.textColor = UIColor.redColor()
 
@@ -94,14 +82,78 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     updateBehaviorPoints(behaviorPoints)
     
     updateBehaviorList(behaviorName)
-    // TODO: dismiss the modal
     
+    // dismiss the modal
+    self.dismissViewControllerAnimated(true, completion: {});
   }
+  
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    return CGSize(width: 90, height: 90) // The size of one cell
+  }
+  
+  
+  // MARK: - Add Behavior
+  // TODO: Finish implemeneting sending behaviors to the server
+  // currently it sends the values correctly to the sending function
+  func addBehaviorAlert() {
+    var alertController:UIAlertController?
+    
+    alertController = UIAlertController(title: "Behavior",
+      message: "Enter the behavior to make below",
+      preferredStyle: .Alert)
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(nameTextField: UITextField!) in
+        nameTextField.placeholder = "Behavior Name"
+        nameTextField.autocapitalizationType = UITextAutocapitalizationType.Words
+        nameTextField.becomeFirstResponder()
+    })
+    
+    alertController!.addTextFieldWithConfigurationHandler(
+      {(valueTextField: UITextField!) in
+        valueTextField.placeholder = "value ex) 4 ex) -2"
+        valueTextField.becomeFirstResponder()
+    })
+    
+    let submitAction = UIAlertAction(
+      title: "Make Behavior",
+      style: UIAlertActionStyle.Default,
+      handler: {[weak self]
+        (paramAction:UIAlertAction!) in
+        if let textFields = alertController?.textFields{
+          let theTextFields = textFields as! [UITextField]
+          let behaviorName = theTextFields[0].text
+          let behaviorValue = theTextFields[1].text
+          if let behaviorValueInt = behaviorValue.toInt() {
+            self!.sendNewBehaviorToServer(behaviorName, behaviorValue: behaviorValueInt)
+          } else {
+            theTextFields[1].text = ""
+          }
+        }
+      })
+    
+    let cancelAction = UIAlertAction(
+      title: "Cancel",
+      style: UIAlertActionStyle.Cancel,
+      handler: nil
+    )
+
+    
+    alertController?.addAction(submitAction)
+    alertController?.addAction(cancelAction)
+    
+    
+    self.presentViewController(alertController!,
+      animated: true,
+      completion: nil)
+  }
+
   
   // MARK: - Firebase Update Behavior Points
   
   func updateBehaviorPoints(behaviorValueToAddOrSubtract: Int) {
     
+    removeAllFirebaseListeners()
     
     let firebaseStudentBehaviorRef =
     firebaseClassRootRef
@@ -159,8 +211,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     addFirebaseReferenceToCollection(firebaseClassBehaviorRef)
     
     // retrieve all behaviors in ascending order with respect to behavior value
-    firebaseClassBehaviorRef.queryOrderedByValue().observeEventType(.Value, withBlock: { snapshot in
-      // we reverse the query result to sort the data in descending order by behavior value
+    firebaseClassBehaviorRef.queryOrderedByValue().observeSingleEventOfType(.Value, withBlock: { snapshot in
+//      println("GETTING ALL BEHAVIORS")
+      // reverse the query result to sort the data in descending order by behavior value
       for behaviorFromServer in reverse(snapshot.children.allObjects as! [FDataSnapshot]) {
         let newBehavior = Behavior(snap: behaviorFromServer)
         addNewBehavior(newBehavior)
@@ -176,6 +229,9 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
   // Mark: - Firebase Send New Behavior
   
   func sendNewBehaviorToServer(behaviorName: String, behaviorValue: Int) {
+    // TODO: Implement creating new behaviors
+    
+    
     
   }
   
@@ -190,12 +246,22 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController {
     }
   }
   
+  // Mark: - Layout
   
+  func setupBackgroundTile() {
+    let image = UIImage(named: "handmade-paper.png")!
+    let scaled = UIImage(CGImage: image.CGImage, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
+    self.view.backgroundColor = UIColor(patternImage: scaled!)
+  }
   
+  func setupCellSpacing() {
+    let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    layout.sectionInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
+    layout.minimumInteritemSpacing = 5
+    layout.minimumLineSpacing = 10
+    self.collectionView!.collectionViewLayout = layout
+  }
+
   
-  
-
-
-
-
 }
+

@@ -16,7 +16,7 @@ class TeacherStudent: Printable {
   var behaviorTotal: Int
   var attendanceStatus: String
   var currentlySelected: Bool
-  var groupNumber: String?
+  var groupNumber: Int?
   var description: String {
     return "The student name is \(studentTitle)"
   }
@@ -38,7 +38,7 @@ class TeacherStudent: Printable {
     }
     self.currentlySelected = false
     // TODO:
-    self.groupNumber = "1"
+    self.groupNumber = 1
   }
   
   // when initializing with the snapshot data
@@ -76,7 +76,7 @@ func emptyAllTeacherStudentsLocally() {
   
 }
 
-func assignStudentModelToGroup(studentId: String, groupNumber: String) {
+func assignStudentModelToGroup(studentId: String, groupNumber: Int) {
   if let studentToGroupIndex = getIndexByStudentId(studentId) {
     allTeacherStudents[studentToGroupIndex].groupNumber = groupNumber
   } else {

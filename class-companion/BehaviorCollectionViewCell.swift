@@ -12,4 +12,14 @@ class BehaviorCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var behaviorNameLabel: UILabel!
   @IBOutlet weak var behaviorValueLabel: UILabel!
   
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setupBackgroundTile()
+  }
+  
+  func setupBackgroundTile() {
+    self.layer.borderWidth = 1
+    self.layer.borderColor = UIColor.blackColor().CGColor
+  }
+
 }

@@ -15,33 +15,34 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // set up the navigation bar
+    // set up the navigation bar itle
     setUpNavBarTitle()
-//    setUpRightBarButton()
-//    setUpLeftBarButton()
-
-    // set up listeners
-    setupReloadDataListener()
     
-    setupFirebaseListeners()
+    removeAllFirebaseListeners()
     
     // refresh the table
-    emptyAllTeacherStudentsLocally()  
     getAllStudentsFromServer()
+    
+    // set up listeners
+    setupFirebaseListeners()
+    setupReloadDataListener()
+
   }
   
-//   func didReceiveMemoryWarning() {
-//    super.didReceiveMemoryWarning()
-//    // Dispose of any resources that can be recreated.
-//  }
   
   func setUpNavBarTitle() {
-    self.navigationItem.title = "\(currentClassName!) Behavior"
+    self.navigationItem.title = "\(currentClassName!)"
+
   }
   
-  override func viewWillDisappear(animated: Bool) {
-    removeAllFirebaseListeners()
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(true)
+    
+    
+ 
+    
   }
+  
   
   @IBAction func returnToTeacherDashboard(sender: UIBarButtonItem) {
     var next = self.storyboard?.instantiateViewControllerWithIdentifier("TeacherDashboard") as! TeacherDashboardViewController
@@ -53,8 +54,7 @@ class TeacherStudentsTableViewController: UITableViewController {
 
   
   
-  // MARK: - Add / Delete Class Alerts
-  // ADD CLASS ALERT
+  // MARK: - Add / Delete Student Alerts
   @IBAction func addNewTeacherStudentAlert(sender: AnyObject) {
     var alertController:UIAlertController?
     
@@ -78,7 +78,7 @@ class TeacherStudentsTableViewController: UITableViewController {
           let enteredText = theTextFields[0].text
           let newstudentName = enteredText
           self!.sendStudentToServer(newstudentName)
-          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+//          NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
 
         }
       })
@@ -116,9 +116,9 @@ class TeacherStudentsTableViewController: UITableViewController {
     let cell = self.tableView.dequeueReusableCellWithIdentifier("teacherStudentCell") as! UITableViewCell
     
     let row = indexPath.row
-    
+//    println("TRYING TO GET behavior STUDENT AT ROW \(row)")
     cell.textLabel?.text = allTeacherStudents[row].studentTitle
-    cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal)
+    cell.detailTextLabel?.text = String(allTeacherStudents[row].behaviorTotal) + " points"
     
     
     return cell
@@ -215,6 +215,11 @@ class TeacherStudentsTableViewController: UITableViewController {
   // MARK: - Firebase Student Retrieval
   
   func getAllStudentsFromServer() {
+    
+    emptyAllTeacherStudentsLocally()
+    
+    removeAllFirebaseListeners()
+    
     let firebaseClassStudentRef =
       firebaseClassRootRef
         .childByAppendingPath(currentClassId)
@@ -223,14 +228,18 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseClassStudentRef)
     
     
-    firebaseClassStudentRef.observeEventType(.Value, withBlock: { snapshot in
+    firebaseClassStudentRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+//      println("GETTING ALL STUDENTS FROM SERVER")
+      
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-//        println("STUDENT FROM SERVER IS \(studentFromServer)")
         let newTeacherStudent = TeacherStudent(snap: studentFromServer)
         addNewTeacherStudent(newTeacherStudent)
       }
+      
       // after adding the new classes to the classes array, reload the table
       NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
+      
+      self.setupFirebaseListeners()
       
       }, withCancelBlock: { error in
         println(error.description)
@@ -245,6 +254,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     
     if let currentUserId = userDefaults.stringForKey(currentUserIdKey) {
       
+      removeAllFirebaseListeners()
+      
       let currentDate = getCurrentDateInString()
 
       // prepare data to send to teacher section of database
@@ -255,6 +266,8 @@ class TeacherStudentsTableViewController: UITableViewController {
         .childByAppendingPath("students/")
         .childByAutoId()
       
+      let studentKey = firebaseClassStudentRef.key
+      
       let firebaseClassStudentBehaviorRef =
         firebaseClassStudentRef
         .childByAppendingPath("behavior/")
@@ -263,6 +276,12 @@ class TeacherStudentsTableViewController: UITableViewController {
         firebaseClassStudentRef
         .childByAppendingPath("attendance/")
         .childByAppendingPath(currentDate)
+      
+      let firebaseClassGroupsRef =
+      firebaseClassRootRef
+        .childByAppendingPath(currentClassId)
+        .childByAppendingPath("groups/")
+        .childByAppendingPath(studentKey)
       
       let studentInfoForClassRoot =
       [
@@ -284,6 +303,12 @@ class TeacherStudentsTableViewController: UITableViewController {
       
       // by default, set the student attendance to "Present" for today
       firebaseClassStudentAttendanceRef.setValue("Present")
+      
+      // by default, set the student group to 1
+      firebaseClassGroupsRef.setValue(1)
+      
+      setupFirebaseListeners()
+      getAllStudentsFromServer()
       
     }
     else {
@@ -326,22 +351,25 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseClassStudentRef)
     
     firebaseClassStudentRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
-      emptyAllTeacherStudentsLocally()
+//      println("STUDENT REMOVED, UPDATING")
       self.getAllStudentsFromServer()
     })
   }
   
   func setupStudentsChangeListener() {
     // TODO set firebase ref to student behavior
-    let firebaseStudentsrRef =
+    let firebaseStudentsRef =
     firebaseClassRootRef
       .childByAppendingPath(currentClassId)
       .childByAppendingPath("students/")
     
-    addFirebaseReferenceToCollection(firebaseStudentsrRef)
+    addFirebaseReferenceToCollection(firebaseStudentsRef)
     
-    firebaseStudentsrRef.observeEventType(.ChildChanged, withBlock: { snapshot in
-      emptyAllTeacherStudentsLocally()
+    firebaseStudentsRef.observeEventType(.ChildChanged, withBlock: { snapshot in
+      let studentData: AnyObject! = snapshot.value
+      let studentName = studentData["studentTitle"]
+//      println("STUDENT CHANGED, UPDATING \(studentName)")
+
       self.getAllStudentsFromServer()
     })
   }
@@ -364,6 +392,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     for listener in allFirebaseListenerRefs {
       listener.removeAllObservers()
     }
+    allFirebaseListenerRefs.removeAll()
   }
 
   
