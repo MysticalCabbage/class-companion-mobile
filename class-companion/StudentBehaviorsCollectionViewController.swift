@@ -85,6 +85,8 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     
     updateBehaviorHistory(behaviorName, behaviorValueToSave: behaviorPoints)
     
+    updateExperiencePoints(behaviorPoints)
+    
     // dismiss the modal
     self.dismissViewControllerAnimated(true, completion: {});
   }
@@ -244,6 +246,29 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
 
   }
   
+  func updateExperiencePoints(behaviorValueToSave: Int) {
+    let firebaseStudentExpRef =
+      firebaseClassRootRef
+        .childByAppendingPath(currentClassId)
+        .childByAppendingPath("students/")
+        .childByAppendingPath(currentStudentId)
+        .childByAppendingPath("pokemon")
+        .childByAppendingPath("profile")
+        .childByAppendingPath("currentExp")
+    
+    firebaseStudentExpRef.runTransactionBlock({
+      (currentData:FMutableData!) in
+      
+      if let currentBehaviorCount = currentData.value as? Int {
+        currentData.value = currentBehaviorCount + behaviorValueToSave
+      } else {
+        currentData.value = 1
+      }
+      
+      return FTransactionResult.successWithValue(currentData)
+    })
+  }
+  
   // MARK: - Firebase Get All Behaviors
   
   func getAllBehaviorsFromServer() {
@@ -266,8 +291,6 @@ class StudentBehaviorsCollectionViewController: UICollectionViewController, UICo
     // after adding the new behaviors to the behaviors array, reload the collection
     self.collectionView!.reloadData()
     
-    }, withCancelBlock: { error in
-    println(error.description)
     })
   }
   
