@@ -24,7 +24,6 @@
 		698681501B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */; };
 		698681521B5ADE7E0073AE96 /* BehaviorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */; };
 		698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */; };
-		69879A501B6C263200F3436F /* QTouchposeApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 69879A4F1B6C263200F3436F /* QTouchposeApplication.m */; };
 		69AF6E911B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E901B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift */; };
 		69AF6E931B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */; };
 		69BB3D311B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */; };
@@ -66,8 +65,6 @@
 		6986814F1B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentBehaviorsCollectionViewController.swift; sourceTree = "<group>"; };
 		698681511B5ADE7E0073AE96 /* BehaviorsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorsModel.swift; sourceTree = "<group>"; };
 		698681531B5AEC190073AE96 /* BehaviorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorCollectionViewCell.swift; sourceTree = "<group>"; };
-		69879A4E1B6C263200F3436F /* QTouchposeApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTouchposeApplication.h; sourceTree = "<group>"; };
-		69879A4F1B6C263200F3436F /* QTouchposeApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTouchposeApplication.m; sourceTree = "<group>"; };
 		69AF6E901B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentAttendanceTableViewController.swift; sourceTree = "<group>"; };
 		69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentAttendanceTableView.swift; sourceTree = "<group>"; };
 		69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -128,8 +125,6 @@
 				69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */,
 				69BB3D321B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift */,
 				69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */,
-				69879A4E1B6C263200F3436F /* QTouchposeApplication.h */,
-				69879A4F1B6C263200F3436F /* QTouchposeApplication.m */,
 				690E3B371B5EC3600045A68D /* teacherStudentSelectionTableViewController.swift */,
 				69AF6E921B5DA87C00AA34CB /* teacherStudentAttendanceTableView.swift */,
 				690BA6F91B560196009E63A5 /* TeacherClassesUITableView.swift */,
@@ -343,7 +338,6 @@
 				69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */,
 				691AEEFB1B59A81200FD3051 /* TeacherStudentsModel.swift in Sources */,
 				690BA6F81B56013F009E63A5 /* TeacherDashboardViewController.swift in Sources */,
-				69879A501B6C263200F3436F /* QTouchposeApplication.m in Sources */,
 				69F717511B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift in Sources */,
 				690E3B381B5EC3600045A68D /* teacherStudentSelectionTableViewController.swift in Sources */,
 				698681541B5AEC190073AE96 /* BehaviorCollectionViewCell.swift in Sources */,

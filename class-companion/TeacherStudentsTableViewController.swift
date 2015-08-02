@@ -38,8 +38,8 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
     
-    
- 
+//    getAllStudentsFromServer()
+//    println("there are \(allTeacherStudents.count) students")
     
   }
   
@@ -128,6 +128,15 @@ class TeacherStudentsTableViewController: UITableViewController {
     self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
+    
+    // if we have a race condition where we are trying to select a row that
+    // doesn't exist in the allTeacherstudents array
+    // Note: this happens when very rapidly changing attendance with many students
+    if row > allTeacherStudents.count {
+      // eject from the function and do not select anything
+      return
+    }
+    
     let selectedStudent = allTeacherStudents[row]
 //    let selectedCellStudentId = selectedCell.studentId
     
@@ -216,9 +225,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   func getAllStudentsFromServer() {
     
-    emptyAllTeacherStudentsLocally()
-    
-    removeAllFirebaseListeners()
+//    emptyAllTeacherStudentsLocally()
     
     let firebaseClassStudentRef =
       firebaseClassRootRef
@@ -232,14 +239,12 @@ class TeacherStudentsTableViewController: UITableViewController {
 //      println("GETTING ALL STUDENTS FROM SERVER")
       
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-        let newTeacherStudent = TeacherStudent(snap: studentFromServer)
-        addNewTeacherStudent(newTeacherStudent)
+        let newTeacherStudent = studentFromServer
+        addNewTeacherStudent(studentFromServer)
       }
       
       // after adding the new classes to the classes array, reload the table
       NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-      
-      self.setupFirebaseListeners()
       
       }, withCancelBlock: { error in
         println(error.description)
@@ -308,7 +313,7 @@ class TeacherStudentsTableViewController: UITableViewController {
       firebaseClassGroupsRef.setValue(1)
       
       setupFirebaseListeners()
-      getAllStudentsFromServer()
+//      getAllStudentsFromServer()
       
     }
     else {
@@ -366,11 +371,8 @@ class TeacherStudentsTableViewController: UITableViewController {
     addFirebaseReferenceToCollection(firebaseStudentsRef)
     
     firebaseStudentsRef.observeEventType(.ChildChanged, withBlock: { snapshot in
-      let studentData: AnyObject! = snapshot.value
-      let studentName = studentData["studentTitle"]
-//      println("STUDENT CHANGED, UPDATING \(studentName)")
-
-      self.getAllStudentsFromServer()
+      let updatedStudentData = snapshot
+      self.handleSingleStudentUpdate(updatedStudentData)
     })
   }
   
@@ -399,6 +401,13 @@ class TeacherStudentsTableViewController: UITableViewController {
   // MARK: - Reload Table Data
   func reloadTableData(notification: NSNotification) {
     tableView.reloadData()
+  }
+  
+  // MARK: - Single Student Update
+  
+  func handleSingleStudentUpdate(updatedStudentData: FDataSnapshot!) {
+    updateSingleStudentLocally(updatedStudentData)
+    NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
   }
   
   /*

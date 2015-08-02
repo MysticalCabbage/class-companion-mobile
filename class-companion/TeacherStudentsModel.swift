@@ -54,12 +54,15 @@ class TeacherStudent: Printable {
 
 
 
-func addNewTeacherStudent(newStudent: TeacherStudent) {
+func addNewTeacherStudent(newStudentData: FDataSnapshot!) {
   
-  if !studentAlreadyExists(allTeacherStudents, newStudent) {
-    allTeacherStudents.append(newStudent)
+  let studentId = newStudentData.key;
+  if let studentIndex = getIndexByStudentId(studentId) {
+    updateSingleStudentLocally(newStudentData)
+  } else {
+    let newStudentModel = TeacherStudent(snap: newStudentData)
+    allTeacherStudents.append(newStudentModel)
   }
-  
 }
 
 func studentAlreadyExists (studentsArray: [TeacherStudent], newStudent: TeacherStudent) -> Bool {
@@ -88,5 +91,22 @@ func assignStudentModelToGroup(studentId: String, groupNumber: Int) {
 
 func sortTeacherStudentsByGroupNumber () {
   allTeacherStudents.sort({$0.groupNumber < $1.groupNumber})
+}
+
+func getIndexByStudentId(targetStudentId: String) -> Int? {
+  for (index, student) in enumerate(allTeacherStudents) {
+    if targetStudentId == student.studentId {
+      return index
+    }
+  }
+  return nil
+}
+
+func updateSingleStudentLocally(updatedStudentData: FDataSnapshot) {
+  let updatedStudentModel = TeacherStudent(snap: updatedStudentData)
+  let updatedStudentId = updatedStudentData.key
+  let updatedStudentIndex = getIndexByStudentId(updatedStudentId)
+  
+  allTeacherStudents[updatedStudentIndex!] = updatedStudentModel
 }
 

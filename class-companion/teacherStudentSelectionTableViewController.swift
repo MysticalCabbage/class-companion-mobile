@@ -54,7 +54,6 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       let currentRow = indexPath.row
       
 //      println("TRYING TO GET selection STUDENT AT ROW \(currentRow)")
-
       
       let selectedStudent = allTeacherStudents[currentRow]
       
@@ -90,6 +89,14 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
     self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
     let row = indexPath.row
+    
+    // if we have a race condition where we are trying to select a row that
+    // doesn't exist in the allTeacherstudents array
+    // Note: this happens when very rapidly changing attributes of students
+//    if row > allTeacherStudents.count {
+//      // eject from the function and do not select anything
+//      return
+//    }
     
     setStudentAsSelected(row)
    
@@ -247,17 +254,20 @@ class teacherStudentSelectionTableViewController: TeacherStudentsTableViewContro
       self.tableView.reloadRowsAtIndexPaths([previousCellIndexPath], withRowAnimation: UITableViewRowAnimation.None)
     }
     
-    allTeacherStudents[selectedStudentIndex].currentlySelected = true
-    
-    let cellToEditIndexPath = NSIndexPath(forRow: selectedStudentIndex, inSection: 0)
-    
-    self.tableView.reloadRowsAtIndexPaths([cellToEditIndexPath], withRowAnimation: UITableViewRowAnimation.None)
-    
-    self.tableView.selectRowAtIndexPath(cellToEditIndexPath, animated: true, scrollPosition: .Middle);
-    
-    previousSelectionRow = selectedStudentIndex
-    
-    sendSelectedStudent(allTeacherStudents[selectedStudentIndex])
+    if allTeacherStudents[selectedStudentIndex] !== nil {
+      allTeacherStudents[selectedStudentIndex].currentlySelected = true
+      
+      let cellToEditIndexPath = NSIndexPath(forRow: selectedStudentIndex, inSection: 0)
+      
+      self.tableView.reloadRowsAtIndexPaths([cellToEditIndexPath], withRowAnimation: UITableViewRowAnimation.None)
+      
+      self.tableView.selectRowAtIndexPath(cellToEditIndexPath, animated: true, scrollPosition: .Middle);
+      
+      previousSelectionRow = selectedStudentIndex
+      
+      sendSelectedStudent(allTeacherStudents[selectedStudentIndex])
+
+    }
   }
   
 
