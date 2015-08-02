@@ -90,3 +90,20 @@ func sortTeacherStudentsByGroupNumber () {
   allTeacherStudents.sort({$0.groupNumber < $1.groupNumber})
 }
 
+func getIndexByStudentId(targetStudentId: String) -> Int? {
+  for (index, student) in enumerate(allTeacherStudents) {
+    if targetStudentId == student.studentId {
+      return index
+    }
+  }
+  return nil
+}
+
+func updateSingleStudentLocally(updatedStudentData: FDataSnapshot) {
+  let updatedStudentModel = TeacherStudent(snap: updatedStudentData)
+  let updatedStudentId = updatedStudentData.key
+  let updatedStudentIndex = getIndexByStudentId(updatedStudentId)
+  
+  allTeacherStudents[updatedStudentIndex!] = updatedStudentModel
+}
+
