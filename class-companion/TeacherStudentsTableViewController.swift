@@ -227,8 +227,6 @@ class TeacherStudentsTableViewController: UITableViewController {
     
 //    emptyAllTeacherStudentsLocally()
     
-    removeAllFirebaseListeners()
-    
     let firebaseClassStudentRef =
       firebaseClassRootRef
         .childByAppendingPath(currentClassId)
@@ -247,8 +245,6 @@ class TeacherStudentsTableViewController: UITableViewController {
       
       // after adding the new classes to the classes array, reload the table
       NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
-      
-      self.setupFirebaseListeners()
       
       }, withCancelBlock: { error in
         println(error.description)
