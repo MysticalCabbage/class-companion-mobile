@@ -54,12 +54,15 @@ class TeacherStudent: Printable {
 
 
 
-func addNewTeacherStudent(newStudent: TeacherStudent) {
+func addNewTeacherStudent(newStudentData: FDataSnapshot!) {
   
-  if !studentAlreadyExists(allTeacherStudents, newStudent) {
-    allTeacherStudents.append(newStudent)
+  let studentId = newStudentData.key;
+  if let studentIndex = getIndexByStudentId(studentId) {
+    updateSingleStudentLocally(newStudentData)
+  } else {
+    let newStudentModel = TeacherStudent(snap: newStudentData)
+    allTeacherStudents.append(newStudentModel)
   }
-  
 }
 
 func studentAlreadyExists (studentsArray: [TeacherStudent], newStudent: TeacherStudent) -> Bool {

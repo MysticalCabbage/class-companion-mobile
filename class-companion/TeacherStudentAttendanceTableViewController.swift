@@ -78,7 +78,7 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
   
   func assignAttendanceToAllStudents() {
     
-    removeAllFirebaseListeners()
+//    removeAllFirebaseListeners()
 
     for student in allTeacherStudents {
       
@@ -87,8 +87,8 @@ class teacherStudentAttendanceTableViewController: TeacherStudentsTableViewContr
     }
     
     toggleAttendanceStatus = !toggleAttendanceStatus
-    setupFirebaseListeners()
-    getAllStudentsFromServer()
+//    setupFirebaseListeners()
+//    getAllStudentsFromServer()
     
 
   }

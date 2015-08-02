@@ -38,8 +38,8 @@ class TeacherStudentsTableViewController: UITableViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
     
-    
- 
+//    getAllStudentsFromServer()
+    println("there are \(allTeacherStudents.count) students")
     
   }
   
@@ -225,7 +225,7 @@ class TeacherStudentsTableViewController: UITableViewController {
   
   func getAllStudentsFromServer() {
     
-    emptyAllTeacherStudentsLocally()
+//    emptyAllTeacherStudentsLocally()
     
     removeAllFirebaseListeners()
     
@@ -241,8 +241,8 @@ class TeacherStudentsTableViewController: UITableViewController {
 //      println("GETTING ALL STUDENTS FROM SERVER")
       
       for studentFromServer in snapshot.children.allObjects as! [FDataSnapshot] {
-        let newTeacherStudent = TeacherStudent(snap: studentFromServer)
-        addNewTeacherStudent(newTeacherStudent)
+        let newTeacherStudent = studentFromServer
+        addNewTeacherStudent(studentFromServer)
       }
       
       // after adding the new classes to the classes array, reload the table
@@ -317,7 +317,7 @@ class TeacherStudentsTableViewController: UITableViewController {
       firebaseClassGroupsRef.setValue(1)
       
       setupFirebaseListeners()
-      getAllStudentsFromServer()
+//      getAllStudentsFromServer()
       
     }
     else {
