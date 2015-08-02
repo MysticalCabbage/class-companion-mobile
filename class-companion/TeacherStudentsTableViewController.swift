@@ -39,7 +39,7 @@ class TeacherStudentsTableViewController: UITableViewController {
     super.viewWillAppear(true)
     
 //    getAllStudentsFromServer()
-    println("there are \(allTeacherStudents.count) students")
+//    println("there are \(allTeacherStudents.count) students")
     
   }
   
