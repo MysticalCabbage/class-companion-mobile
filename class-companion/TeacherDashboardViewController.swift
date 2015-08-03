@@ -50,6 +50,11 @@ class TeacherDashboardViewController: UIViewController, UITableViewDataSource, U
     removeAllFirebaseListeners()
   }
   
+  override func viewWillAppear(animated: Bool){
+    super.viewWillAppear(true)
+    emptyAllTeacherStudentsLocally()
+  }
+  
   
   
   // MARK: - Add / Delete Class Alerts
