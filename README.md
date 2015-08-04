@@ -17,6 +17,7 @@ This is a native iOS app for the teacher to use while teaching using Class Compa
 
 
 ## Features
+ - Add/Remove students and classes
  - Record and track daily attendance
  - Arrange students into groups
  - Randomly and manually select students
@@ -25,8 +26,7 @@ This is a native iOS app for the teacher to use while teaching using Class Compa
 
 ## Team
 
-  - __Jonathan Davis__: Full Stack Engineer / Product Owner 
-
+The Class Companion mobile iOS app is a solo project I completed inside of the larger team where we built [Class Companion](https://github.com/MysticalCabbage/class-companion). 
 
 ## Development
 
@@ -35,7 +35,8 @@ This is a native iOS app for the teacher to use while teaching using Class Compa
 ```
 pod install
 ```
-To install the Firebar iOS library. If there are any issues, follow the instructions on the Firebase site: [https://www.firebase.com/docs/ios/quickstart.html](https://www.firebase.com/docs/ios/quickstart.html)
+
+If there are any issues, follow the instructions on the Firebase site: [https://www.firebase.com/docs/ios/quickstart.html](https://www.firebase.com/docs/ios/quickstart.html)
 
 ## Technologies
  - Swift
