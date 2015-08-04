@@ -4,7 +4,7 @@ Website: [http://www.class-companion.com](http://www.class-companion.com)
 
 Web app GitHub: [https://github.com/MysticalCabbage/class-companion](https://github.com/MysticalCabbage/class-companion)
 
-This is a native iOS app for the teacher to use while teaching using Class Companion. This app syncs in real-time via Firebase with the web app for cross-platform communication.
+This is a native iOS app for the teacher to use while teaching using Class Companion. The app syncs in real-time via Firebase with the web app for cross-platform communication.
 
 ## Table of Contents
 
