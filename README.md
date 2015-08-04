@@ -35,8 +35,11 @@ The Class Companion mobile iOS app is a solo project I completed inside of the l
 ```
 pod install
 ```
+```
+open class-companion.xcworkspace
+```
 
-If there are any issues, follow the instructions on the Firebase site: [https://www.firebase.com/docs/ios/quickstart.html](https://www.firebase.com/docs/ios/quickstart.html)
+If the project file is opened through Xcode, there could be potential issues with the Firebase library. It's necessary to open the .xcworkspace file instead of the .xcodeproj file. If there are any issues, follow the instructions on the Firebase site: [https://www.firebase.com/docs/ios/quickstart.html](https://www.firebase.com/docs/ios/quickstart.html)
 
 ## Technologies
  - Swift
