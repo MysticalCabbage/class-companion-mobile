@@ -35,7 +35,7 @@ This is a native iOS app for the teacher to use while teaching using Class Compa
 ```
 pod install
 ```
-
+To install the Firebar iOS library. If there are any issues, follow the instructions on the Firebase site: [https://www.firebase.com/docs/ios/quickstart.html](https://www.firebase.com/docs/ios/quickstart.html)
 
 ## Technologies
  - Swift
