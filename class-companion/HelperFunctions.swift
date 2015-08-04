@@ -12,7 +12,7 @@ import Foundation
 func getCurrentDateInString() -> String {
   let date = NSDate()
   let dateFormatter:NSDateFormatter = NSDateFormatter()
-  dateFormatter.dateFormat = "M-dd-yyyy"
+  dateFormatter.dateFormat = "M-d-yyyy"
   let currentDate:String = dateFormatter.stringFromDate(date)
   
   return currentDate
