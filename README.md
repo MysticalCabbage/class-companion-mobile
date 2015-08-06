@@ -11,8 +11,7 @@ This is a native iOS app for the teacher to use while teaching using Class Compa
 1. [Features](#features)
 1. [Team](#team)
 1. [Mobile](#mobile)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
+1. [Installing Dependencies](#installing-dependencies)
 1. [Tech Stack](#tech-stack)
 
 
