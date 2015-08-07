@@ -18,6 +18,7 @@ This is a native iOS app for the teacher to use while teaching using Class Compa
 ## Features
  - Add/Remove students and classes
  - Record and track daily attendance
+ - Add/remove students and classes
  - Arrange students into groups
  - Randomly and manually select students
  - Assign student behavior points
