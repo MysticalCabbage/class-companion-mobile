@@ -63,12 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
   
   // sends the user to safari to signup for an account
   @IBAction func signupButton(sender: UIButton) {
-    
-    if let webAppUrl = NSURL(string: "http://class-companion.com") {
-      UIApplication.sharedApplication().openURL(webAppUrl)
-    }
-  /*
-  Disabled in-app signup due to missing fields for title, firstname, lastname, etc.
+  
     if let username = usernameField.text {
       if let password = passwordField.text {
         
@@ -76,10 +71,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
       }
     }
-  */
+
   }
-  // This feature is not currently being used due to lack of
-  // dedicated signup page to handle all user account fields
+
   func createFirebaseUser (username: String, password: String) {
 
     firebaseRef.createUser(username, password: password,
