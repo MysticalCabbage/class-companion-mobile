@@ -92,7 +92,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
       data, response, error in
-        println(NSString(data: data, encoding: NSUTF8StringEncoding))
+        if error != nil {
+          println("error=\(error)")
+          return
+        }
+        
+        println("response = \(response)")
+        
+        let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+        println("responseString = \(responseString)")
     }
     task.resume()
     
@@ -108,7 +116,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     request.setValue("application/json", forHTTPHeaderField: "Accept")
     
-    request.HTTPBody = newUserIdPostData.dataUsingEncoding(NSUTF8StringEncoding);
+    request.HTTPBody = newUserIdPostData.dataUsingEncoding(NSUTF8StringEncoding)
+
     return request
   }
   
