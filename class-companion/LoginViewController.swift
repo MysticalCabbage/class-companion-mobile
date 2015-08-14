@@ -107,10 +107,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
   }
   
   func prepareRequest(userId: String) -> NSMutableURLRequest {
-    let serverUrl = NSURL(string: "http://wwww.class-companion.com")
+    let serverUrl = NSURL(string: "http://wwww.class-companion.com/api/teacher/demo")
     let request = NSMutableURLRequest(URL:serverUrl!)
     // prepares key-value pair
-    let newUserIdPostData: String = "userId=userId"
+    let newUserIdPostData: String = "teacherId=\(userId)"
     
     request.HTTPMethod = "POST";
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
