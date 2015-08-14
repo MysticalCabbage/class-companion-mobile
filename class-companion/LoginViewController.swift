@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
   @IBAction func loginButton() {
     if let username = usernameField.text {
       if let password = passwordField.text {
-        checkLoginCredentials(username, password: password)
+        checkLoginCredentials(username, password: password, isNewUser: false)
       }
     }
   }
@@ -78,10 +78,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     firebaseRef.createUser(username, password: password,
       withValueCompletionBlock: { authError, result in
         if authError != nil {
-          println("There was an error creating account\(authError)")
+          println("There was an error creating account \(authError)")
           self.handleErrorMessage(authError)
         } else {
-          self.checkLoginCredentials(username, password: password)
+          self.checkLoginCredentials(username, password: password, isNewUser: true)
         }
     })
   }
@@ -99,6 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           return
         }
     }
+    // start the task to create the demo class
     task.resume()
   }
   
@@ -140,7 +141,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
   }
   
-  func checkLoginCredentials(username: String, password: String){
+  func checkLoginCredentials(username: String, password: String, isNewUser: Bool){
 
     firebaseRef.authUser(username, password: password,
       withCompletionBlock: { authError, authData in
@@ -150,8 +151,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else {
           let userId = authData.uid
           self.setLoggedInUserId(userId)
-          self.createServerDemoClass(userId)
           self.goToTeacherDashboardView()
+          if isNewUser {
+            self.createServerDemoClass(userId)
+          }
         }
     })
     
