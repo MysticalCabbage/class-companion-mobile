@@ -68,7 +68,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
       if let password = passwordField.text {
         
         createFirebaseUser(username, password: password)
-        createServerDemoClass(username)
       }
     }
 
@@ -87,27 +86,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     })
   }
   
-  func createServerDemoClass(username: String) {
+  func createServerDemoClass(userId: String) {
     
-    let request = prepareRequest(username)
+    let request = prepareRequest(userId)
     
     let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
       data, response, error in
         println(NSString(data: data, encoding: NSUTF8StringEncoding))
     }
-    
     task.resume()
     
   }
   
-  func prepareRequest(username: String) -> NSMutableURLRequest {
+  func prepareRequest(userId: String) -> NSMutableURLRequest {
     let serverUrl = NSURL(string: "http://wwww.class-companion.com")
     let request = NSMutableURLRequest(URL:serverUrl!)
-    let newUsernamePostData = username
+    // prepares key-value pair
+    let newUserIdPostData: String = "userId=userId"
     
     request.HTTPMethod = "POST";
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
     
-    request.HTTPBody = newUsernamePostData.dataUsingEncoding(NSUTF8StringEncoding);
+    request.HTTPBody = newUserIdPostData.dataUsingEncoding(NSUTF8StringEncoding);
     return request
   }
   
@@ -144,6 +145,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else {
           let userId = authData.uid
           self.setLoggedInUserId(userId)
+          self.createServerDemoClass(userId)
           self.goToTeacherDashboardView()
         }
     })
