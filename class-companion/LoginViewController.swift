@@ -171,9 +171,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let teacherInfo = [
                       "email": usernameField.text,
-                      "firstName": "Cabbage",
-                      "lastName": "Mystical",
-                      "prefix": "Sorcerer",
+                      "firstName": "",
+                      "lastName": "",
+                      "prefix": "",
                       "uid": currentUserId
                       ]
     
