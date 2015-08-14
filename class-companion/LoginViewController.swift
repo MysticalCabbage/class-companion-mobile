@@ -68,7 +68,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
       if let password = passwordField.text {
         
         createFirebaseUser(username, password: password)
-        
+        createServerDemoClass(username)
       }
     }
 
@@ -85,6 +85,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           self.checkLoginCredentials(username, password: password)
         }
     })
+  }
+  
+  func createServerDemoClass(username: String) {
+    
+    let request = prepareRequest(username)
+    
+    let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+      data, response, error in
+        println(NSString(data: data, encoding: NSUTF8StringEncoding))
+    }
+    
+    task.resume()
+    
+  }
+  
+  func prepareRequest(username: String) -> NSMutableURLRequest {
+    let serverUrl = NSURL(string: "http://wwww.class-companion.com")
+    let request = NSMutableURLRequest(URL:serverUrl!)
+    let newUsernamePostData = username
+    
+    request.HTTPMethod = "POST";
+    
+    request.HTTPBody = newUsernamePostData.dataUsingEncoding(NSUTF8StringEncoding);
+    return request
   }
   
   
