@@ -86,37 +86,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     })
   }
   
+  // creates the demo class when a new user is made
   func createServerDemoClass(userId: String) {
     
     let request = prepareRequest(userId)
     
+    // prepare task object for the POST request
     let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
       data, response, error in
         if error != nil {
-          println("error=\(error)")
+          println("demo class creation POST request error: \(error)")
           return
         }
-        
-        println("response = \(response)")
-        
-        let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-        println("responseString = \(responseString)")
     }
     task.resume()
-    
   }
   
+  // prepares the request for the demo class creation
   func prepareRequest(userId: String) -> NSMutableURLRequest {
+    // api call url
     let serverUrl = NSURL(string: "http://wwww.class-companion.com/api/teacher/demo")
+    // creates request type
     let request = NSMutableURLRequest(URL:serverUrl!)
     // prepares key-value pair
     let newUserIdPostData: String = "teacherId=\(userId)"
-    
-    request.HTTPMethod = "POST";
-    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-    request.setValue("application/json", forHTTPHeaderField: "Accept")
-    
+    // sets the key value pair as a json
     request.HTTPBody = newUserIdPostData.dataUsingEncoding(NSUTF8StringEncoding)
+    request.HTTPMethod = "POST";
 
     return request
   }
