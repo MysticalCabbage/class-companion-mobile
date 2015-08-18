@@ -29,6 +29,7 @@
 		69BB3D311B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BB3D301B65A15D00FB2CF2 /* CustomLaunchScreen.storyboard */; };
 		69BB3D331B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB3D321B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift */; };
 		69C8EF8F1B58A25B00715BF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8EF8E1B58A25B00715BF9 /* Constants.swift */; };
+		69DD7E281B83FA1E00BFDF0E /* firebaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD7E271B83FA1D00BFDF0E /* firebaseURL.swift */; };
 		69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */; };
 		69F717511B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		69BB3D321B65A31C00FB2CF2 /* CustomLaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLaunchScreenViewController.swift; sourceTree = "<group>"; };
 		69C8EF8B1B58971100715BF9 /* class-companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "class-companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		69C8EF8E1B58A25B00715BF9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		69DD7E271B83FA1D00BFDF0E /* firebaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = firebaseURL.swift; sourceTree = "<group>"; };
 		69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		69F717501B5F281A00E682F5 /* teacherStudentSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teacherStudentSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		8E4731F839F0B2D02C6B9E66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 				690BA6F71B56013F009E63A5 /* TeacherDashboardViewController.swift */,
 				69F3CAA81B55EB3300C1D891 /* LoginViewController.swift */,
 				69C8EF8E1B58A25B00715BF9 /* Constants.swift */,
+				69DD7E271B83FA1D00BFDF0E /* firebaseURL.swift */,
 				69480CE51B55E98100F80FAF /* Images.xcassets */,
 				69480CE71B55E98100F80FAF /* LaunchScreen.xib */,
 				69480CDC1B55E98100F80FAF /* Supporting Files */,
@@ -329,6 +332,7 @@
 				69AF6E911B5DA79D00AA34CB /* teacherStudentAttendanceTableViewController.swift in Sources */,
 				6978C5991B59CCB0006A70FB /* TeacherStudentsTableViewController.swift in Sources */,
 				698681501B5ADE5B0073AE96 /* StudentBehaviorsCollectionViewController.swift in Sources */,
+				69DD7E281B83FA1E00BFDF0E /* firebaseURL.swift in Sources */,
 				698681521B5ADE7E0073AE96 /* BehaviorsModel.swift in Sources */,
 				69F3CAA91B55EB3300C1D891 /* LoginViewController.swift in Sources */,
 				694563221B5DF298002AFB2D /* HelperFunctions.swift in Sources */,
